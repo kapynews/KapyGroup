@@ -1,0 +1,96 @@
+﻿@model IdentityTest2.Models.News1
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>@Html.DisplayFor(model => model.Category.categoryName)</h4>
+
+<div>
+    <h2><a href="@Html.DisplayFor(model => model.origUrl) ">@Html.DisplayFor(model => model.newsTitle)</a></h2>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.newsDate)*@
+            Date:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.newsDate)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.newsTime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.newsTime)
+            </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.author)
+        </dd>
+
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Source.sourceName)*@
+            Source:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Source.sourceName)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.picUrl)*@
+
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.picUrl) " style="width:300px;height:228px;">
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.newsContent)*@
+            Content:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.newsContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numOfClicks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numOfClicks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numOfLikes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numOfLikes)
+        </dd>
+        <dt>
+            @*@Html.DisplayNameFor(model => model.origUrl)*@
+            Orignial Link :
+        </dt>
+
+        <dd>
+            <a href="@Html.DisplayFor(model => model.origUrl) ">@Html.DisplayFor(model => model.origUrl)</a>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("See all comments", "CommentForNews", "Comments", new { id = Model.newsId }, null) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.newsId }) |
+    @Html.ActionLink("Back to List", "Category", new { categoryId = Model.categoryId })
+</p>
