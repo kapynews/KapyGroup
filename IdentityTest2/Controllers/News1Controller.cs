@@ -7,7 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IdentityTest2.Models;
-
+using PagedList;
+using PagedList.Mvc;
 namespace IdentityTest2.Controllers
 {
     public class News1Controller : Controller
@@ -16,7 +17,7 @@ namespace IdentityTest2.Controllers
 
         // GET: News1
         // GET: News1
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder,int? page)
         {
             ViewBag.DateSortParm = sortOrder == "ID" ? "Time" : "ID";
             var news = from s in db.News1
@@ -35,7 +36,7 @@ namespace IdentityTest2.Controllers
                     break;
             }
             //var news1 = db.News1.Include(n => n.Category).Include(n => n.Source);
-            return View(news.ToList());
+            return View(news.ToList().ToPagedList(page??1,3));
         }
 
         // GET: News1/Details/5
