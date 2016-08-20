@@ -1,5 +1,6 @@
 ﻿@model IdentityTest2.Models.AspNetUser_Category
 
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,16 +20,18 @@
         <div class="form-group">
             @Html.LabelFor(model => model.userId, "userId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("userId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.userId, "", new { @class = "text-danger" })
+                @ViewBag.userId;
+                
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.categoryId, "categoryId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("categoryId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })
+                @*@Html.DropDownList("categoryId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })*@
+                @Html.Action("_CategoryList", "News1")
+
             </div>
         </div>
 

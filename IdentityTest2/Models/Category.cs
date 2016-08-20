@@ -24,8 +24,13 @@ namespace IdentityTest2.Models
     
         public int categoryId { get; set; }
         public string categoryName { get; set; }
-        public Nullable<bool> isSelected { get; set; }
-    
+        public bool isSelected { get; set; }
+        public class CategoryList
+        {
+            //use CheckBoxModel class as list 
+            public List<Category> Categories { get; set; }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<News1> News1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

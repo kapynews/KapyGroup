@@ -55,5 +55,7 @@ namespace IdentityTest2.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<IdentityTest2.Models.CheckBoxListItem> CheckBoxListItems { get; set; }
     }
 }

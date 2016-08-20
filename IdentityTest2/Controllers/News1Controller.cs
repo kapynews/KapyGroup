@@ -155,6 +155,11 @@ namespace IdentityTest2.Controllers
         {
             return PartialView("_MenuView", db.Categories.ToList());
         }
+        public ActionResult _CategoryList()
+        {
+            return PartialView("_CategoryList", db.Categories.ToList());
+        }
+
 
         // GET: News1/Category/1
         public ActionResult Category(int? categoryId)
@@ -167,5 +172,6 @@ namespace IdentityTest2.Controllers
                 .Single(n => n.categoryId == categoryId);
             return View(categoryModel);
         }
+
     }
 }

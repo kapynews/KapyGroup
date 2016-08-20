@@ -77,6 +77,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcCheckBoxList, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcCheckBoxList.1.4.5\lib\net45\MvcCheckBoxList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -230,6 +234,7 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CheckBoxListItem.cs" />
     <Compile Include="Models\Comment.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
@@ -273,6 +278,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\Categories\AddCategories.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -368,6 +374,12 @@
     <Content Include="Views\AspNetUser_Category\Details.cshtml" />
     <Content Include="Views\AspNetUser_Category\Edit.cshtml" />
     <Content Include="Views\AspNetUser_Category\Index.cshtml" />
+    <Content Include="Views\News1\_CategoryList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CheckBoxListItem.cshtml" />
+    <Content Include="Views\Manage\Editor Templates\CategoryList.cshtml" />
+    <Content Include="Views\AspNetUser_Category\Insert.cshtml" />
+    <Content Include="Views\Manage\Editor Templates\Category.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

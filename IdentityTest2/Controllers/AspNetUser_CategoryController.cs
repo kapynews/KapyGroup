@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IdentityTest2.Models;
+using Microsoft.AspNet.Identity;
 
 namespace IdentityTest2.Controllers
 {
@@ -39,8 +40,11 @@ namespace IdentityTest2.Controllers
         // GET: AspNetUser_Category/Create
         public ActionResult Create()
         {
-            ViewBag.userId = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName");
+            ViewBag.userId = User.Identity.GetUserId<int>();
+           
+
+
+            //ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName");
             return View();
         }
 
@@ -58,8 +62,9 @@ namespace IdentityTest2.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.userId = new SelectList(db.AspNetUsers, "Id", "Email", aspNetUser_Category.userId);
-            ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName", aspNetUser_Category.categoryId);
+            //ViewBag.userId = new SelectList(db.AspNetUsers, "Id", "Email", aspNetUser_Category.userId);
+            ViewBag.userId = User.Identity.GetUserId<int>();
+            //ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName", aspNetUser_Category.categoryId);
             return View(aspNetUser_Category);
         }
 
@@ -132,5 +137,40 @@ namespace IdentityTest2.Controllers
             }
             base.Dispose(disposing);
         }
+        
+        [HttpGet]
+        public ActionResult Insert() {
+           
+            return View(db.Categories.ToList());
+
+        }
+        //private List<Category> categoryList = new kapymvc1Entities().Categories.ToList();
+        [HttpPost,ActionName("Insert")]
+        public ActionResult Insert(IEnumerable<Category> categories)
+        {
+            int user_Id = User.Identity.GetUserId<int>();
+            ViewBag.Message = "User ID: " + user_Id + "Please select categories you are interested in ";
+            
+            foreach (Category c in categories) {
+                if (c.isSelected)
+                {
+
+                    var save = new AspNetUser_Category
+                    {
+                        userId = user_Id,
+                        categoryId = c.categoryId
+                    };
+                    db.AspNetUser_Category.Add(save);
+                    db.SaveChanges();
+                }
+                else {
+
+                    ViewBag.Message = "Please select categories you are interested in ";
+                }
+            }
+            return View();
+
+        }
+
     }
 }
