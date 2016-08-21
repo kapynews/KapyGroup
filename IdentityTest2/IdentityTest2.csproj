@@ -81,6 +81,14 @@
       <HintPath>..\packages\MvcCheckBoxList.1.4.5\lib\net45\MvcCheckBoxList.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -285,6 +293,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap_lumen.css" />
     <Content Include="Content\Images\kapy_logo.png" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -374,12 +383,12 @@
     <Content Include="Views\AspNetUser_Category\Details.cshtml" />
     <Content Include="Views\AspNetUser_Category\Edit.cshtml" />
     <Content Include="Views\AspNetUser_Category\Index.cshtml" />
-    <Content Include="Views\News1\_CategoryList.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\CheckBoxListItem.cshtml" />
-    <Content Include="Views\Manage\Editor Templates\CategoryList.cshtml" />
     <Content Include="Views\AspNetUser_Category\Insert.cshtml" />
     <Content Include="Views\Manage\Editor Templates\Category.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Category.cshtml" />
+    <Content Include="Views\AspNetUser_Category\EditorTemplates\Category.cshtml" />
+    <Content Include="Views\Manage\AddCategories.cshtml" />
+    <Content Include="Views\AspNetUser_Category\InsertResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

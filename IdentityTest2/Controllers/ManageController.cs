@@ -7,12 +7,15 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using IdentityTest2.Models;
+using System.Text;
+using System.Collections.Generic;
 
 namespace IdentityTest2.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
+        private kapymvc1Entities db = new kapymvc1Entities();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -330,38 +333,47 @@ namespace IdentityTest2.Controllers
 
             base.Dispose(disposing);
         }
-
-
         //GET: /Manage/AddCategories
+        [HttpGet]
         public ActionResult AddCategories()
         {
+            return View(db.Categories.ToList());
+        }
+        //private List<Category> categoryList = new kapymvc1Entities().Categories.ToList();
+        [HttpPost, ActionName("Insert")]
+        public ActionResult AddCategories(IEnumerable<Category> categories)
+        {
+            if (categories.Count(x => x.isSelected) == 0)
+            {
+                ViewBag.message = "You didnt select any categories";
+            }
+            else {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("You selected -");
+                foreach (Category c in categories)
+                {
+                    if (c.isSelected)
+                    {
+                        sb.Append(c.categoryName + " ,");
+                        if (ModelState.IsValid)
+                        {
+                            var save = new AspNetUser_Category
+                            {
+                                userId = User.Identity.GetUserId<int>(),
+                                categoryId = c.categoryId
+                            };
+                            db.AspNetUser_Category.Add(save);
+                            db.SaveChanges();
+                        }
+                        ModelState.Clear();
+
+                    }
+                }
+                sb.Remove(sb.ToString().LastIndexOf(","), 1);
+                ViewBag.message = sb.ToString();
+            }
             return View();
         }
-
-        ////
-        //// POST: /Manage/AddCategories
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> AddCategories(AddCategoriesViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
-        //    var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId<int>(), model.OldPassword, model.NewPassword);
-        //    if (result.Succeeded)
-        //    {
-        //        var user = await UserManager.FindByIdAsync(User.Identity.GetUserId<int>());
-        //        if (user != null)
-        //        {
-        //            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-        //        }
-        //        return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
-        //    }
-        //    AddErrors(result);
-        //    return View(model);
-        //}
-
 
         #region Helpers
         // Used for XSRF protection when adding external logins

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<IdentityTest2.Models.News1>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<IdentityTest2.Models.News1>
 
 
 @{
@@ -69,3 +71,4 @@
     }
 
 </table>
+@Html.PagedListPager(Model,page=> Url.Action("Index", new { page }))
