@@ -1,0 +1,604 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="kapymvc1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Action">
+    <Key>
+      <PropertyRef Name="actionId" />
+    </Key>
+    <Property Name="actionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="actionName" Type="varchar" MaxLength="36" />
+  </EntityType>
+  <EntityType Name="ActionRecord">
+    <Key>
+      <PropertyRef Name="recordId" />
+    </Key>
+    <Property Name="recordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="adminId" Type="int" Nullable="false" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="actionTime" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="actionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUser_Category">
+    <Key>
+      <PropertyRef Name="usercategoryId" />
+    </Key>
+    <Property Name="usercategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="categoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="categoryId" />
+    </Key>
+    <Property Name="categoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categoryName" Type="varchar" MaxLength="50" />
+    <Property Name="isSelected" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="commentId" />
+    </Key>
+    <Property Name="commentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="newsId" Type="int" Nullable="false" />
+    <Property Name="postTime" Type="timestamp" StoreGeneratedPattern="Computed" />
+    <Property Name="commentContent" Type="ntext" />
+    <Property Name="isDisplayed" Type="bit" Nullable="false" />
+    <Property Name="numOfComentLikes" Type="int" />
+  </EntityType>
+  <EntityType Name="Comment1">
+    <Key>
+      <PropertyRef Name="commentId" />
+    </Key>
+    <Property Name="commentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="newsId" Type="int" Nullable="false" />
+    <Property Name="postTime" Type="timestamp" StoreGeneratedPattern="Computed" />
+    <Property Name="commentContent" Type="ntext" />
+    <Property Name="isDisplayed" Type="bit" Nullable="false" />
+    <Property Name="numOfComentLikes" Type="int" />
+  </EntityType>
+  <EntityType Name="News1">
+    <Key>
+      <PropertyRef Name="newsId" />
+    </Key>
+    <Property Name="newsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uniqueTitle" Type="char" MaxLength="50" Nullable="false" />
+    <Property Name="newsTitle" Type="ntext" />
+    <Property Name="newsDate" Type="date" />
+    <Property Name="newsTime" Type="time" Precision="7" />
+    <Property Name="author" Type="varchar" MaxLength="50" />
+    <Property Name="sourceId" Type="int" Nullable="false" />
+    <Property Name="categoryId" Type="int" Nullable="false" />
+    <Property Name="origUrl" Type="varchar(max)" />
+    <Property Name="picUrl" Type="varchar(max)" />
+    <Property Name="newsContent" Type="ntext" />
+    <Property Name="numOfClicks" Type="int" />
+    <Property Name="numOfLikes" Type="int" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="roleId" />
+    </Key>
+    <Property Name="roleId" Type="int" Nullable="false" />
+    <Property Name="roleName" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Source">
+    <Key>
+      <PropertyRef Name="sourceId" />
+    </Key>
+    <Property Name="sourceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sourceName" Type="varchar" MaxLength="50" />
+    <Property Name="sourceUrl" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userName" Type="varchar" MaxLength="32" />
+    <Property Name="userEmail" Type="varchar" MaxLength="64" />
+    <Property Name="password" Type="varchar" MaxLength="64" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="roleId" Type="int" />
+    <Property Name="notifyFrequency" Type="int" />
+    <Property Name="isNotified" Type="bit" />
+    <Property Name="selectedCategoryId" Type="int" />
+  </EntityType>
+  <EntityType Name="User_Category">
+    <Key>
+      <PropertyRef Name="userId" />
+      <PropertyRef Name="categoryId" />
+    </Key>
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="categoryId" Type="int" Nullable="false" />
+    <Property Name="categoryName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="User_Source">
+    <Key>
+      <PropertyRef Name="userId" />
+      <PropertyRef Name="sourceId" />
+    </Key>
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="sourceId" Type="int" Nullable="false" />
+    <Property Name="subscribeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subscribeTime" Type="timestamp" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <Association Name="FK_ActionRecord_Action">
+    <End Role="Action" Type="Self.Action" Multiplicity="1" />
+    <End Role="ActionRecord" Type="Self.ActionRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Action">
+        <PropertyRef Name="actionId" />
+      </Principal>
+      <Dependent Role="ActionRecord">
+        <PropertyRef Name="actionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActionRecord_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="ActionRecord" Type="Self.ActionRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActionRecord">
+        <PropertyRef Name="adminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActionRecord_AspNetUsers1">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="ActionRecord" Type="Self.ActionRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActionRecord">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActionRecord_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="ActionRecord" Type="Self.ActionRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="ActionRecord">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActionRecord_User1">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="ActionRecord" Type="Self.ActionRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="ActionRecord">
+        <PropertyRef Name="adminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUser_Category_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="AspNetUser_Category" Type="Self.AspNetUser_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUser_Category">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUser_Category_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="AspNetUser_Category" Type="Self.AspNetUser_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="categoryId" />
+      </Principal>
+      <Dependent Role="AspNetUser_Category">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_News1">
+    <End Role="News1" Type="Self.News1" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="News1">
+        <PropertyRef Name="newsId" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="newsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_News1-1">
+    <End Role="News1" Type="Self.News1" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="News1">
+        <PropertyRef Name="newsId" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="newsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment1_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Comment1" Type="Self.Comment1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment1">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment1_News1">
+    <End Role="News1" Type="Self.News1" Multiplicity="1" />
+    <End Role="Comment1" Type="Self.Comment1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="News1">
+        <PropertyRef Name="newsId" />
+      </Principal>
+      <Dependent Role="Comment1">
+        <PropertyRef Name="newsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_News1_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="News1" Type="Self.News1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="categoryId" />
+      </Principal>
+      <Dependent Role="News1">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_News1_Source">
+    <End Role="Source" Type="Self.Source" Multiplicity="1" />
+    <End Role="News1" Type="Self.News1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Source">
+        <PropertyRef Name="sourceId" />
+      </Principal>
+      <Dependent Role="News1">
+        <PropertyRef Name="sourceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Category_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="User_Category" Type="Self.User_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_Category">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Category_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="User_Category" Type="Self.User_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="categoryId" />
+      </Principal>
+      <Dependent Role="User_Category">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Category_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User_Category" Type="Self.User_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="User_Category">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="roleId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="roleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Source_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="User_Source" Type="Self.User_Source" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_Source">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Source_Source">
+    <End Role="Source" Type="Self.Source" Multiplicity="1" />
+    <End Role="User_Source" Type="Self.User_Source" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Source">
+        <PropertyRef Name="sourceId" />
+      </Principal>
+      <Dependent Role="User_Source">
+        <PropertyRef Name="sourceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Source_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User_Source" Type="Self.User_Source" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="User_Source">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="kapymvc1ModelStoreContainer">
+    <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ActionRecord" EntityType="Self.ActionRecord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUser_Category" EntityType="Self.AspNetUser_Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment1" EntityType="Self.Comment1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="News1" EntityType="Self.News1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Source" EntityType="Self.Source" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Category" EntityType="Self.User_Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Source" EntityType="Self.User_Source" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ActionRecord_Action" Association="Self.FK_ActionRecord_Action">
+      <End Role="Action" EntitySet="Action" />
+      <End Role="ActionRecord" EntitySet="ActionRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActionRecord_AspNetUsers" Association="Self.FK_ActionRecord_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="ActionRecord" EntitySet="ActionRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActionRecord_AspNetUsers1" Association="Self.FK_ActionRecord_AspNetUsers1">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="ActionRecord" EntitySet="ActionRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActionRecord_User" Association="Self.FK_ActionRecord_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="ActionRecord" EntitySet="ActionRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActionRecord_User1" Association="Self.FK_ActionRecord_User1">
+      <End Role="User" EntitySet="User" />
+      <End Role="ActionRecord" EntitySet="ActionRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUser_Category_AspNetUsers" Association="Self.FK_AspNetUser_Category_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUser_Category" EntitySet="AspNetUser_Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUser_Category_Category" Association="Self.FK_AspNetUser_Category_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="AspNetUser_Category" EntitySet="AspNetUser_Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_News1" Association="Self.FK_Comment_News1">
+      <End Role="News1" EntitySet="News1" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_News1-1" Association="Self.FK_Comment_News1-1">
+      <End Role="News1" EntitySet="News1" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_User" Association="Self.FK_Comment_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment1_AspNetUsers" Association="Self.FK_Comment1_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Comment1" EntitySet="Comment1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment1_News1" Association="Self.FK_Comment1_News1">
+      <End Role="News1" EntitySet="News1" />
+      <End Role="Comment1" EntitySet="Comment1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News1_Category" Association="Self.FK_News1_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="News1" EntitySet="News1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News1_Source" Association="Self.FK_News1_Source">
+      <End Role="Source" EntitySet="Source" />
+      <End Role="News1" EntitySet="News1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Category_AspNetUsers" Association="Self.FK_User_Category_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="User_Category" EntitySet="User_Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Category_Category" Association="Self.FK_User_Category_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="User_Category" EntitySet="User_Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Category_User" Association="Self.FK_User_Category_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="User_Category" EntitySet="User_Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Source_AspNetUsers" Association="Self.FK_User_Source_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="User_Source" EntitySet="User_Source" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Source_Source" Association="Self.FK_User_Source_Source">
+      <End Role="Source" EntitySet="Source" />
+      <End Role="User_Source" EntitySet="User_Source" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Source_User" Association="Self.FK_User_Source_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="User_Source" EntitySet="User_Source" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

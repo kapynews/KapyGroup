@@ -1,0 +1,79 @@
+﻿@{
+    Layout = "";
+}
+
+@model IEnumerable<IdentityTest2.Models.Comment1>
+
+<body>
+    <h4> All Comments </h4>
+
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AspNetUser.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.commentContent)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.isDisplayed)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.numOfComentLikes)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.postTime)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.News1.uniqueTitle)
+                </th>*@
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.isDisplayed)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.commentContent)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.numOfComentLikes)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.postTime)
+                    </td>
+
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.isDisplayed)
+                        </td>*@
+
+
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.News1.uniqueTitle)
+                        </td>*@
+                    <td>
+                        @Html.Action("Like", "Comment1", new { id = item.commentId }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.commentId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.commentId })
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+
+    <p>
+        @Html.ActionLink("ADD A COMMENT", "CreateCommentForNews", new { id = ViewBag.newsID })
+    </p>
+
+</body>

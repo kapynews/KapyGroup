@@ -258,6 +258,8 @@ D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\bin\PagedList.dll
 D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\bin\PagedList.Mvc.dll
 D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\bin\PagedList.xml
 D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\bin\PagedList.Mvc.xml
+<<<<<<< HEAD
+=======
 D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.csprojResolveAssemblyReference.cache
 C:\Users\atiat\Desktop\yang\IdentityTest2\bin\ApplicationInsights.config
 C:\Users\atiat\Desktop\yang\IdentityTest2\bin\roslyn\csc.exe
@@ -346,3 +348,4 @@ C:\Users\atiat\Desktop\yang\IdentityTest2\bin\Microsoft.Owin.Security.MicrosoftA
 C:\Users\atiat\Desktop\yang\IdentityTest2\obj\Debug\IdentityTest2.csprojResolveAssemblyReference.cache
 C:\Users\atiat\Desktop\yang\IdentityTest2\obj\Debug\IdentityTest2.dll
 C:\Users\atiat\Desktop\yang\IdentityTest2\obj\Debug\IdentityTest2.pdb
+>>>>>>> origin/master

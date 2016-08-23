@@ -211,6 +211,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AspNetUser_CategoryController.cs" />
+    <Compile Include="Controllers\Comment1Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\News1Controller.cs" />
@@ -322,6 +323,7 @@
     <Content Include="Models\KapyModel.edmx.diagram">
       <DependentUpon>KapyModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\kapyNews.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -390,6 +392,14 @@
     <Content Include="Views\AspNetUser_Category\InsertResult.cshtml" />
     <Content Include="Views\News1\Recommend.cshtml" />
     <Content Include="Views\News1\RecommendToYou.cshtml" />
+    <Content Include="Views\Comment1\Create.cshtml" />
+    <Content Include="Views\Comment1\Delete.cshtml" />
+    <Content Include="Views\Comment1\Details.cshtml" />
+    <Content Include="Views\Comment1\Edit.cshtml" />
+    <Content Include="Views\Comment1\Index.cshtml" />
+    <Content Include="Views\Comment1\CommentForNews.cshtml" />
+    <Content Include="Views\Comment1\CreateCommentForNews.cshtml" />
+    <Content Include="Views\Comment1\Like.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
