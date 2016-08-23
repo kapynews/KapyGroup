@@ -10,6 +10,9 @@ using IdentityTest2.Models;
 using PagedList;
 using PagedList.Mvc;
 using Microsoft.AspNet.Identity;
+using System.Text;
+using System.Data.SqlClient;
+
 namespace IdentityTest2.Controllers
 {
     public class News1Controller : Controller
@@ -157,10 +160,10 @@ namespace IdentityTest2.Controllers
         {
             return PartialView("_MenuView", db.Categories.ToList());
         }
-        public ActionResult _CategoryList()
-        {
-            return PartialView("_CategoryList", db.Categories.ToList());
-        }
+        //public ActionResult _CategoryList()
+        //{
+        //    return PartialView("_CategoryList", db.Categories.ToList());
+        //}
 
 
         // GET: News1/Category/1
@@ -172,24 +175,62 @@ namespace IdentityTest2.Controllers
             }
             var categoryModel = db.Categories.Include("News1")
                 .Single(n => n.categoryId == categoryId);
+            //news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate)
             return View(categoryModel);
         }
-        //// GET: News1/Recommend/1
-        //public ActionResult Recommend(int? userId)
-        //{
-        //    userId = User.Identity.GetUserId<int>();
-        //    if (userId == 0)
-        //    {
-        //        return RedirectToAction("Index","News1");
-        //    }
-        //    var selectedCategories= db.AspNetUser_Category.Include("Category").Single(n => n.userId == userId);
-        //    foreach (var categoryId in selectedCategories) {
-        //        var categoryModel = db.Categories.Include("News1").Single(n => n.categoryId == categoryId);
-        //    }
+        // GET: News1/Recommend
+        public ActionResult Recommend()
+        {
+            int userId = User.Identity.GetUserId<int>();
+            if (userId == 0)
+            {
+                return RedirectToAction("Index", "News1");
+            }
+            //Get students enrolled in a particular course
+            //dc.Students.Where(s => s.StudentCourseEnrollments.Any(e => e.CourseID == courseID)
+            var selectedCategoriesModel = db.Categories.Include("News1").Where(c => c.AspNetUser_Category.Any(u => u.userId == userId));
+            IEnumerable<Category> selectCategories = selectedCategoriesModel.ToList();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Recommend News for you in categories: " + "\n");
+            foreach (var c in selectCategories)
+            {
+                sb.Append(c.categoryName + ", ");
+            }
+            sb.Remove(sb.ToString().LastIndexOf(","), 1);
+            ViewBag.message = sb.ToString();
+            return View(selectedCategoriesModel);
+        }
 
+        // GET: News1/RecommendToYou()
+        //Needs modification
+        public ActionResult RecommendToYou()
+        {
+            int userId = User.Identity.GetUserId<int>();
+            if (userId == 0)
+            {
+                return RedirectToAction("Index", "News1");
+            }
+            //Get students enrolled in a particular course
+            //dc.Students.Where(s => s.StudentCourseEnrollments.Any(e => e.CourseID == courseID)
+            var selectedCategoriesModel = db.Categories.Include("News1").Where(c => c.AspNetUser_Category.Any(u => u.userId == userId));
+            IEnumerable<Category> selectCategories = selectedCategoriesModel.ToList();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Recommend News for you in categories: " + "\n");
+            List<int> ids = null;
+            foreach (var c in selectCategories)
+            {
+                sb.Append(c.categoryName + ", ");
+                ids.Add(c.categoryId);                
+            }
+            //var newsModel = db.News1.Where(n => (n.categoryId == c.categoryId) || (n.categoryId == c.categoryId));
+            var newsModel = db.News1.Where(n => ids.Contains(n.categoryId));
+            //var newsModel = db.News1.Where(BuildOrExpression < People, string >< News1, int>(e => e.ID, ids)); n => ids.Contains(n.categoryId)); BuildContainsExpression<Entity, int>
+            //x => (x.Body.Scopes.Count > 5) && (x.Foo == "test")
+            sb.Remove(sb.ToString().LastIndexOf(","), 1);
+            ViewBag.message = sb.ToString();
+            return View(newsModel.ToList().OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate));
+        }
 
-        //    return View();
-        //}
 
     }
 }
