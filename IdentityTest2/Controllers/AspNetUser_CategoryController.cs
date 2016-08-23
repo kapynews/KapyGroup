@@ -152,18 +152,18 @@ namespace IdentityTest2.Controllers
             int userId=User.Identity.GetUserId<int>();
             if (userId == 0)
             {
-                ViewBag.message = "Sorry, please login or register Firstly";
+                ViewBag.message = "Sorry, please login or register First";
             }
             else {
 
                 if (categories.Count(x => x.isSelected) == 0)
                 {
-                    ViewBag.message = "You haven't select any categories";
+                    ViewBag.message = "You haven't selected any category";
                 }
                 else {
 
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("You successfully selected:  ");
+                    sb.Append("You have successfully selected:  ");
                     foreach (Category c in categories)
                     {
 
