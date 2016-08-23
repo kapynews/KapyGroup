@@ -84,7 +84,7 @@
     </Key>
     <Property Name="categoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="categoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="isSelected" Type="Boolean" />
+    <Property Name="isSelected" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="News1" Relationship="Self.FK_News1_Category" FromRole="Category" ToRole="News1" />
     <NavigationProperty Name="User_Category" Relationship="Self.FK_User_Category_Category" FromRole="Category" ToRole="User_Category" />
     <NavigationProperty Name="AspNetUser_Category" Relationship="kapymvc1Model.FK_AspNetUser_Category_Category" FromRole="Category" ToRole="AspNetUser_Category" />

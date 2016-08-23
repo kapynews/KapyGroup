@@ -375,7 +375,6 @@
     <Content Include="Views\News1\Details.cshtml" />
     <Content Include="Views\News1\Edit.cshtml" />
     <Content Include="Views\News1\Index.cshtml" />
-    <Content Include="Views\News1\NewsinCategory.cshtml" />
     <Content Include="Views\News1\_MenuView.cshtml" />
     <Content Include="Views\News1\Category.cshtml" />
     <Content Include="Views\AspNetUser_Category\Create.cshtml" />
@@ -389,6 +388,8 @@
     <Content Include="Views\AspNetUser_Category\EditorTemplates\Category.cshtml" />
     <Content Include="Views\Manage\AddCategories.cshtml" />
     <Content Include="Views\AspNetUser_Category\InsertResult.cshtml" />
+    <Content Include="Views\News1\Recommend.cshtml" />
+    <Content Include="Views\News1\RecommendToYou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

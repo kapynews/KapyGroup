@@ -3,13 +3,14 @@
 @{
     ViewBag.Title = "Category";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<IdentityTest2.Models.News1> newsList = Model.News1.ToList().OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
 }
 
 <h2>@Model.categoryName</h2>
 
 <table class="table">
-
-    @foreach (var news in Model.News1)
+    
+    @foreach (var news in newsList)
     {
         <tr>
             <td>

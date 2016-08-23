@@ -156,7 +156,7 @@ namespace IdentityTest2.Controllers
             }
             else {
 
-                if (categories.Count(x => x.isSelected) == 0)
+                if (categories.Count(x => x.isSelected==true) == 0)
                 {
                     ViewBag.message = "You haven't select any categories";
                 }
@@ -166,8 +166,7 @@ namespace IdentityTest2.Controllers
                     sb.Append("You successfully selected:  ");
                     foreach (Category c in categories)
                     {
-
-                        if (c.isSelected)
+                        if (c.isSelected==true)
                         {
                             sb.Append(c.categoryName + " ,");
                             if (ModelState.IsValid)

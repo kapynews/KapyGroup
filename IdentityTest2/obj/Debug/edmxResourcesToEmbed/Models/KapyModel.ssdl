@@ -82,7 +82,7 @@
     </Key>
     <Property Name="categoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="categoryName" Type="varchar" MaxLength="50" />
-    <Property Name="isSelected" Type="bit" />
+    <Property Name="isSelected" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Comment">
     <Key>

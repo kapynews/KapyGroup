@@ -343,7 +343,7 @@ namespace IdentityTest2.Controllers
         [HttpPost, ActionName("Insert")]
         public ActionResult AddCategories(IEnumerable<Category> categories)
         {
-            if (categories.Count(x => x.isSelected) == 0)
+            if (categories.Count(x => x.isSelected==true) == 0)
             {
                 ViewBag.message = "You didnt select any categories";
             }
@@ -352,7 +352,7 @@ namespace IdentityTest2.Controllers
                 sb.Append("You selected -");
                 foreach (Category c in categories)
                 {
-                    if (c.isSelected)
+                    if (c.isSelected==true)
                     {
                         sb.Append(c.categoryName + " ,");
                         if (ModelState.IsValid)

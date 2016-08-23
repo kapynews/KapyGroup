@@ -161,7 +161,6 @@ D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\bin\Microsoft.Owin
 D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.dll
 D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.pdb
-D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.csprojResolveAssemblyReference.cache
 D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\bin\MvcCheckBoxList.dll
 C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\bin\ApplicationInsights.config
 C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\bin\roslyn\csc.exe
@@ -259,3 +258,4 @@ D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\bin\PagedList.dll
 D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\bin\PagedList.Mvc.dll
 D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\bin\PagedList.xml
 D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\bin\PagedList.Mvc.xml
+D:\My Documents2010_T60_061110\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.csprojResolveAssemblyReference.cache
