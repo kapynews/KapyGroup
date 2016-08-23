@@ -1,30 +1,26 @@
 ﻿@model IEnumerable<IdentityTest2.Models.Category>
-
 @{
     ViewBag.Title = "Insert";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if (ViewBag.Message != null)
+    {
+        <h2>
+            @ViewBag.Message;</h2>
+    }
 }
-<h2>Select Subjects</h2>
-<p>
-   <div style="font-family:Arial"> 
-       @using (Html.BeginForm("Insert", "AspNetUser_Category", FormMethod.Post))
-       {
-           //@Html.EditorForModel()
-        foreach (var u in Model)
-        {
-            @Html.HiddenFor(item => u.categoryId)
-            @Html.HiddenFor(item => u.categoryName)
-            <br />
-            @Html.CheckBoxFor(item => u.isSelected)
-            @Html.DisplayFor(item => u.categoryName)
 
-
-           }
-
-        <br />
-            <input type="submit" value="Submit" class="btn btn-default">
-       }
-    </div>
-</p>
-
+            <p>
+                <div style="font-family:Arial">
+                    @using (Html.BeginForm("Insert", "AspNetUser_Category", FormMethod.Post))
+                    {
+                        <br />
+                        <h4>Select Subjects</h4>
+                        <br />
+                        @Html.EditorForModel()
+                        <br />
+                        <input type="submit" value="Submit" class="btn btn-default">
+                    }
+                </div>
+            </p>
 

@@ -383,12 +383,12 @@
     <Content Include="Views\AspNetUser_Category\Details.cshtml" />
     <Content Include="Views\AspNetUser_Category\Edit.cshtml" />
     <Content Include="Views\AspNetUser_Category\Index.cshtml" />
-    <Content Include="Views\News1\_CategoryList.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\CheckBoxListItem.cshtml" />
-    <Content Include="Views\Manage\Editor Templates\CategoryList.cshtml" />
     <Content Include="Views\AspNetUser_Category\Insert.cshtml" />
     <Content Include="Views\Manage\Editor Templates\Category.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Category.cshtml" />
+    <Content Include="Views\AspNetUser_Category\EditorTemplates\Category.cshtml" />
+    <Content Include="Views\Manage\AddCategories.cshtml" />
+    <Content Include="Views\AspNetUser_Category\InsertResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

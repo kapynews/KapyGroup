@@ -243,10 +243,10 @@ C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\bin\Microsoft.Owin.Secur
 C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.csprojResolveAssemblyReference.cache
 C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.dll
 C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.pdb
 C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\bin\PagedList.dll
 C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\bin\PagedList.Mvc.dll
 C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\bin\PagedList.xml
 C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\bin\PagedList.Mvc.xml
+C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.csprojResolveAssemblyReference.cache

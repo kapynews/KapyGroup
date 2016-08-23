@@ -36,7 +36,7 @@ namespace IdentityTest2.Controllers
                     break;
             }
             //var news1 = db.News1.Include(n => n.Category).Include(n => n.Source);
-            return View(news.ToList().ToPagedList(page??1,3));
+            return View(news.ToList().ToPagedList(page??1,5));
         }
 
         // GET: News1/Details/5
@@ -121,6 +121,7 @@ namespace IdentityTest2.Controllers
         {
             if (id == null)
             {
+
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             News1 news1 = db.News1.Find(id);

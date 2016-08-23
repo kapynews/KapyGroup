@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using IdentityTest2.Models;
 using Microsoft.AspNet.Identity;
+using System.Text;
 
 namespace IdentityTest2.Controllers
 {
@@ -148,24 +149,43 @@ namespace IdentityTest2.Controllers
         [HttpPost,ActionName("Insert")]
         public ActionResult Insert(IEnumerable<Category> categories)
         {
-            int user_Id = User.Identity.GetUserId<int>();
-            ViewBag.Message = "User ID: " + user_Id + "Please select categories you are interested in ";
-            
-            foreach (Category c in categories) {
-                if (c.isSelected)
-                {
+            int userId=User.Identity.GetUserId<int>();
+            if (userId == 0)
+            {
+                ViewBag.message = "Sorry, please login or register Firstly";
+            }
+            else {
 
-                    var save = new AspNetUser_Category
-                    {
-                        userId = user_Id,
-                        categoryId = c.categoryId
-                    };
-                    db.AspNetUser_Category.Add(save);
-                    db.SaveChanges();
+                if (categories.Count(x => x.isSelected) == 0)
+                {
+                    ViewBag.message = "You haven't select any categories";
                 }
                 else {
 
-                    ViewBag.Message = "Please select categories you are interested in ";
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("You successfully selected:  ");
+                    foreach (Category c in categories)
+                    {
+
+                        if (c.isSelected)
+                        {
+                            sb.Append(c.categoryName + " ,");
+                            if (ModelState.IsValid)
+                            {
+                                var save = new AspNetUser_Category
+                                {
+                                    userId = User.Identity.GetUserId<int>(),
+                                    categoryId = c.categoryId
+                                };
+                                db.AspNetUser_Category.Add(save);
+                                db.SaveChanges();
+                            }
+                            ModelState.Clear();
+
+                        }
+                    }
+                    sb.Remove(sb.ToString().LastIndexOf(","), 1);
+                    ViewBag.message = sb.ToString();
                 }
             }
             return View();
