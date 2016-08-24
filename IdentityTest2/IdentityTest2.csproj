@@ -323,6 +323,12 @@
     <Content Include="Models\KapyModel.edmx.diagram">
       <DependentUpon>KapyModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Kapy.pubxml" />
+    <None Include="Properties\PublishProfiles\kapyNews %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\kapyNews %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\kapyNews %284%29.pubxml" />
+    <None Include="Properties\PublishProfiles\kapyNews %285%29.pubxml" />
+    <None Include="Properties\PublishProfiles\kapyNews %286%29.pubxml" />
     <None Include="Properties\PublishProfiles\kapyNews.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
