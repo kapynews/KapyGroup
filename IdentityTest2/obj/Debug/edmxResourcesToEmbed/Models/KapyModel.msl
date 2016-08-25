@@ -90,6 +90,7 @@
     <EntitySetMapping Name="News1">
       <EntityTypeMapping TypeName="kapymvc1Model.News1">
         <MappingFragment StoreEntitySet="News1">
+          <ScalarProperty Name="crawlTime" ColumnName="crawlTime" />
           <ScalarProperty Name="newsId" ColumnName="newsId" />
           <ScalarProperty Name="uniqueTitle" ColumnName="uniqueTitle" />
           <ScalarProperty Name="newsTitle" ColumnName="newsTitle" />
@@ -168,6 +169,8 @@
     <EntitySetMapping Name="Comment1">
       <EntityTypeMapping TypeName="kapymvc1Model.Comment1">
         <MappingFragment StoreEntitySet="Comment1">
+          <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="numOfComentLikes" ColumnName="numOfComentLikes" />
           <ScalarProperty Name="isDisplayed" ColumnName="isDisplayed" />
           <ScalarProperty Name="commentContent" ColumnName="commentContent" />

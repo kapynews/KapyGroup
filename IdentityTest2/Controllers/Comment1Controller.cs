@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IdentityTest2.Models;
-using IdentityTest2.Models;
 using Microsoft.AspNet.Identity;
 using System.Text;
 

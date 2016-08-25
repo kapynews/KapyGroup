@@ -107,6 +107,8 @@
     <Property Name="commentContent" Type="ntext" />
     <Property Name="isDisplayed" Type="bit" Nullable="false" />
     <Property Name="numOfComentLikes" Type="int" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Datetime" Type="datetime" />
   </EntityType>
   <EntityType Name="News1">
     <Key>
@@ -125,6 +127,7 @@
     <Property Name="newsContent" Type="ntext" />
     <Property Name="numOfClicks" Type="int" />
     <Property Name="numOfLikes" Type="int" />
+    <Property Name="crawlTime" Type="datetime2" Precision="7" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
