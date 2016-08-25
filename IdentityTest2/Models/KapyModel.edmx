@@ -112,6 +112,8 @@
           <Property Name="commentContent" Type="ntext" />
           <Property Name="isDisplayed" Type="bit" Nullable="false" />
           <Property Name="numOfComentLikes" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Datetime" Type="datetime" />
         </EntityType>
         <EntityType Name="News1">
           <Key>
@@ -130,6 +132,7 @@
           <Property Name="newsContent" Type="ntext" />
           <Property Name="numOfClicks" Type="int" />
           <Property Name="numOfLikes" Type="int" />
+          <Property Name="crawlTime" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -734,6 +737,7 @@
           <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_News1" FromRole="News1" ToRole="Comment" />
           <NavigationProperty Name="Source" Relationship="Self.FK_News1_Source" FromRole="News1" ToRole="Source" />
           <NavigationProperty Name="Comment1" Relationship="kapymvc1Model.FK_Comment1_News1" FromRole="News1" ToRole="Comment1" />
+          <Property Name="crawlTime" Type="DateTime" Precision="7" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -1145,6 +1149,8 @@
           <Property Name="numOfComentLikes" Type="Int32" />
           <NavigationProperty Name="AspNetUser" Relationship="kapymvc1Model.FK_Comment1_AspNetUsers" FromRole="Comment1" ToRole="AspNetUser" />
           <NavigationProperty Name="News1" Relationship="kapymvc1Model.FK_Comment1_News1" FromRole="Comment1" ToRole="News1" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Datetime" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Comment1_AspNetUsers">
           <End Type="kapymvc1Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -1299,6 +1305,7 @@
           <EntitySetMapping Name="News1">
             <EntityTypeMapping TypeName="kapymvc1Model.News1">
               <MappingFragment StoreEntitySet="News1">
+                <ScalarProperty Name="crawlTime" ColumnName="crawlTime" />
                 <ScalarProperty Name="newsId" ColumnName="newsId" />
                 <ScalarProperty Name="uniqueTitle" ColumnName="uniqueTitle" />
                 <ScalarProperty Name="newsTitle" ColumnName="newsTitle" />
@@ -1377,6 +1384,8 @@
           <EntitySetMapping Name="Comment1">
             <EntityTypeMapping TypeName="kapymvc1Model.Comment1">
               <MappingFragment StoreEntitySet="Comment1">
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="numOfComentLikes" ColumnName="numOfComentLikes" />
                 <ScalarProperty Name="isDisplayed" ColumnName="isDisplayed" />
                 <ScalarProperty Name="commentContent" ColumnName="commentContent" />

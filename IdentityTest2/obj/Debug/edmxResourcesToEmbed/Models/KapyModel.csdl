@@ -124,6 +124,7 @@
     <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_News1" FromRole="News1" ToRole="Comment" />
     <NavigationProperty Name="Source" Relationship="Self.FK_News1_Source" FromRole="News1" ToRole="Source" />
     <NavigationProperty Name="Comment1" Relationship="kapymvc1Model.FK_Comment1_News1" FromRole="News1" ToRole="Comment1" />
+    <Property Name="crawlTime" Type="DateTime" Precision="7" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -535,6 +536,8 @@
     <Property Name="numOfComentLikes" Type="Int32" />
     <NavigationProperty Name="AspNetUser" Relationship="kapymvc1Model.FK_Comment1_AspNetUsers" FromRole="Comment1" ToRole="AspNetUser" />
     <NavigationProperty Name="News1" Relationship="kapymvc1Model.FK_Comment1_News1" FromRole="Comment1" ToRole="News1" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Datetime" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK_Comment1_AspNetUsers">
     <End Type="kapymvc1Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />

@@ -17,26 +17,28 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.newsDate)
+            @Html.DisplayFor(model => model.newsDate,"ShortDateTime")
         </dd>
 
-        @*<dt>
-                @Html.DisplayNameFor(model => model.newsTime)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.newsTime)
-            </dd>*@
-
         <dt>
-            @Html.DisplayNameFor(model => model.author)
+            Time:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.author)
+                @Html.DisplayFor(model => model.newsTime)
         </dd>
+        @if (Model.author!="")
+        {
+            <dt>
+                @*@Html.DisplayNameFor(model => model.author)*@
+                Author:
+            </dt>
 
+            <dd>
 
+                @Html.DisplayFor(model => model.author)
+            </dd>
+        }
         <dt>
             @*@Html.DisplayNameFor(model => model.Source.sourceName)*@
             Source:
@@ -45,25 +47,47 @@
         <dd>
             @Html.DisplayFor(model => model.Source.sourceName)
         </dd>
-
-        <dt>
-            @*@Html.DisplayNameFor(model => model.picUrl)*@
-
-        </dt>
-
-        <dd>
-            <img src="@Html.DisplayFor(model => model.picUrl) " style="width:300px;height:228px;">
-        </dd>
+        @if (Model.picUrl != "")
+        {
+            <dt>
+                @*@Html.DisplayNameFor(model => model.picUrl)*@
+            </dt>
+            <dd>
+                <img src="@Html.DisplayFor(model => model.picUrl) " style="width:300px;height:228px;">
+            </dd>
+        }
+        else {
+            <dt>
+                @*@Html.DisplayNameFor(model => model.picUrl)*@
+            </dt>
+            <dd>
+                <img src="~/Content/Images/kapy_logo.png" style="width:200px;height:128px;">
+            </dd>
+        }
 
         <dt>
             @*@Html.DisplayNameFor(model => model.newsContent)*@
             Content:
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.newsContent)
         </dd>
+        <dt>
+            Orignial Link :
+        </dt>
 
+        <dd>
+            <a href="@Html.DisplayFor(model => model.origUrl) ">@Html.DisplayFor(model => model.origUrl)</a>
+        </dd>
+        @if (Model.crawlTime!=null)
+        {
+            <dt>
+                crawlTime:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.crawlTime)
+            </dd>
+        }
         <dt>
             @Html.DisplayNameFor(model => model.numOfClicks)
         </dt>
@@ -79,14 +103,7 @@
         <dd>
             @Html.DisplayFor(model => model.numOfLikes)
         </dd>
-        <dt>
-            @*@Html.DisplayNameFor(model => model.origUrl)*@
-            Orignial Link :
-        </dt>
 
-        <dd>
-            <a href="@Html.DisplayFor(model => model.origUrl) ">@Html.DisplayFor(model => model.origUrl)</a>
-        </dd>
     </dl>
 </div>
 
@@ -94,8 +111,8 @@
         @Html.ActionLink("Edit", "Edit", new { id = Model.newsId }) |
         @Html.ActionLink("Back to List", "Category", new { categoryId = Model.categoryId })*@
 <p>
-    @*@Html.ActionLink("See all comments", "CommentForNews", "Comments", new { id = Model.newsId }, null) |*@
-    @Html.ActionLink("Edit", "Edit", new { id = Model.newsId }) |
+    @*@Html.ActionLink("See all comments", "CommentForNews", "Comments", new { id = Model.newsId }, null) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.newsId }) |*@
     @Html.ActionLink("Back to List", "Category", new { categoryId = Model.categoryId })
 </p>
 <p>
