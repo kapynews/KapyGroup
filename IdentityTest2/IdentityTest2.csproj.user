@@ -12,6 +12,7 @@
     <WebStackScaffolding_ViewDialogWidth>600</WebStackScaffolding_ViewDialogWidth>
     <UseIISExpress>true</UseIISExpress>
     <NameOfLastUsedPublishProfile>kapyNews %286%29</NameOfLastUsedPublishProfile>
+    <IISExpressSSLPort>44377</IISExpressSSLPort>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
