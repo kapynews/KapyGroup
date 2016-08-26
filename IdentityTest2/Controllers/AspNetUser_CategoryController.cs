@@ -153,12 +153,14 @@ namespace IdentityTest2.Controllers
             if (userId == 0)
             {
                 ViewBag.message = "Sorry, please login or register First";
+                return View("InsertResult");
             }
             else {
 
                 if (categories == null || categories.Count(x => x.isSelected==true) == 0 )
                 {
                     ViewBag.message = "You haven't selected any category";
+                    return View("InsertResult");
                 }
                 else {
 
@@ -185,9 +187,11 @@ namespace IdentityTest2.Controllers
                     }
                     sb.Remove(sb.ToString().LastIndexOf(","), 1);
                     ViewBag.message = sb.ToString();
+                    //return View();
+                    return View("InsertResult");
                 }
             }
-            return View();
+            
 
         }
 
