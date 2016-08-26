@@ -94,6 +94,7 @@ namespace IdentityTest2.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(comment).State = EntityState.Modified;
+                comment.numOfComentLikes = 0;
                 db.SaveChanges();
                 return RedirectToAction("Details", "News1", new { id = comment.newsId });
             }
@@ -142,6 +143,7 @@ namespace IdentityTest2.Controllers
         }
 
         //This function retrieve all comments for a given news
+        //the id parameter is the news ID
         // GET: Comments/CommentForNews/5
         public ActionResult CommentForNews(int? id, string sortOrder)
         {
@@ -156,11 +158,12 @@ namespace IdentityTest2.Controllers
             }
 
 
+
             var commentNews = db.Comment1.Include(c => c.AspNetUser).Include(c => c.News1).Where(x => x.newsId == id);
             var newsTitle = db.News1.Single(x => x.newsId == id).newsTitle;
             ViewBag.newsTitle = newsTitle;
             ViewBag.newsID = id;
-
+            ViewBag.user_id = User.Identity.GetUserId<int>();
             //The comments will be sorted by the number of likes
             ViewBag.DateSortParm = sortOrder == "ID" ? "Time" : "ID";
             switch (sortOrder)
@@ -193,14 +196,23 @@ namespace IdentityTest2.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.userId = User.Identity.GetUserId<int>();
-            ViewBag.newsId = id;
-            ViewBag.message = "ADD A COMMENT";
-            //ViewBag.userId = new SelectList(db.AspNetUsers, "userId", "userName");
-            //ViewBag.newsId = new SelectList(db.News1, "newsId", "newsId");
-            return View();
-        }
+            var user_id = User.Identity.GetUserId<int>();
+            var article = db.News1.Single(x => x.newsId == id);
+            if (user_id == 0)
+            {
+                ViewBag.message = "Please login or register first.";
+                return View("LoginFirstView", article);
+            }
+            else {
+                ViewBag.message = "ADD A COMMENT";
+                ViewBag.userId = User.Identity.GetUserId<int>();
+                ViewBag.newsId = id;
+                return View();
+                
+            }
 
+        }
+        //The id here is for the newsID of the news this comment is being written on
         // POST: Comments/CreateCommentForNews/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -209,15 +221,18 @@ namespace IdentityTest2.Controllers
         public ActionResult CreateCommentForNews(int id, [Bind(Include = "commentId,userId,newsId,postTime,commentContent,isDisplayed,numOfComentLikes")] Comment1 comment)
         {
             var user_id = User.Identity.GetUserId<int>();
+            var article = db.News1.Single(x => x.newsId == id);
+
             if (user_id == 0)
             {
-                ViewBag.message = "Sorry, please login or register First.";
+                
                 String returnURL = "Comments/CreateCommentForNews/" + id;
-                return RedirectToAction("Login", "Account", "returnURL");
+                return RedirectToAction("Login", "Account", returnURL);
             }
 
             if (ModelState.IsValid)
             {
+                comment.Datetime = DateTime.Now;
                 comment.numOfComentLikes = 0;
                 ViewBag.message = "ADD A COMMENT";
                 comment.newsId = id;
@@ -229,9 +244,7 @@ namespace IdentityTest2.Controllers
 
             ViewBag.userId = User.Identity.GetUserId<int>();
             ViewBag.newsId = comment.newsId;
-            //ViewBag.userId = new SelectList(db.Users, "userId", "userName", comment.userId);
-            //ViewBag.newsId = new SelectList(db.News1, "newsId", "uniqueTitle", comment.newsId);
-
+  
             return View(comment);
         }
 

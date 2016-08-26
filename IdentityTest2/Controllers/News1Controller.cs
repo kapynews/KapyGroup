@@ -184,14 +184,14 @@ namespace IdentityTest2.Controllers
             int userId = User.Identity.GetUserId<int>();
             if (userId == 0)
             {
-                return RedirectToAction("Index", "News1");
+                return RedirectToAction("Login", "Account");
             }
             //Get students enrolled in a particular course
             //dc.Students.Where(s => s.StudentCourseEnrollments.Any(e => e.CourseID == courseID)
             var selectedCategoriesModel = db.Categories.Include("News1").Where(c => c.AspNetUser_Category.Any(u => u.userId == userId));
             IEnumerable<Category> selectCategories = selectedCategoriesModel.ToList();
             StringBuilder sb = new StringBuilder();
-            sb.Append("Recommend News for you in categories: " + "\n");
+            sb.Append("Recommended News for you in categories: " + "\n");
             foreach (var c in selectCategories)
             {
                 sb.Append(c.categoryName + ", ");
@@ -208,14 +208,13 @@ namespace IdentityTest2.Controllers
             int userId = User.Identity.GetUserId<int>();
             if (userId == 0)
             {
-                return RedirectToAction("Index", "News1");
+                return RedirectToAction("Login", "Account");
             }
-            //Get students enrolled in a particular course
-            //dc.Students.Where(s => s.StudentCourseEnrollments.Any(e => e.CourseID == courseID)
+            
             var selectedCategoriesModel = db.Categories.Include("News1").Where(c => c.AspNetUser_Category.Any(u => u.userId == userId));
             IEnumerable<Category> selectCategories = selectedCategoriesModel.ToList();
             StringBuilder sb = new StringBuilder();
-            sb.Append("Recommend News for you in categories: " + "\n");
+            sb.Append("Recommended news for you in these categories: " + "\n");
             List<int> ids = null;
             foreach (var c in selectCategories)
             {
@@ -230,6 +229,95 @@ namespace IdentityTest2.Controllers
             ViewBag.message = sb.ToString();
             return View(newsModel.ToList().OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate));
         }
+
+        // GET: News1/Like/5
+        public ActionResult Like(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            News1 news = db.News1.Find(id);
+            if (news == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.user_id = User.Identity.GetUserId<int>();
+            ViewBag.newsID = id;
+            return PartialView(news);
+        }
+
+
+
+
+        //LikeNews increases the numberOfLikes for a given news
+        // POST: News1/LikeNews/5
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LikeNews(int id)
+        {
+            var userID = User.Identity.GetUserId<int>();
+
+
+            if (userID != 0)
+            {
+                News1 news = db.News1.Find(id);
+                news.numOfLikes++;
+                db.Entry(news).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index", "News1");
+            }
+            else {
+                return RedirectToAction("Login","Account");
+            }
+            
+        }
+        // GET: News1/HotNews/5
+        public ActionResult HotNews(string sortOrder, int? page)
+        {
+
+            int userId = User.Identity.GetUserId<int>();
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var selectedCategoriesModel = db.Categories.Include("News1").Where(c => c.AspNetUser_Category.Any(u => u.userId == userId));
+            var selectedSourcesModel = db.Sources.Include("News1").Where(s => s.User_Source.Any(u => u.userId == userId));
+            IEnumerable<Category> selectedCategories = selectedCategoriesModel.ToList();
+            IEnumerable<Source> selectedSources = selectedSourcesModel.ToList();
+            int nbcat = selectedCategories.Count();
+            int nbsources = selectedSources.Count();
+            ViewBag.nbcat = nbcat;
+            ViewBag.nbsources = nbsources;
+            ViewBag.DateSortParm = sortOrder == "ID" ? "Time" : "ID";
+            var news = from s in db.News1
+                       select s;
+            switch (sortOrder)
+            {
+
+                case "ID":
+                    news = news.OrderBy(s => s.newsId);
+                    break;
+                case "Time":
+                    news = news.OrderByDescending(s => s.newsTime);
+                    break;
+                default:
+                    news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
+                    break;
+            }
+            //var news1 = db.News1.Include(n => n.Category).Include(n => n.Source);
+            return View(news.ToList().ToPagedList(page ?? 1, 5));
+        }
+
+
+        
+        
+
+
+
+
 
 
     }

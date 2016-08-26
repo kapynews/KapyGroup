@@ -156,7 +156,7 @@ namespace IdentityTest2.Controllers
             }
             else {
 
-                if (categories.Count(x => x.isSelected==true) == 0)
+                if (categories == null || categories.Count(x => x.isSelected==true) == 0 )
                 {
                     ViewBag.message = "You haven't selected any category";
                 }

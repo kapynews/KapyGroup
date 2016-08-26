@@ -25,7 +25,7 @@
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.postTime)
+                @Html.DisplayNameFor(model => model.Datetime)
             </th>
             @*<th>
                     @Html.DisplayNameFor(model => model.News1.uniqueTitle)
@@ -50,7 +50,7 @@
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.postTime)
+                        @Html.DisplayFor(modelItem => item.Datetime)
                     </td>
 
                     @*<td>
@@ -62,10 +62,23 @@
                             @Html.DisplayFor(modelItem => item.News1.uniqueTitle)
                         </td>*@
                     <td>
-                        @Html.Action("Like", "Comment1", new { id = item.commentId }) |
-                        @Html.ActionLink("Edit", "Edit", new { id = item.commentId }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.commentId })
+                       @if (ViewBag.user_id != 0)
+                       {
+                            @Html.Action("Like", "Comment1", new { id = item.commentId })    
+                        }
+
                     </td>
+                    
+                        @if (item.userId == ViewBag.user_id && ViewBag.user_id != 0)
+                        {
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.commentId }) 
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.commentId })
+                            </td>
+                        }
+                    
                 </tr>
             }
         }

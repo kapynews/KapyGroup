@@ -62,7 +62,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Source.sourceName)
             </td>
+            <td> @if (ViewBag.user_id != 0)
+            {
+                @Html.Action("Like", "News1", new { id = item.newsId })
+            }
+             @Html.DisplayFor(modelItem => item.numOfLikes)
+            </td>
             <td>
+
                 @*@Html.ActionLink("Details", "Details", new { id = item.newsId }) |
         @Html.ActionLink("Edit", "Edit", new { id=item.newsId }) |
     @Html.ActionLink("Delete", "Delete", new { id = item.newsId })*@
