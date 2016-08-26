@@ -1,13 +1,25 @@
 ﻿@model IEnumerable<IdentityTest2.Models.News1>
 
 @{
-    ViewBag.Title = "RecommendToYou";
+    ViewBag.Title = "Hot News";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 
-<h2>RecommendToYou</h2>
-@if (ViewBag.Message != null)
+<h2>The most commented news</h2>
+@if (ViewBag.nbcat == 0 | ViewBag.nbsources == 0)
+{
+<h3>Personalize your profile with your prefered categories and news sources.</h3>
+
+    using (Html.BeginForm("Insert", "AspNetUser_Category", FormMethod.Get, null))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Personalyze your profile" class="btn btn-default" />
+        </div>
+    }
+}
+else
 {
     <table class="table">
 
@@ -19,7 +31,8 @@
                     {
                         <img src="~/Content/Images/kapy_logo.png" style="width:200px;height:128px;">
                     }
-                    else {
+                    else
+                    {
                         <img src="@Html.DisplayFor(modelItem => news.picUrl) " style="width:200px;height:128px;">
                     }
                 </td>
@@ -35,9 +48,11 @@
                     @Html.DisplayFor(modelItem => news.Source.sourceName)
                 </td>
                 <td>
-                    @*@Html.ActionLink("Details", "Details", new { id = item.newsId }) |
-                        @Html.ActionLink("Edit", "Edit", new { id=item.newsId }) |*@
-                    @*@Html.ActionLink("Delete", "Delete", new { id = news.newsId })*@
+                    @if (ViewBag.user_id != 0)
+                    {
+                        @Html.Action("Like", "News1", new { id = news.newsId })
+                    }
+                    @Html.DisplayFor(modelItem => news.numOfLikes)
                 </td>
             </tr>
         }

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace IdentityTest2.Controllers
 {
-    [RequireHttps]
+    //[RequireHttps]
     public class HomeController : Controller
     {
 
