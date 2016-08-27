@@ -311,14 +311,18 @@ namespace IdentityTest2.Controllers
             return View(news.ToList().ToPagedList(page ?? 1, 5));
         }
 
+        public ActionResult SearchForNews(string searchString, int? page)
+        {
 
-        
-        
+            var searchedNews = from s in db.News1
+                               select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchedNews = searchedNews.Where(n => n.newsTitle.Contains(searchString));
+            }
 
-
-
-
-
-
+            //return View(searchedNews);
+            return PartialView(searchedNews.ToList().ToPagedList(page ?? 1, 5));
+        }
     }
 }

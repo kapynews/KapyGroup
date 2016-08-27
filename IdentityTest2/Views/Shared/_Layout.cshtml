@@ -37,9 +37,13 @@
                             <span class="caret"></span>
                         </a>
                     *@
+                    @using (Html.BeginForm("SearchForNews", "News1", FormMethod.Get))
+                    {
 
-                    <li>@Html.ActionLink("Search", "Search", "News")</li>  <!-- a button for searching news - the search method will be implemented in the News controller -->
-                    @*@Html.Action("CategoryDropList", "Partial")*@
+                        <li>@Html.TextBox("SearchString")<span>    </span><input class="btn btn-primary btn-xs" type="submit" value="Search" /></li>
+
+                         <!-- a button for searching news - the search method will be implemented in the News controller -->
+                    }
 
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -56,8 +60,6 @@
                 @RenderBody()
             </div>
         </div>
-
-
 
         <hr />
         <footer>
