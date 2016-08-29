@@ -375,11 +375,6 @@ namespace IdentityTest2.Controllers
             return View();
         }
 
-        public ActionResult UserProfile()
-        {
-            return View();
-        }
-
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
