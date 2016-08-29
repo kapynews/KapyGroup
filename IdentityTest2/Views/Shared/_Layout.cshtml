@@ -22,7 +22,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><img src="~/Content/Images/kapy_logo.png" style="width:80px;height:50px;"></li>
+                    <li>
+                        <a href="@Url.Action("Home", "Index")" style="padding:0px 10px;">
+                            <img src="@Url.Content("~/Content/Images/kapy_logo.png")" style="width:80px;height:50px;" />
+                        </a>
+                    </li>
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("News", "Index", "News1")</li>
                     <li>@Html.ActionLink("Personalize", "Insert", "AspNetUser_Category")</li>
@@ -37,13 +41,15 @@
                             <span class="caret"></span>
                         </a>
                     *@
-                    @using (Html.BeginForm("SearchForNews", "News1", FormMethod.Get))
+
+                    <li>@using (Html.BeginForm("SearchForNews", "News1", FormMethod.Get))
                     {
 
-                        <li>@Html.TextBox("SearchString")<span>    </span><input class="btn btn-primary btn-xs" type="submit" value="Search" /></li>
+                        @Html.TextBox("SearchString")<span>    </span><input class="btn btn-primary btn-xs" type="submit" value="Search" style="padding-top:0px">
 
                          <!-- a button for searching news - the search method will be implemented in the News controller -->
                     }
+                    </li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")

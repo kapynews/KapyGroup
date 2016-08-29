@@ -411,6 +411,7 @@
     <Content Include="Views\News1\Like.cshtml" />
     <Content Include="Views\News1\HotNews.cshtml" />
     <Content Include="Views\News1\SearchForNews.cshtml" />
+    <Content Include="Views\Manage\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
