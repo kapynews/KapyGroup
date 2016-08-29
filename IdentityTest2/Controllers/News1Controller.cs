@@ -247,6 +247,9 @@ namespace IdentityTest2.Controllers
             return PartialView(news);
         }
 
+
+
+
         //LikeNews increases the numberOfLikes for a given news
         // POST: News1/LikeNews/5
         
@@ -263,8 +266,7 @@ namespace IdentityTest2.Controllers
                 news.numOfLikes++;
                 db.Entry(news).State = EntityState.Modified;
                 db.SaveChanges();
-                
-                return RedirectToAction("Details", "News1", new { id = id });
+                return RedirectToAction("Index", "News1");
             }
             else {
                 return RedirectToAction("Login","Account");
@@ -309,19 +311,14 @@ namespace IdentityTest2.Controllers
             return View(news.ToList().ToPagedList(page ?? 1, 5));
         }
 
-                public ActionResult SearchForNews(string searchString, int? page)
-        {
 
-            var searchedNews = from s in db.News1
-                               select s;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                searchedNews = searchedNews.Where(n => n.newsTitle.Contains(searchString));
-            }
+        
+        
 
-            //return View(searchedNews);
-            return PartialView(searchedNews.ToList().ToPagedList(page ?? 1, 5));
-        }
+
+
+
+
 
     }
 }

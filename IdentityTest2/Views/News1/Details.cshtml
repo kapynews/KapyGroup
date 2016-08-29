@@ -89,12 +89,20 @@
             </dd>
         }
         <dt>
-            NumOfLikes:
+            @Html.DisplayNameFor(model => model.numOfClicks)
         </dt>
+
         <dd>
-            @Html.DisplayFor(model => model.numOfLikes)           
+            @Html.DisplayFor(model => model.numOfClicks)
         </dd>
-@Html.Partial("Like")
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numOfLikes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numOfLikes)
+        </dd>
 
     </dl>
 </div>
@@ -102,8 +110,9 @@
     @*@Html.ActionLink("See all comments", "CommentForNews", "Comments", new { id = Model.newsId }, null) |
         @Html.ActionLink("Edit", "Edit", new { id = Model.newsId }) |
         @Html.ActionLink("Back to List", "Category", new { categoryId = Model.categoryId })*@
-
 <p>
+    @*@Html.ActionLink("See all comments", "CommentForNews", "Comments", new { id = Model.newsId }, null) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.newsId }) |*@
     @Html.ActionLink("Back to List", "Category", new { categoryId = Model.categoryId })
 </p>
 <p>
