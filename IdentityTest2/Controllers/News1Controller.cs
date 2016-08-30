@@ -194,9 +194,9 @@ namespace IdentityTest2.Controllers
             sb.Append("Recommended News for you in categories: " + "\n");
             foreach (var c in selectCategories)
             {
-                sb.Append(c.categoryName + ", ");
+                sb.Append(c.categoryName + " ");
             }
-            sb.Remove(sb.ToString().LastIndexOf(","), 1);
+            //sb.Remove(sb.ToString().LastIndexOf(","), 1);
             ViewBag.message = sb.ToString();
             return View(selectedCategoriesModel);
         }
@@ -246,19 +246,34 @@ namespace IdentityTest2.Controllers
             ViewBag.newsID = id;
             return PartialView(news);
         }
-
-
-
-
         //LikeNews increases the numberOfLikes for a given news
         // POST: News1/LikeNews/5
-        
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult LikeNews1(int id)
+        //{
+        //    var userID = User.Identity.GetUserId<int>();
+
+
+        //    if (userID != 0)
+        //    {
+        //        News1 news = db.News1.Find(id);
+        //        news.numOfLikes++;
+        //        db.Entry(news).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index", "News1");
+        //    }
+        //    else {
+        //        return RedirectToAction("Login", "Account");
+        //    }
+
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LikeNews(int id)
         {
             var userID = User.Identity.GetUserId<int>();
-
 
             if (userID != 0)
             {
@@ -266,12 +281,11 @@ namespace IdentityTest2.Controllers
                 news.numOfLikes++;
                 db.Entry(news).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "News1");
+                return RedirectToAction("Details", "News1", new { id = id });
             }
             else {
-                return RedirectToAction("Login","Account");
+                return RedirectToAction("Login", "Account");
             }
-            
         }
         // GET: News1/HotNews/5
         public ActionResult HotNews(string sortOrder, int? page)
@@ -311,14 +325,19 @@ namespace IdentityTest2.Controllers
             return View(news.ToList().ToPagedList(page ?? 1, 5));
         }
 
+        public ActionResult SearchForNews(string searchString, int? page)
+        {
 
-        
-        
+            var searchedNews = from s in db.News1
+                               select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchedNews = searchedNews.Where(n => n.newsTitle.Contains(searchString));
+            }
 
-
-
-
-
+            //return View(searchedNews);
+            return PartialView(searchedNews.ToList().ToPagedList(page ?? 1, 5));
+        }
 
     }
 }
