@@ -1,0 +1,16 @@
+﻿@model IEnumerable<IdentityTest2.Models.News1>
+
+@{
+    ViewBag.Title = "Hot News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+    <h3>@ViewBag.message</h3>
+
+    @using (Html.BeginForm("Insert", "AspNetUser_Category", FormMethod.Get, null))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Personalyze your profile" class="btn btn-default" />
+        </div>
+    }
