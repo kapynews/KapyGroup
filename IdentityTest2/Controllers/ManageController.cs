@@ -9,6 +9,10 @@ using Microsoft.Owin.Security;
 using IdentityTest2.Models;
 using System.Text;
 using System.Collections.Generic;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using ProfileManagement.Models;
+using System.Data.Entity;
 
 namespace IdentityTest2.Controllers
 {
@@ -377,8 +381,20 @@ namespace IdentityTest2.Controllers
 
         public ActionResult UserProfile()
         {
+
+            //var currentUserId = User.Identity.GetUserId();
+            //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            //var currentUser = manager.FindById(User.Identity.GetUserId());
+
+            //currentUser.MyUserInfo.FirstName();
+
+
+
+            //return View(currentUserId);
             return View();
         }
+
+    
 
         #region Helpers
         // Used for XSRF protection when adding external logins

@@ -279,6 +279,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserProfileEdit.cs" />
     <Compile Include="Models\User_Category.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
