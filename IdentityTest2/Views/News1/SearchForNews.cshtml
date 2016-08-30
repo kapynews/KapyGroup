@@ -1,0 +1,54 @@
+﻿@model IEnumerable<IdentityTest2.Models.News1>
+
+@{
+    ViewBag.Title = "SearchForNews";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td style="color: red">No data match search criteria</td>
+        </tr>
+    }
+    else {
+        <tr>
+            <td style="color: red">Search Results:</td>
+        </tr>
+
+    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (item.picUrl == "")
+                {
+                    <img src="~/Content/Images/kapy_logo.png" style="width:200px;height:128px;">
+                }
+                else
+                {
+                    <img src="@Html.DisplayFor(modelItem => item.picUrl) " style="width:200px;height:128px;">
+                }
+            </td>
+            <td>
+                @Html.ActionLink(item.newsTitle, "Details", new { id = item.newsId })
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.newsDate)*@
+                @Html.DisplayFor(modelItem => item.newsTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.categoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Source.sourceName)
+            </td>
+            <td>
+                @*@Html.ActionLink("Details", "Details", new { id = item.newsId }) |
+                        @Html.ActionLink("Edit", "Edit", new { id=item.newsId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.newsId })*@
+            </td>
+        </tr>
+    }
+</table>

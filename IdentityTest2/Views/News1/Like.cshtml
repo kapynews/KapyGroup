@@ -4,7 +4,7 @@
     Layout = "";
 }
 
-@using (Html.BeginForm("LikeNews", "News1", new { id = @ViewBag.newsID }, FormMethod.Post, null))
+@using (Html.BeginForm("LikeNews", "News1", new { id = Model.newsId }, FormMethod.Post, null))
 {
     @Html.AntiForgeryToken()
 
@@ -15,8 +15,3 @@
 
 
 }
-
-
-
-
-

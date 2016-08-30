@@ -22,3 +22,36 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*For the user profile*/
+
+.userProfile_outerContainer {
+    box-shadow: 0px 0px 7px #888888;
+    width:80%;
+    margin:0 auto;
+    margin-top:35px;
+}
+
+.userProfile_rowContainer {
+    border-bottom:1px solid #999999;
+    padding:10px 15px;
+}
+
+.userProfile_rowContainer_last {
+    border-bottom:0px none transparent !important;
+}
+
+.userProfile_labelContainer {
+    float:left;
+    width:90%
+}
+
+.userProfile_labelTitle {
+    font-weight:bold;
+    font-size:110%;
+}
+
+.userProfile_editContainer {
+    float:left;
+    vertical-align:middle;
+}

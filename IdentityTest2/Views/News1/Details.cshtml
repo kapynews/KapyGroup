@@ -109,10 +109,11 @@
 
     @*@Html.ActionLink("See all comments", "CommentForNews", "Comments", new { id = Model.newsId }, null) |
         @Html.ActionLink("Edit", "Edit", new { id = Model.newsId }) |
+
         @Html.ActionLink("Back to List", "Category", new { categoryId = Model.categoryId })*@
+@Html.Partial("Like")
 <p>
-    @*@Html.ActionLink("See all comments", "CommentForNews", "Comments", new { id = Model.newsId }, null) |
-    @Html.ActionLink("Edit", "Edit", new { id = Model.newsId }) |*@
+
     @Html.ActionLink("Back to List", "Category", new { categoryId = Model.categoryId })
 </p>
 <p>
