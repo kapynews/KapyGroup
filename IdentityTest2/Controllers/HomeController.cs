@@ -6,8 +6,8 @@ using System.Web.Mvc;
 
 namespace IdentityTest2.Controllers
 {
-    //[RequireHttps]
-    public class HomeController : Controller
+    [RequireHttps]
+    public class HomeController : Controller//
     {
 
         public ActionResult Index()
@@ -21,7 +21,7 @@ namespace IdentityTest2.Controllers
 
             return View();
         }
-
+        [Authorize]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

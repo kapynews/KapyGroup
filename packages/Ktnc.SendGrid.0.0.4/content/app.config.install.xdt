@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+    <appSettings xdt:Transform="InsertIfMissing">
+        <add key="Ktnc.SendGrid.Storage.AccountName" value="--SetAccountName--" xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)" />
+        <add key="Ktnc.SendGrid.Storage.AccessKey" value="--SetAccessKey--" xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)" />
+        <add key="Ktnc.SendGrid.Storage.Container" value="--SetContainer--" xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)" />
+        <add key="Ktnc.SendGrid.ApiKey" value="--SetApiKey--" xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)" />
+        <add key="Ktnc.SendGrid.From" value="--SetDefaultFrom(MailAddress)--" xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)" />
+        <add key="Ktnc.SendGrid.FromName" value="--SetDefaultFromName--" xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)" />
+    </appSettings>
+</configuration>
