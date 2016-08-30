@@ -26,6 +26,7 @@ namespace IdentityTest2.Models
             this.AspNetRoles = new HashSet<AspNetRole>();
             this.Comment1 = new HashSet<Comment1>();
             this.AspNetUser_Category = new HashSet<AspNetUser_Category>();
+            this.AspNetUser_Source = new HashSet<AspNetUser_Source>();
         }
     
         public int Id { get; set; }
@@ -40,6 +41,7 @@ namespace IdentityTest2.Models
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
+        public Nullable<int> ReceiveNewsLetters { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActionRecord> ActionRecords { get; set; }
@@ -59,5 +61,7 @@ namespace IdentityTest2.Models
         public virtual ICollection<Comment1> Comment1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUser_Category> AspNetUser_Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUser_Source> AspNetUser_Source { get; set; }
     }
 }

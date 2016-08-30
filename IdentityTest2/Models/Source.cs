@@ -19,6 +19,7 @@ namespace IdentityTest2.Models
         {
             this.News1 = new HashSet<News1>();
             this.User_Source = new HashSet<User_Source>();
+            this.AspNetUser_Source = new HashSet<AspNetUser_Source>();
         }
     
         public int sourceId { get; set; }
@@ -29,5 +30,7 @@ namespace IdentityTest2.Models
         public virtual ICollection<News1> News1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User_Source> User_Source { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUser_Source> AspNetUser_Source { get; set; }
     }
 }
