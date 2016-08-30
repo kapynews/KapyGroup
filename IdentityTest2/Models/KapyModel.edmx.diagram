@@ -44,6 +44,9 @@
         <EntityTypeShape EntityType="kapymvc1Model.AspNetUser_Category" Width="1.5" PointX="8.25" PointY="16.125" />
         <AssociationConnector Association="kapymvc1Model.FK_AspNetUser_Category_AspNetUsers" />
         <AssociationConnector Association="kapymvc1Model.FK_AspNetUser_Category_Category" />
+        <EntityTypeShape EntityType="kapymvc1Model.AspNetUser_Source" Width="1.5" PointX="11.25" PointY="6" />
+        <AssociationConnector Association="kapymvc1Model.FK_AspNetUser_Source_Source" />
+        <AssociationConnector Association="kapymvc1Model.FK_dbo_AspNetUser_Source_dbo_AspNetUsers_UserId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

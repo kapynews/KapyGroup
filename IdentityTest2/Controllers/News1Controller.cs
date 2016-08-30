@@ -339,5 +339,59 @@ namespace IdentityTest2.Controllers
             return PartialView(searchedNews.ToList().ToPagedList(page ?? 1, 5));
         }
 
+
+        [HttpGet]
+        public ActionResult AddSubscription(int? id)
+        {
+            News1 news = db.News1.Find(id);
+            int user_id = User.Identity.GetUserId<int>();
+            ViewBag.newsID = id;
+            //return View(db.Sources.ToList());
+            //IEnumerable<AspNetUser_Source> aspNetUser_Sources = db.AspNetUser_Source.Where(n => n.UserId==user_id);
+            //foreach (var row in aspNetUser_Sources){
+            //    if (news.Source.sourceId == row.souceId) {
+            //        news.newsId = 0;
+            //    }
+            //}
+            return PartialView(news);
+
+        }
+
+        [HttpPost, ActionName("AddSubscription")]
+        public ActionResult AddSubscription(int id, [Bind(Include = "usersourceId,UserId,souceId,subscribeTime")] AspNetUser_Source aspNetUser_Source)
+        {
+            int userId = User.Identity.GetUserId<int>();
+            bool isSubscribe = false;
+            if (userId == 0)
+            {
+                ViewBag.message = "Sorry, please login or register First";
+                return RedirectToAction("Login", "Account");
+            }
+            else {
+                News1 news = db.News1.Find(id);
+                IEnumerable<AspNetUser_Source> aspNetUser_Sources = db.AspNetUser_Source.Where(n => n.UserId == userId);
+                foreach (var row in aspNetUser_Sources)
+                {
+                    if (news.Source.sourceId == row.souceId)
+                    {
+                        isSubscribe = true;
+                    }
+                }
+                if (ModelState.IsValid && !isSubscribe)
+                {
+
+                    aspNetUser_Source.UserId = userId;
+                    aspNetUser_Source.subscribeTime = DateTime.Now;
+                    aspNetUser_Source.souceId = news.Source.sourceId;
+                    db.AspNetUser_Source.Add(aspNetUser_Source);
+                    db.SaveChanges();
+                }
+                ModelState.Clear();
+                //ViewBag.souceId = new SelectList(db.Sources, "sourceId", "sourceName", aspNetUser_Source.souceId);
+                //ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", aspNetUser_Source.UserId);
+                return RedirectToAction("Details", "News1", new { id = id });
+            }
+        }
+
     }
 }

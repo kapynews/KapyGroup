@@ -182,6 +182,15 @@ namespace IdentityTest2.Controllers
                                 db.SaveChanges();
                             }
                             ModelState.Clear();
+                            //db.AspNetUser_Category.GroupBy(x => new { x.userId, x.categoryId }).Select(y=>y.usercategoryId);
+                            //db.AspNetUser_Category.Remove(db.AspNetUser_Category.Where(c => c.usercategoryId !=x))
+        
+        //DELETE FROM[dbo].[AspNetUser_Category]
+        //WHERE usercategoryId NOT IN
+        //(
+        //SELECT MAX(usercategoryId)
+        //    FROM[dbo].[AspNetUser_Category]
+        //GROUP BY userId,categoryId)
 
                         }
                     }

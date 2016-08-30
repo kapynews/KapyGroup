@@ -77,6 +77,8 @@
     <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
     <NavigationProperty Name="Comment1" Relationship="kapymvc1Model.FK_Comment1_AspNetUsers" FromRole="AspNetUser" ToRole="Comment1" />
     <NavigationProperty Name="AspNetUser_Category" Relationship="kapymvc1Model.FK_AspNetUser_Category_AspNetUsers" FromRole="AspNetUser" ToRole="AspNetUser_Category" />
+    <Property Name="ReceiveNewsLetters" Type="Int32" />
+    <NavigationProperty Name="AspNetUser_Source" Relationship="kapymvc1Model.FK_dbo_AspNetUser_Source_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUser_Source" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -125,6 +127,7 @@
     <NavigationProperty Name="Source" Relationship="Self.FK_News1_Source" FromRole="News1" ToRole="Source" />
     <NavigationProperty Name="Comment1" Relationship="kapymvc1Model.FK_Comment1_News1" FromRole="News1" ToRole="Comment1" />
     <Property Name="crawlTime" Type="DateTime" Precision="7" />
+    <Property Name="numComments" Type="Int32" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -143,6 +146,7 @@
     <Property Name="sourceUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="News1" Relationship="Self.FK_News1_Source" FromRole="Source" ToRole="News1" />
     <NavigationProperty Name="User_Source" Relationship="Self.FK_User_Source_Source" FromRole="Source" ToRole="User_Source" />
+    <NavigationProperty Name="AspNetUser_Source" Relationship="kapymvc1Model.FK_AspNetUser_Source_Source" FromRole="Source" ToRole="AspNetUser_Source" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -522,6 +526,15 @@
       <End Role="Category" EntitySet="Categories" />
       <End Role="AspNetUser_Category" EntitySet="AspNetUser_Category" />
     </AssociationSet>
+    <EntitySet Name="AspNetUser_Source" EntityType="kapymvc1Model.AspNetUser_Source" />
+    <AssociationSet Name="FK_AspNetUser_Source_Source" Association="kapymvc1Model.FK_AspNetUser_Source_Source">
+      <End Role="Source" EntitySet="Sources" />
+      <End Role="AspNetUser_Source" EntitySet="AspNetUser_Source" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUser_Source_dbo_AspNetUsers_UserId" Association="kapymvc1Model.FK_dbo_AspNetUser_Source_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUser_Source" EntitySet="AspNetUser_Source" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Comment1">
     <Key>
@@ -594,6 +607,43 @@
       </Principal>
       <Dependent Role="AspNetUser_Category">
         <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AspNetUser_Source">
+    <Key>
+      <PropertyRef Name="usersourceId" />
+    </Key>
+    <Property Name="usersourceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="souceId" Type="Int32" Nullable="false" />
+    <Property Name="subscribeTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Source" Relationship="kapymvc1Model.FK_AspNetUser_Source_Source" FromRole="AspNetUser_Source" ToRole="Source" />
+    <NavigationProperty Name="AspNetUser" Relationship="kapymvc1Model.FK_dbo_AspNetUser_Source_dbo_AspNetUsers_UserId" FromRole="AspNetUser_Source" ToRole="AspNetUser" />
+  </EntityType>
+  <Association Name="FK_AspNetUser_Source_Source">
+    <End Type="kapymvc1Model.Source" Role="Source" Multiplicity="1" />
+    <End Type="kapymvc1Model.AspNetUser_Source" Role="AspNetUser_Source" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Source">
+        <PropertyRef Name="sourceId" />
+      </Principal>
+      <Dependent Role="AspNetUser_Source">
+        <PropertyRef Name="souceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUser_Source_dbo_AspNetUsers_UserId">
+    <End Type="kapymvc1Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="kapymvc1Model.AspNetUser_Source" Role="AspNetUser_Source" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUser_Source">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

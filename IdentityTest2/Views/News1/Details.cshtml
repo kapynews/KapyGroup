@@ -39,14 +39,7 @@
                 @Html.DisplayFor(model => model.author)
             </dd>
         }
-        <dt>
-            @*@Html.DisplayNameFor(model => model.Source.sourceName)*@
-            Source:
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Source.sourceName)
-        </dd>
         @if (Model.picUrl != "")
         {
             <dt>
@@ -64,9 +57,18 @@
                 <img src="~/Content/Images/kapy_logo.png" style="width:200px;height:128px;">
             </dd>
         }
-
         <dt>
-            @*@Html.DisplayNameFor(model => model.newsContent)*@
+           Source:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Source.sourceName)
+        </dd>
+        <dt>
+        </dt>
+        <dd>
+            @Html.Partial("AddSubscription")
+        </dd>
+        <dt>
             Content:
         </dt>
         <dd>
@@ -75,7 +77,6 @@
         <dt>
             Orignial Link :
         </dt>
-
         <dd>
             <a href="@Html.DisplayFor(model => model.origUrl) ">@Html.DisplayFor(model => model.origUrl)</a>
         </dd>
