@@ -41,5 +41,6 @@ namespace IdentityTest2.Models
         public virtual DbSet<User_Source> User_Source { get; set; }
         public virtual DbSet<Comment1> Comment1 { get; set; }
         public virtual DbSet<AspNetUser_Category> AspNetUser_Category { get; set; }
+        public virtual DbSet<AspNetUser_Source> AspNetUser_Source { get; set; }
     }
 }

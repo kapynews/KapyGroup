@@ -21,7 +21,7 @@ namespace IdentityTest2.Controllers
 
         // GET: News1
         // GET: News1
-        public ActionResult Index(string sortOrder,int? page)
+        public ActionResult Index(string sortOrder, int? page)
         {
             ViewBag.DateSortParm = sortOrder == "ID" ? "Time" : "ID";
             var news = from s in db.News1
@@ -40,7 +40,7 @@ namespace IdentityTest2.Controllers
                     break;
             }
             //var news1 = db.News1.Include(n => n.Category).Include(n => n.Source);
-            return View(news.ToList().ToPagedList(page??1,5));
+            return View(news.ToList().ToPagedList(page ?? 1, 5));
         }
 
         // GET: News1/Details/5
@@ -210,7 +210,7 @@ namespace IdentityTest2.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            
+
             var selectedCategoriesModel = db.Categories.Include("News1").Where(c => c.AspNetUser_Category.Any(u => u.userId == userId));
             IEnumerable<Category> selectCategories = selectedCategoriesModel.ToList();
             StringBuilder sb = new StringBuilder();
@@ -219,7 +219,7 @@ namespace IdentityTest2.Controllers
             foreach (var c in selectCategories)
             {
                 sb.Append(c.categoryName + ", ");
-                ids.Add(c.categoryId);                
+                ids.Add(c.categoryId);
             }
             //var newsModel = db.News1.Where(n => (n.categoryId == c.categoryId) || (n.categoryId == c.categoryId));
             var newsModel = db.News1.Where(n => ids.Contains(n.categoryId));
@@ -246,29 +246,7 @@ namespace IdentityTest2.Controllers
             ViewBag.newsID = id;
             return PartialView(news);
         }
-        //LikeNews increases the numberOfLikes for a given news
-        // POST: News1/LikeNews/5
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult LikeNews1(int id)
-        //{
-        //    var userID = User.Identity.GetUserId<int>();
-
-
-        //    if (userID != 0)
-        //    {
-        //        News1 news = db.News1.Find(id);
-        //        news.numOfLikes++;
-        //        db.Entry(news).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index", "News1");
-        //    }
-        //    else {
-        //        return RedirectToAction("Login", "Account");
-        //    }
-
-        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LikeNews(int id)
@@ -337,6 +315,60 @@ namespace IdentityTest2.Controllers
 
             //return View(searchedNews);
             return PartialView(searchedNews.ToList().ToPagedList(page ?? 1, 5));
+        }
+
+
+        [HttpGet]
+        public ActionResult AddSubscription(int? id)
+        {
+            News1 news = db.News1.Find(id);
+            int user_id = User.Identity.GetUserId<int>();
+            ViewBag.newsID = id;
+            //return View(db.Sources.ToList());
+            //IEnumerable<AspNetUser_Source> aspNetUser_Sources = db.AspNetUser_Source.Where(n => n.UserId==user_id);
+            //foreach (var row in aspNetUser_Sources){
+            //    if (news.Source.sourceId == row.souceId) {
+            //        news.newsId = 0;
+            //    }
+            //}
+            return PartialView(news);
+
+        }
+
+        [HttpPost, ActionName("AddSubscription")]
+        public ActionResult AddSubscription(int id, [Bind(Include = "usersourceId,UserId,souceId,subscribeTime")] AspNetUser_Source aspNetUser_Source)
+        {
+            int userId = User.Identity.GetUserId<int>();
+            bool isSubscribe = false;
+            if (userId == 0)
+            {
+                ViewBag.message = "Sorry, please login or register First";
+                return RedirectToAction("Login", "Account");
+            }
+            else {
+                News1 news = db.News1.Find(id);
+                IEnumerable<AspNetUser_Source> aspNetUser_Sources = db.AspNetUser_Source.Where(n => n.UserId == userId);
+                foreach (var row in aspNetUser_Sources)
+                {
+                    if (news.Source.sourceId == row.souceId)
+                    {
+                        isSubscribe = true;
+                    }
+                }
+                if (ModelState.IsValid && !isSubscribe)
+                {
+
+                    aspNetUser_Source.UserId = userId;
+                    aspNetUser_Source.subscribeTime = DateTime.Now;
+                    aspNetUser_Source.souceId = news.Source.sourceId;
+                    db.AspNetUser_Source.Add(aspNetUser_Source);
+                    db.SaveChanges();
+                }
+                ModelState.Clear();
+                //ViewBag.souceId = new SelectList(db.Sources, "sourceId", "sourceName", aspNetUser_Source.souceId);
+                //ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", aspNetUser_Source.UserId);
+                return RedirectToAction("Details", "News1", new { id = id });
+            }
         }
 
     }
