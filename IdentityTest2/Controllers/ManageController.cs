@@ -390,7 +390,7 @@ namespace IdentityTest2.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            var currentCategories = db.Categories.Include("Category1").Where(c => c.AspNetUser_Category.Any(u => userId == userId));
+            var currentCategories = db.Categories.Where(u => u.AspNetUser_Category.Any(a => a.userId == userId));
             IEnumerable<Category> currentCatgories = currentCategories.ToList();
 
             StringBuilder sb = new StringBuilder();
