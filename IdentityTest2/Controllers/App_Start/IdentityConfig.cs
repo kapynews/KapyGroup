@@ -12,6 +12,7 @@ using SendGrid;
 
 using System.Configuration;
 using System.Diagnostics;
+using System.Net.Mail;
 
 namespace IdentityTest2
 {
@@ -25,33 +26,68 @@ namespace IdentityTest2
         }
         private async Task configSendGridasync(IdentityMessage message)
         {
-            var myMessage = new SendGridMessage();
-            myMessage.AddTo(message.Destination);
-            myMessage.From = new System.Net.Mail.MailAddress(
-                                "smtp.sendgrid.net", "Kapy News");
-            myMessage.Subject = message.Subject;
-            myMessage.Text = message.Body;
-            myMessage.Html = message.Body;
+            //  var smtp = new SmtpClient(Properties.Resources.SendGridURL, 587);
+            var smtp = new SmtpClient();
+            smtp.UseDefaultCredentials = false;
+            //  var creds = new NetworkCredential(Properties.Resources.SendGridUser, Properties.Resources.SendGridPassword);
+            smtp.Credentials = new System.Net.NetworkCredential("kapynews@gmail.com", "Kapyiscool1234");
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            //smtp.UseDefaultCredentials = false;
+         //   smtp.Credentials = creds;
+            smtp.EnableSsl = true;
 
-            var credentials = new NetworkCredential(
-                       ConfigurationManager.AppSettings["Kapyemail"],
-                       ConfigurationManager.AppSettings["Kapy1234~"]
-                       );
+            var to = new MailAddress(message.Destination);
+            var from = new MailAddress("kapynews@gmail.com", "Your Contractor Connection");
 
-            // Create a Web transport for sending email.
-            var transportWeb = new Web(credentials);
+            var msg = new MailMessage();
 
-            // Send the email.
-            if (transportWeb != null)
-            {
-                await transportWeb.DeliverAsync(myMessage);
-            }
-            else
-            {
-                Trace.TraceError("Failed to create Web transport.");
-                await Task.FromResult(0);
-            }
+            msg.To.Add(to);
+            msg.From = from;
+            msg.IsBodyHtml = true;
+            msg.Subject = message.Subject;
+            msg.Body = message.Body;
+
+            await smtp.SendMailAsync(msg);
         }
+        //private async Task configSendGridasync(IdentityMessage message)
+        //{
+        //    var myMessage = new SendGridMessage();
+        //    myMessage.AddTo(message.Destination);
+        //    myMessage.From = new System.Net.Mail.MailAddress(
+        //                        "kapynews@gmail.com", "Kapy News");
+        //    myMessage.Subject = message.Subject;
+        //    myMessage.Text = message.Body;
+        //    myMessage.Html = message.Body;
+
+        //    var credentials = new NetworkCredential(
+        //               ConfigurationManager.AppSettings["Kapyemail"],
+        //               ConfigurationManager.AppSettings["Kapykapy1234!"]
+        //               );
+
+        //    // Create a Web transport for sending email.
+        //    var transportWeb = new Web(credentials);
+
+        //    // Send the email.
+        //    if (transportWeb != null)
+        //    {
+        //        try
+        //        {
+        //            await transportWeb.DeliverAsync(myMessage);
+        //        }
+        //        catch (Exception)
+        //        {
+
+        //            throw;
+        //        }
+
+        //    }
+        //    else
+        //    {
+        //        Trace.TraceError("Failed to create Web transport.");
+        //        await Task.FromResult(0);
+        //    }
+        //}
 
     }
 
@@ -117,6 +153,16 @@ namespace IdentityTest2
                     new DataProtectorTokenProvider<ApplicationUser,int>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
+        }
+
+        internal Task<string> GenerateEmailConfirmationTokenAsync(string userID)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal Task SendEmailAsync(string userID, string subject, string v)
+        {
+            throw new NotImplementedException();
         }
     }
 

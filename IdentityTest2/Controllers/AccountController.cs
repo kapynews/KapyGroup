@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using IdentityTest2.Models;
+using System;
 
 namespace IdentityTest2.Controllers
 {
@@ -166,34 +167,43 @@ namespace IdentityTest2.Controllers
                 if (result.Succeeded)
                 {
                     //  Comment the following line to prevent log in until the user is confirmed.
-                   
-                  //  await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                    //  await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account",
-                       new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id,
-                       "Confirm your account", "Please confirm your account by clicking <a href=\""
-                       + callbackUrl + "\">here</a>");
 
 
-                    
-                    
+                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                    //   new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id,
+                    //   "Confirm your account", "Please confirm your account by clicking <a href=\""
+                    //   + callbackUrl + "\">here</a>");
 
-                    // Uncomment to debug locally 
-                     TempData["ViewBagLink"] = callbackUrl;
+
+                    //             // Uncomment to debug locally 
+                    // TempData["ViewBagLink"] = callbackUrl;
+
+                    //ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                    //                + "before you can log in.";
+
+                    //return View("Info");
+                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
+
 
                     ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
                                     + "before you can log in.";
 
+                    // For local debug only
+                    ViewBag.Link = callbackUrl;
+
                     return View("Info");
-                   
-                  //  return RedirectToAction("Insert", "AspNetUser_Category");
+
+                    //  return RedirectToAction("Insert", "AspNetUser_Category");
                     //return RedirectToAction("AddCategories", "Manage");
                 }
                 AddErrors(result);
@@ -202,6 +212,11 @@ namespace IdentityTest2.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        //private Task<string> SendEmailConfirmationTokenAsync(int id, string v)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         //
         // GET: /Account/ConfirmEmail
@@ -511,6 +526,16 @@ namespace IdentityTest2.Controllers
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
+        }
+        private async Task<string> SendEmailConfirmationTokenAsync(int userID, string subject)
+        {
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account",
+               new { userId = userID, code = code }, protocol: Request.Url.Scheme);
+            await UserManager.SendEmailAsync(userID, subject,
+               "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+            return callbackUrl;
         }
         #endregion
     }
