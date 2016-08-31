@@ -380,6 +380,31 @@ namespace IdentityTest2.Controllers
 
         }
 
+   
+        public ActionResult ShowCurrentCategories ()
+        {
+           
+            int userId = User.Identity.GetUserId<int>();
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var currentCategories = db.Categories.Include("Category1").Where(c => c.AspNetUser_Category.Any(u => userId == userId));
+            IEnumerable<Category> currentCatgories = currentCategories.ToList();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Your current favorite categories : ");
+            List<int> ids = null;
+            foreach (var c in currentCategories)
+            {
+                sb.Append(c.categoryName + "\n" );
+                ids.Add(c.categoryId);
+            }
+
+            return View(currentCategories);
+        }
+
     #region Helpers
     // Used for XSRF protection when adding external logins
     private const string XsrfKey = "XsrfId";
