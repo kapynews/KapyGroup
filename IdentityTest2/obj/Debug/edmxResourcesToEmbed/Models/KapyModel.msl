@@ -50,6 +50,7 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="kapymvc1Model.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="ReceiveNewsLetters" ColumnName="ReceiveNewsLetters" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
@@ -90,6 +91,7 @@
     <EntitySetMapping Name="News1">
       <EntityTypeMapping TypeName="kapymvc1Model.News1">
         <MappingFragment StoreEntitySet="News1">
+          <ScalarProperty Name="numComments" ColumnName="numComments" />
           <ScalarProperty Name="crawlTime" ColumnName="crawlTime" />
           <ScalarProperty Name="newsId" ColumnName="newsId" />
           <ScalarProperty Name="uniqueTitle" ColumnName="uniqueTitle" />
@@ -187,6 +189,16 @@
           <ScalarProperty Name="categoryId" ColumnName="categoryId" />
           <ScalarProperty Name="userId" ColumnName="userId" />
           <ScalarProperty Name="usercategoryId" ColumnName="usercategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUser_Source">
+      <EntityTypeMapping TypeName="kapymvc1Model.AspNetUser_Source">
+        <MappingFragment StoreEntitySet="AspNetUser_Source">
+          <ScalarProperty Name="subscribeTime" ColumnName="subscribeTime" />
+          <ScalarProperty Name="souceId" ColumnName="souceId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="usersourceId" ColumnName="usersourceId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

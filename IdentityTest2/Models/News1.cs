@@ -11,7 +11,7 @@ namespace IdentityTest2.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class News1
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +24,6 @@ namespace IdentityTest2.Models
         public int newsId { get; set; }
         public string uniqueTitle { get; set; }
         public string newsTitle { get; set; }
-        [DataType(DataType.Date)]
         public Nullable<System.DateTime> newsDate { get; set; }
         public Nullable<System.TimeSpan> newsTime { get; set; }
         public string author { get; set; }
@@ -36,6 +35,7 @@ namespace IdentityTest2.Models
         public Nullable<int> numOfClicks { get; set; }
         public Nullable<int> numOfLikes { get; set; }
         public Nullable<System.DateTime> crawlTime { get; set; }
+        public Nullable<int> numComments { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

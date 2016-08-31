@@ -277,6 +277,7 @@
     <Compile Include="Controllers\App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AspNetUser_CategoryController.cs" />
+    <Compile Include="Controllers\AspNetUser_SourceController.cs" />
     <Compile Include="Controllers\Comment1Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -304,6 +305,9 @@
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUser_Category.cs">
+      <DependentUpon>KapyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser_Source.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
@@ -495,6 +499,13 @@
     <Content Include="Views\News1\SearchForNews.cshtml" />
     <Content Include="Views\News1\Like.cshtml" />
     <Content Include="Views\Manage\UserProfile.cshtml" />
+    <Content Include="Views\AspNetUser_Source\Create.cshtml" />
+    <Content Include="Views\AspNetUser_Source\Delete.cshtml" />
+    <Content Include="Views\AspNetUser_Source\Details.cshtml" />
+    <Content Include="Views\AspNetUser_Source\Edit.cshtml" />
+    <Content Include="Views\AspNetUser_Source\Index.cshtml" />
+    <Content Include="Views\News1\AddSubscription.cshtml" />
+    <Content Include="Views\AspNetUser_Category\ListSelectedCategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

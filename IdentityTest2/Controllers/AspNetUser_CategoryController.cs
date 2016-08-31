@@ -138,7 +138,31 @@ namespace IdentityTest2.Controllers
             }
             base.Dispose(disposing);
         }
-        
+
+
+        //[HttpPost]
+        //public ActionResult ListSelectedCategories()
+        //{
+        //    int userId = User.Identity.GetUserId<int>();
+        //    if (userId != 0)
+        //    {
+        //        var selectedCategoriesModel = db.Categories.Where(c => c.AspNetUser_Category.Any(u => u.userId == userId));
+        //        IEnumerable<Category> selectCategories = selectedCategoriesModel.ToList();
+        //        StringBuilder sb = new StringBuilder();
+        //        sb.Append("You have selected categories: " );
+        //        foreach (var c in selectCategories)
+        //        {
+        //            sb.Append(c.categoryName + " ");
+        //        }
+                
+        //        ViewBag.message = sb.ToString();
+        //        return ViewBag;
+        //    }
+        //    else {
+
+        //        return ViewBag;
+        //    }
+        //}
         [HttpGet]
         public ActionResult Insert() {
            
@@ -149,6 +173,7 @@ namespace IdentityTest2.Controllers
         [HttpPost,ActionName("Insert")]
         public ActionResult Insert(IEnumerable<Category> categories)
         {
+            bool isAdded = false;
             int userId=User.Identity.GetUserId<int>();
             if (userId == 0)
             {
@@ -168,9 +193,15 @@ namespace IdentityTest2.Controllers
                     sb.Append("You have successfully selected:  ");
                     foreach (Category c in categories)
                     {
-                        if (c.isSelected==true)
+                        IEnumerable<AspNetUser_Category> aspNetUser_Categories = db.AspNetUser_Category.Where(n => n.userId == userId);
+                        foreach (var row in aspNetUser_Categories) {
+                            if (c.categoryId == row.categoryId){
+                                isAdded = true;
+                            }
+                        }
+                        if (c.isSelected==true && !isAdded)
                         {
-                            sb.Append(c.categoryName + " ,");
+                            sb.Append(c.categoryName + " ");
                             if (ModelState.IsValid)
                             {
                                 var save = new AspNetUser_Category
@@ -182,10 +213,10 @@ namespace IdentityTest2.Controllers
                                 db.SaveChanges();
                             }
                             ModelState.Clear();
-
                         }
+                        isAdded = false;
                     }
-                    sb.Remove(sb.ToString().LastIndexOf(","), 1);
+                    sb.Remove(sb.ToString().LastIndexOf(" "), 1);
                     ViewBag.message = sb.ToString();
                     //return View();
                     return View("InsertResult");

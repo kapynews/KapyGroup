@@ -32,6 +32,15 @@
     <Property Name="userId" Type="int" Nullable="false" />
     <Property Name="categoryId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="AspNetUser_Source">
+    <Key>
+      <PropertyRef Name="usersourceId" />
+    </Key>
+    <Property Name="usersourceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="souceId" Type="int" Nullable="false" />
+    <Property Name="subscribeTime" Type="datetime" />
+  </EntityType>
   <EntityType Name="AspNetUserClaims">
     <Key>
       <PropertyRef Name="Id" />
@@ -75,6 +84,7 @@
     <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="ReceiveNewsLetters" Type="int" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -128,6 +138,7 @@
     <Property Name="numOfClicks" Type="int" />
     <Property Name="numOfLikes" Type="int" />
     <Property Name="crawlTime" Type="datetime2" Precision="7" />
+    <Property Name="numComments" Type="int" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -261,8 +272,34 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_AspNetUser_Source_Source">
+    <End Role="Source" Type="Self.Source" Multiplicity="1" />
+    <End Role="AspNetUser_Source" Type="Self.AspNetUser_Source" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Source">
+        <PropertyRef Name="sourceId" />
+      </Principal>
+      <Dependent Role="AspNetUser_Source">
+        <PropertyRef Name="souceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Comment_News1">
     <End Role="News1" Type="Self.News1" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="News1">
+        <PropertyRef Name="newsId" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="newsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_News1_1">
+    <End Role="News1" Type="Self.News1" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="News1">
@@ -309,8 +346,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Comment1_News1">
-    <End Role="News1" Type="Self.News1" Multiplicity="1" />
+  <Association Name="FK_Comment1_News1_1">
+    <End Role="News1" Type="Self.News1" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Comment1" Type="Self.Comment1" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="News1">
@@ -318,6 +357,20 @@
       </Principal>
       <Dependent Role="Comment1">
         <PropertyRef Name="newsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUser_Source_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUser_Source" Type="Self.AspNetUser_Source" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUser_Source">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -473,23 +526,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_User_Source_User">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
-    <End Role="User_Source" Type="Self.User_Source" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="userId" />
-      </Principal>
-      <Dependent Role="User_Source">
-        <PropertyRef Name="userId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="kapymvc1ModelStoreContainer">
     <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ActionRecord" EntityType="Self.ActionRecord" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUser_Category" EntityType="Self.AspNetUser_Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUser_Source" EntityType="Self.AspNetUser_Source" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
@@ -531,7 +573,15 @@
       <End Role="Category" EntitySet="Category" />
       <End Role="AspNetUser_Category" EntitySet="AspNetUser_Category" />
     </AssociationSet>
+    <AssociationSet Name="FK_AspNetUser_Source_Source" Association="Self.FK_AspNetUser_Source_Source">
+      <End Role="Source" EntitySet="Source" />
+      <End Role="AspNetUser_Source" EntitySet="AspNetUser_Source" />
+    </AssociationSet>
     <AssociationSet Name="FK_Comment_News1" Association="Self.FK_Comment_News1">
+      <End Role="News1" EntitySet="News1" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_News1_1" Association="Self.FK_Comment_News1_1">
       <End Role="News1" EntitySet="News1" />
       <End Role="Comment" EntitySet="Comment" />
     </AssociationSet>
@@ -547,9 +597,13 @@
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Comment1" EntitySet="Comment1" />
     </AssociationSet>
-    <AssociationSet Name="FK_Comment1_News1" Association="Self.FK_Comment1_News1">
+    <AssociationSet Name="FK_Comment1_News1_1" Association="Self.FK_Comment1_News1_1">
       <End Role="News1" EntitySet="News1" />
       <End Role="Comment1" EntitySet="Comment1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUser_Source_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUser_Source_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUser_Source" EntitySet="AspNetUser_Source" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -597,10 +651,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_User_Source_Source" Association="Self.FK_User_Source_Source">
       <End Role="Source" EntitySet="Source" />
-      <End Role="User_Source" EntitySet="User_Source" />
-    </AssociationSet>
-    <AssociationSet Name="FK_User_Source_User" Association="Self.FK_User_Source_User">
-      <End Role="User" EntitySet="User" />
       <End Role="User_Source" EntitySet="User_Source" />
     </AssociationSet>
   </EntityContainer>
