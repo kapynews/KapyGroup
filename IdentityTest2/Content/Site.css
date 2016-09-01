@@ -55,3 +55,14 @@ textarea {
     float:left;
     vertical-align:middle;
 }
+
+#topheadertext{
+    font-size : 180%;
+    color: #158cba;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+#biglogo{
+    width:80%;
+}
