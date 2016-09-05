@@ -61,9 +61,9 @@ namespace IdentityTest2
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1102519063162561",
+               appSecret: "0c22256571a8a839d7c8c96b151a880a");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
