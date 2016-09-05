@@ -409,6 +409,7 @@
     <None Include="Properties\PublishProfiles\kapyNews %286%29.pubxml" />
     <None Include="Properties\PublishProfiles\kapyNews.pubxml" />
     <None Include="Properties\PublishProfiles\kapynewstest1 %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\kapynewstest1 %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\kapynewstest1.pubxml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
