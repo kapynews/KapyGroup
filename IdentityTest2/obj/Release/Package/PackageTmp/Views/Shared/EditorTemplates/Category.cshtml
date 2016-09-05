@@ -1,0 +1,7 @@
+﻿@model IdentityTest2.Models.Category
+
+@Html.HiddenFor(u => u.categoryId)
+@Html.HiddenFor(u => u.categoryName)
+<br />
+@Html.CheckBoxFor(u => u.isSelected)
+@Html.DisplayFor(u => u.categoryName)

@@ -1,0 +1,68 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/*For the user profile*/
+
+.userProfile_outerContainer {
+    box-shadow: 0px 0px 7px #888888;
+    width:80%;
+    margin:0 auto;
+    margin-top:35px;
+}
+
+.userProfile_rowContainer {
+    border-bottom:1px solid #999999;
+    padding:10px 15px;
+}
+
+.userProfile_rowContainer_last {
+    border-bottom:0px none transparent !important;
+}
+
+.userProfile_labelContainer {
+    float:left;
+    width:90%
+}
+
+.userProfile_labelTitle {
+    font-weight:bold;
+    font-size:110%;
+}
+
+.userProfile_editContainer {
+    float:left;
+    vertical-align:middle;
+}
+
+#topheadertext{
+    font-size : 180%;
+    color: #158cba;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+#biglogo{
+    width:80%;
+}

@@ -1,0 +1,39 @@
+﻿
+
+
+@model IdentityTest2.Models.News1
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <h4>To comment on </h4>
+        
+        <p>
+            <h2> <a href="@Html.DisplayFor(model => model.origUrl) ">@Html.DisplayFor(model => model.newsTitle)</a>  </h2>
+        </p>
+
+        
+
+        @*<h4>@ViewBag.message</h4>*@
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login or Register" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
