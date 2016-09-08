@@ -16,6 +16,8 @@ namespace IdentityTest2.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public byte[] UserPhoto { get; set; }
     }
     public class CustomUserRole : IdentityUserRole<int> { }
     public class CustomUserClaim : IdentityUserClaim<int> { }
