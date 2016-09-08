@@ -6,12 +6,21 @@
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
+<<<<<<< HEAD
         
         
 
 
         
         
+=======
+
+
+        <li>
+            <img id="usercirclepicsmall" src="@Url.Action("UserPhotos", "Home" )" />
+                    
+        </li>
+>>>>>>> refs/remotes/origin/master
         <li>
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>

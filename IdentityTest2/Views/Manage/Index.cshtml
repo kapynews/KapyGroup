@@ -2,13 +2,13 @@
 
 
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Personalize";
 }
 
 
 <link href="Site.css" rel="stylesheet" type="text/css" />
 
-<h2>Manage your account</h2>
+<h2>Personalize your account</h2>
 
 @*<h2>@ViewBag.Title.</h2>*@
 
@@ -97,6 +97,15 @@
 @*</dl>*@
 
 
+<h2>
+    <img src="@Url.Action("UserPhotos", "Home" )" style="width:160px;height:160px; background: #FFFFFF;
+    margin: auto;
+    -moz-border-radius: 60px;
+    border-radius: 100px;
+    padding: 6px;
+    box-shadow: 0px 0px 20px #888;" />
+</h2>
+
 <div class="userProfile_outerContainer">
 
     <div class="userProfile_rowContainer">
@@ -132,7 +141,7 @@
             [
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("Update your favorite categories", "AddCategories")
+                @Html.ActionLink("Update your favorite categories", "Insert", "AspNetUser_Category")
             }
             else
             {

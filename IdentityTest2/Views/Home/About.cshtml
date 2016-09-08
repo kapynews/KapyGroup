@@ -1,7 +1,27 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+@*<h2>@ViewBag.Title.</h2>*@
+<center>
+    <a href="@Url.Action("Index", "Home")" style="padding:0px 10px;">
+    <img id="logoAboutPage" src="@Url.Content("~/Content/Images/kapy_logo.png")" /></a>
+</center>
+<h2>Personalized News Aggregation Web Application Using Crawlers</h2>
 
-<p>Use this area to provide additional information.</p>
+
+<br />
+
+<p>
+    KAPY’s News is a web application that gathers news from different sources using web crawlers
+    , maps them to various categories and provides a personalized selection for the users based
+    on their predefined profiles. KAPY’s News supports a recommendation feature that suggests to
+    the users the recent news they might be interested in and allows them to get the real time updates
+    by sending notifications. KAPY’s News also promotes user interaction by enabling its members to
+    make comments on each piece of news. KAPY’s News is implemented with: ASP.Net MVC framework and
+    C# for the User Interface development, Python’s BeautifulSoup4 library for web crawling, Lucene.net
+    library for the search engine and Microsoft Azure’s Cloud SQL Database and Web App Services for the
+    database storage and application deployment. KAPY’s News will be available at this website:
+    www.kapysnews.azurewebsites.net
+</p>
+<br/>
+<p>By...Mah Kadidia Konate, Pattira Umyai,Yang Zhang, Atitegeb Gebreselassie</p>

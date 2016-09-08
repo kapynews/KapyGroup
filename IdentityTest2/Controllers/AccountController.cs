@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using IdentityTest2.Models;
 using System;
+using System.IO;
 
 namespace IdentityTest2.Controllers
 {
@@ -25,7 +26,7 @@ namespace IdentityTest2.Controllers
 
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -37,9 +38,9 @@ namespace IdentityTest2.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -133,7 +134,7 @@ namespace IdentityTest2.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -160,14 +161,36 @@ namespace IdentityTest2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+
+        public async Task<ActionResult> Register([Bind(Exclude = "UserPhoto")]RegisterViewModel model)
+        //public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
+                byte[] imageData = null;
+                if (Request.Files.Count > 0)
+                {
+                    HttpPostedFileBase poImgFile = Request.Files["UserPhoto"];
+
+                    using (var binary = new BinaryReader(poImgFile.InputStream))
+                    {
+                        imageData = binary.ReadBytes(poImgFile.ContentLength);
+                    }
+                } //close count if
+
+
+                //////
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                //Pass the byte array to the user context to store in database
+
+                user.UserPhoto = imageData;
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     //  Comment the following line to prevent log in until the user is confirmed.
 
                     //  await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -197,7 +220,7 @@ namespace IdentityTest2.Controllers
                     string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
 
 
-                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                    ViewBag.Message = "Please check your email and confirm your account. The account must be confirmed "
                                     + "before you can log in.";
 
                     // For local debug only
@@ -205,9 +228,10 @@ namespace IdentityTest2.Controllers
 
                     return View("Info");
 
-                    //  return RedirectToAction("Insert", "AspNetUser_Category");
+                   //   return RedirectToAction("Insert", "AspNetUser_Category");
                     //return RedirectToAction("AddCategories", "Manage");
                 }
+
                 AddErrors(result);
             }
 

@@ -80,11 +80,19 @@ namespace IdentityTest2.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+<<<<<<< HEAD
     //    //I want the user to add his/her favoriteSource
     //    [Required]
     //    [EmailAddress]
     //    [Display(Name = "Your Favorite News Source")]
     //    public string favoriteSource { get; set; }
+=======
+
+        [Display(Name = "UserPhoto")]
+        public byte[] UserPhoto { get; set; }
+
+
+>>>>>>> refs/remotes/origin/master
     }
 
     public class ResetPasswordViewModel

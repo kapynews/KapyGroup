@@ -10,6 +10,7 @@ using IdentityTest2.Models;
 using System.Text;
 using System.Collections.Generic;
 
+//new
 namespace IdentityTest2.Controllers
 {
     [Authorize]
