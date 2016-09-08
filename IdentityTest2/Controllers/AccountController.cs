@@ -224,9 +224,9 @@ namespace IdentityTest2.Controllers
                     // For local debug only
                     ViewBag.Link = callbackUrl;
 
-                   // return View("Info");
+                    return View("Info");
 
-                      return RedirectToAction("Insert", "AspNetUser_Category");
+                   //   return RedirectToAction("Insert", "AspNetUser_Category");
                     //return RedirectToAction("AddCategories", "Manage");
                 }
 
