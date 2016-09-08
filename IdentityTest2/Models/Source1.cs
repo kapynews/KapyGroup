@@ -12,14 +12,12 @@ namespace IdentityTest2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Source
+    public partial class Source1
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Source()
+        public Source1()
         {
-            this.News1 = new HashSet<News1>();
-            this.User_Source = new HashSet<User_Source>();
-            this.AspNetUser_Source = new HashSet<AspNetUser_Source>();
+            this.User_Source1 = new HashSet<User_Source1>();
         }
     
         public int sourceId { get; set; }
@@ -27,10 +25,6 @@ namespace IdentityTest2.Models
         public string sourceUrl { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<News1> News1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User_Source> User_Source { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUser_Source> AspNetUser_Source { get; set; }
+        public virtual ICollection<User_Source1> User_Source1 { get; set; }
     }
 }

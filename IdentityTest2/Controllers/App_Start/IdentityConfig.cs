@@ -13,6 +13,7 @@ using SendGrid;
 using System.Configuration;
 using System.Diagnostics;
 using System.Net.Mail;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IdentityTest2
 {
@@ -182,6 +183,19 @@ namespace IdentityTest2
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+        }
+    }
+
+    public class ApplicationRoleManager : RoleManager<CustomRole, int>
+    {
+        public ApplicationRoleManager(IRoleStore<CustomRole, int> roleStore)
+            : base(roleStore)
+        {
+        }
+
+        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+        {
+            return new ApplicationRoleManager(new RoleStore<CustomRole, int, CustomUserRole>(context.Get<ApplicationDbContext>()));
         }
     }
 }

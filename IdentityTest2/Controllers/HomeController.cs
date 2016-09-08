@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace IdentityTest2.Controllers
 {
     [RequireHttps]
-    public class HomeController : Controller//
+    public class HomeController : Controller
     {
 
         public ActionResult Index()
