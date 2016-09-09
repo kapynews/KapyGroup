@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using IdentityTest2.Models;
 using System;
 using System.IO;
+using static IdentityTest2.Models.RegisterViewModel;
 
 namespace IdentityTest2.Controllers
 {

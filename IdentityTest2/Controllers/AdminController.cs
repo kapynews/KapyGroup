@@ -6,29 +6,35 @@ using System.Web.Mvc;
 using IdentityTest2.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using PagedList;
 
 namespace IdentityTest2.Controllers
 {
 
     [Authorize(Roles = "admin")]
-    public class RolesAndUsersController : Controller
+    public class AdminController : Controller
     {
         ApplicationDbContext context;
         
 
-        public RolesAndUsersController()
+        public AdminController()
         {
             context = new ApplicationDbContext();
         }
 
         // GET: RolesAndUsers
         [AllowAnonymous]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, int? page)
         {
-            var UserIsAdmin = true;
-            ViewBag.UserIsAdmin = true;
 
-                return View();
+            ViewBag.DateSortParm = sortOrder == "ID" ? "Time" : "ID";
+            var User_model = from u in context.Users select u;
+            
+            
+            ViewBag.message = "List of all users";
+
+
+                return View(User_model.ToList().ToPagedList(page ?? 1, 5));
            
         }
     }

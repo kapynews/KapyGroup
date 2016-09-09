@@ -2,9 +2,11 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Owin;
+using System;
+using System.Linq;
 
 [assembly: OwinStartupAttribute(typeof(IdentityTest2.Startup))]
-namespace IdentityTest2
+namespace IdentityTest2 
 {
     public partial class Startup
     {
@@ -24,47 +26,51 @@ namespace IdentityTest2
             var roleManager = new ApplicationRoleManager(myRoleStore);
             var UserManager = new ApplicationUserManager(myUserStore);
 
+            var default_adminName = "KapyAdmin";
+            var default_adminEmail = "kapynews@gmail.com";
+            var default_adminRole = "admin";
+            var default_memberRole = "member";
 
-            // In Startup iam creating first Admin Role and creating a default Admin User    
-            if (!roleManager.RoleExists("admin"))
+
+            string default_adminPWD = "Kapyiscool1234";
+            try
             {
-
-                // first we create Admin rool   
-                var role = new CustomRole();
-                role.Id = 1;
-                role.Name = "admin";
-                roleManager.Create(role);
-
-                //Here we create an Admin super user who will maintain the website                  
-
-                var user = new ApplicationUser();
-                user.UserName = "KapyAdmin";
-                user.Email = "kapynews@gmail.com";
-
-                string userPWD = "Kapyiscool1234";
-
-                var chkUser = UserManager.Create(user, userPWD);
-
-                //Add default User to Role Admin   
-                if (chkUser.Succeeded)
+                var AdminUser = context.Users.SingleOrDefault(u => u.UserName == default_adminName);
+                var AdminRole = context.Roles.SingleOrDefault(r => r.Name == default_adminRole);
+                // In Startup iam creating first Admin Role and creating a default Admin User    
+                if (AdminRole == null)
                 {
-                    var result1 = UserManager.AddToRole(user.Id, "admin");
+                    roleManager.CreateAsync(new CustomRole(default_adminRole)).Wait();
+                    AdminRole = context.Roles.SingleOrDefault(r => r.Name == default_adminRole);
+
+                    //Here we create an Admin super user who will maintain the website 
+                    if (AdminUser == null)
+                    {
+                        UserManager.CreateAsync(new ApplicationUser { UserName = default_adminName, Email = default_adminEmail, EmailConfirmed = true }, default_adminPWD).Wait();
+                        AdminUser = context.Users.SingleOrDefault(u => u.UserName == default_adminName);
+                    }
+                    var userRole = AdminUser.Roles.SingleOrDefault(r => r.RoleId == AdminRole.Id);
+                    if (userRole == null)
+                    {
+                        UserManager.AddToRoleAsync(AdminUser.Id, AdminRole.Name).Wait();
+                    }
+                }
+
+                var MemberRole = context.Roles.SingleOrDefault(r => r.Name == default_memberRole);
+                if (MemberRole == null)
+                {
+                    roleManager.CreateAsync(new CustomRole(default_memberRole)).Wait();
+                    MemberRole = context.Roles.SingleOrDefault(r => r.Name == default_memberRole);
+                }
+
 
                 }
-            }
 
-            // creating Creating Manager role    
-            if (!roleManager.RoleExists("member"))
+
+            catch (Exception ex)
             {
-
-                var role = new CustomRole();
-                role.Id = 2;
-                role.Name = "member";
-                roleManager.Create(role);
-
+                Console.WriteLine(ex.ToString());
             }
-
-            
         }
     }
 }
