@@ -1,7 +1,7 @@
-﻿@*@model IEnumerable<IdentityTest2.Models.ApplicationUser>*@
+﻿
 @using PagedList;
 @using PagedList.Mvc;
-@model IPagedList<IdentityTest2.Models.ApplicationUser>
+@model IPagedList<IdentityTest2.Models.UsersAndRoles>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,24 +16,30 @@
       
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => user.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => user.Email)
-                </td>
-                
-                @*<td>
-                    @if (user.UserPhoto == null)
-                {
+                    @if (user.photo == null)
+                    {
                         <img src="~/Content/Images/kapy_logo.png" style="width:200px;height:128px;">
                     }
                     else
                     {
-                        <img src="@Html.DisplayFor(modelItem => user.UserPhoto) " style="width:200px;height:128px;">
+                        <img src="@Html.DisplayFor(modelItem => user.photo) " style="width:200px;height:128px;">
                     }
 
-                </td>*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.username)
+                </td>
+                <td>
+                     @foreach (String name in user.rolenames)
+                     {
+                 
+                     @name
                 
+                      }
+                </td>
+
+
+
             </tr>
         }
 

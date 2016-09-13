@@ -3,7 +3,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-
+using System.Collections.Generic;
+using System;
 
 namespace IdentityTest2.Models
 {
@@ -21,11 +22,19 @@ namespace IdentityTest2.Models
         public byte[] UserPhoto { get; set; }
     }
 
-    //public class ApplicationUser : IdentityUser
-    //{
-    //    public string favoriteSource { get; set; }
+    public class UsersAndRoles{
+        public List<String> rolenames { get; set; }
+        public byte[] photo { get; set; }
+        public String username { get; set; }
+        public String useremail { get; set; }
 
-    //}
+        public UsersAndRoles(List<String> rolenames, byte[] photo, String username, String useremail) {
+            this.rolenames = rolenames;
+            this.photo = photo;
+            this.username = username;
+            this.useremail = useremail;
+        }
+    }
 
 
     public class CustomUserRole : IdentityUserRole<int> { }
