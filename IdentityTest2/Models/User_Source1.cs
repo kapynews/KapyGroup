@@ -12,19 +12,14 @@ namespace IdentityTest2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Comment1
+    public partial class User_Source1
     {
-        public int commentId { get; set; }
         public int userId { get; set; }
-        public int newsId { get; set; }
-        public byte[] postTime { get; set; }
-        public string commentContent { get; set; }
-        public bool isDisplayed { get; set; }
-        public Nullable<int> numOfComentLikes { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<System.DateTime> Datetime { get; set; }
+        public string sourceName { get; set; }
+        public int subscribeId { get; set; }
+        public byte[] subscribeTime { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
-        public virtual News1 News1 { get; set; }
+        public virtual Source1 Source1 { get; set; }
+        public virtual User User { get; set; }
     }
 }

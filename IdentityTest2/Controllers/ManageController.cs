@@ -400,7 +400,7 @@ namespace IdentityTest2.Controllers
             foreach (var c in currentCategories)
             {
                 sb.Append(c.categoryName + "\n");
-                ids.Add(c.categoryId);
+                //ids.Add(c.categoryId);
             }
 
             return View(currentCategories);
