@@ -41,7 +41,7 @@ namespace IdentityTest2.Controllers
 
                 if (user.Roles.Count == 0)
                 {
-                    rolelist.Add("No role defined");
+                    rolelist.Add("member");
                 }
                 else
                 {
@@ -56,18 +56,23 @@ namespace IdentityTest2.Controllers
 
             }
 
-            ViewBag.message = "List of all users";
+            ViewBag.message = "All Users and their Roles";
 
             return View(users_roles.ToList().ToPagedList(page ?? 1, 10));
         }
 
+        [Authorize(Roles = "admin")]
+        public ActionResult CreateRole(String n) {
 
-
-
+            ViewBag.roleId = new SelectList(context.Roles, "roleId", "roleName");
+            
+            return View();
+        }
 
        
 
 
-     
+
+
     }
 }
