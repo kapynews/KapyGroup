@@ -21,6 +21,7 @@ namespace IdentityTest2.Controllers
 
         // GET: News1
         // GET: News1
+        [AllowAnonymous]
         public ActionResult Index(string sortOrder, int? page)
         {
             ViewBag.DateSortParm = sortOrder == "ID" ? "Time" : "ID";
@@ -44,6 +45,7 @@ namespace IdentityTest2.Controllers
         }
 
         // GET: News1/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -59,6 +61,7 @@ namespace IdentityTest2.Controllers
         }
 
         // GET: News1/Create
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName");
@@ -71,6 +74,7 @@ namespace IdentityTest2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Create([Bind(Include = "newsId,uniqueTitle,newsTitle,newsDate,newsTime,author,sourceId,categoryId,origUrl,picUrl,newsContent,numOfClicks,numOfLikes")] News1 news1)
         {
             if (ModelState.IsValid)
@@ -86,6 +90,7 @@ namespace IdentityTest2.Controllers
         }
 
         // GET: News1/Edit/5
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -107,6 +112,7 @@ namespace IdentityTest2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit([Bind(Include = "newsId,uniqueTitle,newsTitle,newsDate,newsTime,author,sourceId,categoryId,origUrl,picUrl,newsContent,numOfClicks,numOfLikes")] News1 news1)
         {
             if (ModelState.IsValid)
@@ -121,6 +127,7 @@ namespace IdentityTest2.Controllers
         }
 
         // GET: News1/Delete/5
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -136,6 +143,7 @@ namespace IdentityTest2.Controllers
         }
 
         // POST: News1/Delete/5
+        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -155,7 +163,7 @@ namespace IdentityTest2.Controllers
             base.Dispose(disposing);
         }
 
-
+        [AllowAnonymous]
         public ActionResult _MenuView()
         {
             return PartialView("_MenuView", db.Categories.ToList());
@@ -167,6 +175,7 @@ namespace IdentityTest2.Controllers
 
 
         // GET: News1/Category/1
+        [AllowAnonymous]
         public ActionResult Category(int? categoryId)
         {
             if (categoryId == null)
@@ -179,6 +188,7 @@ namespace IdentityTest2.Controllers
             return View(categoryModel);
         }
         // GET: News1/Recommend
+        [Authorize]
         public ActionResult Recommend()
         {
             int userId = User.Identity.GetUserId<int>();
@@ -203,6 +213,7 @@ namespace IdentityTest2.Controllers
 
         // GET: News1/RecommendToYou()
         //Needs modification
+        [Authorize]
         public ActionResult RecommendToYou()
         {
             int userId = User.Identity.GetUserId<int>();
@@ -231,6 +242,7 @@ namespace IdentityTest2.Controllers
         }
 
         // GET: News1/Like/5
+        [Authorize]
         public ActionResult Like(int? id)
         {
             if (id == null)
@@ -249,6 +261,7 @@ namespace IdentityTest2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult LikeNews(int id)
         {
             var userID = User.Identity.GetUserId<int>();
@@ -266,6 +279,7 @@ namespace IdentityTest2.Controllers
             }
         }
         // GET: News1/HotNews/5
+        [Authorize]
         public ActionResult HotNews(string sortOrder, int? page)
         {
 
@@ -303,6 +317,7 @@ namespace IdentityTest2.Controllers
             return View(news.ToList().ToPagedList(page ?? 1, 5));
         }
 
+        [AllowAnonymous]
         public ActionResult SearchForNews(string searchString, int? page)
         {
 
@@ -317,7 +332,7 @@ namespace IdentityTest2.Controllers
             return PartialView(searchedNews.ToList().ToPagedList(page ?? 1, 5));
         }
 
-
+        [Authorize]
         [HttpGet]
         public ActionResult AddSubscription(int? id)
         {
@@ -334,7 +349,7 @@ namespace IdentityTest2.Controllers
             return PartialView(news);
 
         }
-
+        [Authorize]
         [HttpPost, ActionName("AddSubscription")]
         public ActionResult AddSubscription(int id, [Bind(Include = "usersourceId,UserId,souceId,subscribeTime")] AspNetUser_Source aspNetUser_Source)
         {
