@@ -18,7 +18,7 @@ namespace IdentityTest2.Controllers
         private kapymvc1Entities db = new kapymvc1Entities();
 
         // GET: AspNetUser_Category
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             var aspNetUser_Category = db.AspNetUser_Category.Include(a => a.AspNetUser).Include(a => a.Category);
@@ -26,6 +26,7 @@ namespace IdentityTest2.Controllers
         }
 
         // GET: AspNetUser_Category/Details/5
+        [Authorize(Roles = "admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,12 +42,10 @@ namespace IdentityTest2.Controllers
         }
 
         // GET: AspNetUser_Category/Create
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             ViewBag.userId = User.Identity.GetUserId<int>();
-           
-
-
             //ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName");
             return View();
         }
@@ -56,6 +55,7 @@ namespace IdentityTest2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Create([Bind(Include = "usercategoryId,userId,categoryId")] AspNetUser_Category aspNetUser_Category)
         {
             if (ModelState.IsValid)
@@ -72,6 +72,7 @@ namespace IdentityTest2.Controllers
         }
 
         // GET: AspNetUser_Category/Edit/5
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -93,6 +94,7 @@ namespace IdentityTest2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit([Bind(Include = "usercategoryId,userId,categoryId")] AspNetUser_Category aspNetUser_Category)
         {
             if (ModelState.IsValid)
@@ -107,6 +109,7 @@ namespace IdentityTest2.Controllers
         }
 
         // GET: AspNetUser_Category/Delete/5
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -122,6 +125,7 @@ namespace IdentityTest2.Controllers
         }
 
         // POST: AspNetUser_Category/Delete/5
+        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

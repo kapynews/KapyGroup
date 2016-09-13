@@ -11,116 +11,107 @@ using IdentityTest2.Models;
 namespace IdentityTest2.Controllers
 {
     [Authorize(Roles = "admin")]
-    public class AspNetUser_SourceController : Controller
+    public class AspNetUsersController : Controller
     {
         private kapymvc1Entities db = new kapymvc1Entities();
 
-        // GET: AspNetUser_Source
+        // GET: AspNetUsers
         public ActionResult Index()
         {
-            var aspNetUser_Source = db.AspNetUser_Source.Include(a => a.Source).Include(a => a.AspNetUser);
-            return View(aspNetUser_Source.ToList());
+            return View(db.AspNetUsers.ToList());
         }
 
-        // GET: AspNetUser_Source/Details/5
+        // GET: AspNetUsers/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUser_Source aspNetUser_Source = db.AspNetUser_Source.Find(id);
-            if (aspNetUser_Source == null)
+            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
+            if (aspNetUser == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetUser_Source);
+            return View(aspNetUser);
         }
 
-        // GET: AspNetUser_Source/Create
+        // GET: AspNetUsers/Create
         public ActionResult Create()
         {
-            ViewBag.souceId = new SelectList(db.Sources, "sourceId", "sourceName");
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
-        // POST: AspNetUser_Source/Create
+        // POST: AspNetUsers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "usersourceId,UserId,souceId,subscribeTime")] AspNetUser_Source aspNetUser_Source)
+        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,ReceiveNewsLetters,UserPhoto")] AspNetUser aspNetUser)
         {
             if (ModelState.IsValid)
             {
-                db.AspNetUser_Source.Add(aspNetUser_Source);
+                db.AspNetUsers.Add(aspNetUser);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.souceId = new SelectList(db.Sources, "sourceId", "sourceName", aspNetUser_Source.souceId);
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", aspNetUser_Source.UserId);
-            return View(aspNetUser_Source);
+            return View(aspNetUser);
         }
 
-        // GET: AspNetUser_Source/Edit/5
+        // GET: AspNetUsers/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUser_Source aspNetUser_Source = db.AspNetUser_Source.Find(id);
-            if (aspNetUser_Source == null)
+            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
+            if (aspNetUser == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.souceId = new SelectList(db.Sources, "sourceId", "sourceName", aspNetUser_Source.souceId);
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", aspNetUser_Source.UserId);
-            return View(aspNetUser_Source);
+            return View(aspNetUser);
         }
 
-        // POST: AspNetUser_Source/Edit/5
+        // POST: AspNetUsers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "usersourceId,UserId,souceId,subscribeTime")] AspNetUser_Source aspNetUser_Source)
+        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,ReceiveNewsLetters,UserPhoto")] AspNetUser aspNetUser)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(aspNetUser_Source).State = EntityState.Modified;
+                db.Entry(aspNetUser).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.souceId = new SelectList(db.Sources, "sourceId", "sourceName", aspNetUser_Source.souceId);
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", aspNetUser_Source.UserId);
-            return View(aspNetUser_Source);
+            return View(aspNetUser);
         }
 
-        // GET: AspNetUser_Source/Delete/5
+        // GET: AspNetUsers/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUser_Source aspNetUser_Source = db.AspNetUser_Source.Find(id);
-            if (aspNetUser_Source == null)
+            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
+            if (aspNetUser == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetUser_Source);
+            return View(aspNetUser);
         }
 
-        // POST: AspNetUser_Source/Delete/5
+        // POST: AspNetUsers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            AspNetUser_Source aspNetUser_Source = db.AspNetUser_Source.Find(id);
-            db.AspNetUser_Source.Remove(aspNetUser_Source);
+            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
+            db.AspNetUsers.Remove(aspNetUser);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

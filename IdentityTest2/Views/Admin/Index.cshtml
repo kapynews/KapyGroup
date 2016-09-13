@@ -3,7 +3,7 @@
 @using PagedList.Mvc;
 @model IPagedList<IdentityTest2.Models.UsersAndRoles>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Management System";
     Layout = "~/Views/Shared/admin_layout.cshtml";
 }
 
@@ -13,8 +13,7 @@
 <table class="table">
 
     @foreach (var user in Model)
-    {
-      
+    {      
             <tr>
                 <td>
                     @if (user.photo == null)
@@ -32,18 +31,12 @@
                 </td>
                 <td>
                      @foreach (String name in user.rolenames)
-                     {
-                 
-                     @name
-                
+                     {                
+                     @name                
                       }
                 </td>
-
-
-
             </tr>
         }
-
     
 </table>
     

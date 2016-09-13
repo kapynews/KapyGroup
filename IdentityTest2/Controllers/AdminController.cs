@@ -22,9 +22,6 @@ namespace IdentityTest2.Controllers
             context = new ApplicationDbContext();
         }
 
-
-
-
         public async System.Threading.Tasks.Task<ActionResult> Index(string sortOrder, int? page)
         {
 
@@ -61,7 +58,6 @@ namespace IdentityTest2.Controllers
 
             return View(users_roles.ToList().ToPagedList(page ?? 1, 10));
         }
-
         public async System.Threading.Tasks.Task<List<UsersAndRoles>> getUsersWithRoles(List<ApplicationUser> userList)
         {
 
@@ -91,7 +87,6 @@ namespace IdentityTest2.Controllers
 
             return users_roles;
 
-
         }
         [Authorize(Roles = "admin")]
         public ActionResult CreateRole(String n) {
@@ -116,9 +111,5 @@ namespace IdentityTest2.Controllers
             //return View(searchedNews);
             return PartialView(searchUsers_n_Roles.ToPagedList(page ?? 1, 10));
         }
-
-
-
-
     }
 }

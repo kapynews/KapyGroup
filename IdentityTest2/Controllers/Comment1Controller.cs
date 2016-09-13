@@ -18,7 +18,7 @@ namespace IdentityTest2.Controllers
         private kapymvc1Entities db = new kapymvc1Entities();
 
         // GET: Comment1
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             var comment1 = db.Comment1.Include(c => c.AspNetUser).Include(c => c.News1);
@@ -160,9 +160,6 @@ namespace IdentityTest2.Controllers
             {
                 return HttpNotFound();
             }
-
-
-
             var commentNews = db.Comment1.Include(c => c.AspNetUser).Include(c => c.News1).Where(x => x.newsId == id);
             var newsTitle = db.News1.Single(x => x.newsId == id).newsTitle;
             ViewBag.newsTitle = newsTitle;
@@ -268,8 +265,6 @@ namespace IdentityTest2.Controllers
             ViewBag.commentID = id;
             return PartialView(comment);
         }
-
-
 
 
         //LikeComment increases the numberOfLikes for a given comment
