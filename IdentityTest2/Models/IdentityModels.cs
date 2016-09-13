@@ -3,7 +3,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-
+using System;
+using System.Collections.Generic;
 
 namespace IdentityTest2.Models
 {
@@ -19,13 +20,10 @@ namespace IdentityTest2.Models
         }
 
         public byte[] UserPhoto { get; set; }
+        
     }
 
-    //public class ApplicationUser : IdentityUser
-    //{
-    //    public string favoriteSource { get; set; }
-
-    //}
+    
 
 
     public class CustomUserRole : IdentityUserRole<int> { }
@@ -54,6 +52,8 @@ namespace IdentityTest2.Models
         {
         }
     }
+
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole,
     int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
@@ -62,11 +62,29 @@ namespace IdentityTest2.Models
         {
         }
 
+
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
 
         public System.Data.Entity.DbSet<IdentityTest2.Models.CheckBoxListItem> CheckBoxListItems { get; set; }
+    }
+
+    public class UserRoles
+    {
+        public String username { get; set; }
+        public List<String> role_names { get; set; }
+        public byte[] userphoto { get; set; }
+        public string email { get; set; }
+
+        public UserRoles(String name,String email , byte[] photo, List<String> rolesList)
+        {
+            this.username = name;
+            this.userphoto = photo;
+            this.role_names = rolesList;
+            this.email = email;
+        }
     }
 }

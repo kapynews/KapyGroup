@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace IdentityTest2.Models
@@ -84,10 +85,15 @@ namespace IdentityTest2.Models
 
         [Display(Name = "UserPhoto")]
         public byte[] UserPhoto { get; set; }
+    }
 
+    public class UserViewModel
+    {
+        public string UserName { get; set; }
+        public List<String> UserRole { get; set; }
+    }
 
-
-        public class ResetPasswordViewModel
+    public class ResetPasswordViewModel
         {
             [Required]
             [EmailAddress]
@@ -116,6 +122,6 @@ namespace IdentityTest2.Models
             public string Email { get; set; }
         }
     }
-}
+
     
 

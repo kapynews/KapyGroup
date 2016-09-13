@@ -20,11 +20,11 @@ namespace IdentityTest2.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        ApplicationDbContext context;
         //The default constructor for the accountController will now initialize the usermanager
         public AccountController()
         {
-
+            context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -154,6 +154,8 @@ namespace IdentityTest2.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
+                                            .ToList(), "Name", "Name");
             return View();
         }
 
@@ -187,11 +189,15 @@ namespace IdentityTest2.Controllers
 
                 user.UserPhoto = imageData;
 
+                
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    
+
                     //  Comment the following line to prevent log in until the user is confirmed.
 
                     //  await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -226,7 +232,8 @@ namespace IdentityTest2.Controllers
 
                     // For local debug only
                     ViewBag.Link = callbackUrl;
-
+                    ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
+                                          .ToList(), "Name", "Name");
                     return View("Info");
 
                    //   return RedirectToAction("Insert", "AspNetUser_Category");

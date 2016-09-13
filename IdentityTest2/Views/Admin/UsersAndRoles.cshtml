@@ -34,8 +34,8 @@
             </td>
 
             @*<td>
-                    @Html.DisplayFor(modelItem => user.username)
-                </td>*@
+                @Html.DisplayFor(modelItem => user.username)
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => user.email)
             </td>
@@ -43,8 +43,7 @@
 
             <td>
 
-                @foreach (var role in user.role_names)
-                {
+                @foreach (var role in user.role_names) {
                     @role;
                 }
             </td>

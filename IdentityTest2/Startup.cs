@@ -26,7 +26,7 @@ namespace IdentityTest2
             var roleManager = new ApplicationRoleManager(myRoleStore);
             var UserManager = new ApplicationUserManager(myUserStore);
 
-            var default_adminName = "KapyAdmin";
+            var default_adminName = "kapynews@gmail.com";
             var default_adminEmail = "kapynews@gmail.com";
             var default_adminRole = "admin";
             var default_memberRole = "member";
