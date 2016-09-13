@@ -282,7 +282,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\News1Controller.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -314,9 +313,6 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Category1.cs">
-      <DependentUpon>KapyModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CheckBoxListItem.cs" />
     <Compile Include="Models\Comment.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
@@ -344,19 +340,10 @@
     <Compile Include="Models\News1.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ResetPasswordRequest.cs">
-      <DependentUpon>KapyModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Role.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Source.cs">
-      <DependentUpon>KapyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Source1.cs">
-      <DependentUpon>KapyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
@@ -366,9 +353,6 @@
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User_Source.cs">
-      <DependentUpon>KapyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User_Source1.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -525,9 +509,6 @@
     <Content Include="Views\AspNetUser_Source\Index.cshtml" />
     <Content Include="Views\News1\AddSubscription.cshtml" />
     <Content Include="Views\AspNetUser_Category\ListSelectedCategories.cshtml" />
-    <Content Include="Views\Shared\_adminView.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\errorNotAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

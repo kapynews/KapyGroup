@@ -1,0 +1,46 @@
+﻿@model IEnumerable<IdentityTest2.Models.AspNetUser_Source>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.subscribeTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Source.sourceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.subscribeTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Source.sourceName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.usersourceId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.usersourceId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.usersourceId })
+        </td>
+    </tr>
+}
+
+</table>

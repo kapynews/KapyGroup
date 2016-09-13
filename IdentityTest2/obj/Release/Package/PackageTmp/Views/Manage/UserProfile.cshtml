@@ -1,0 +1,62 @@
+﻿@model IdentityTest2.Models.AspNetUser
+
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="Site.css" rel="stylesheet" type="text/css" />
+
+<h2>UserProfile</h2>
+
+<div class="userProfile_outerContainer">
+
+    <div class="userProfile_rowContainer">
+        <div class="userProfile_labelContainer">
+            <span class="userProfile_labelTitle">Name</span>
+            <br />
+            Insert Name
+        </div>
+        <div class="userProfile_editContainer">
+            <a href="../Account/Login">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div class="userProfile_rowContainer">
+        <div class="userProfile_labelContainer">
+            <span class="userProfile_labelTitle">Email address</span>
+            <br />
+            Insert Email
+        </div>
+        <div class="userProfile_editContainer">
+            <a href="#">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div class="userProfile_rowContainer_last userProfile_rowContainer">
+        <div class="userProfile_labelContainer">
+            <span class="userProfile_labelTitle">News Categories</span>
+            <br />
+            Insert Categories
+        </div>
+        <div class="userProfile_editContainer">
+            <a href="#">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+
+
+
+@*<p>@Model.AspNetUser_Category<p/>
+
+    @Html.DisplayFor(model => model.UserName, "ShortDateTime")
+
+    @Html.DisplayFor(model => model.AspNetUser_Category, "ShortDateTime")*@
+

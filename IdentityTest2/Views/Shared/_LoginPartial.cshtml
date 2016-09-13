@@ -12,17 +12,10 @@
             <img id="usercirclepicsmall" src="@Url.Action("UserPhotos", "Home" )" />
                     
         </li>
-
         <li>
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-        <li>
-        @if (ViewContext.HttpContext.User.IsInRole("admin"))
-        {
-            @Html.Partial("_adminView")
-        }
-        </li>
     </ul>
     }
 }

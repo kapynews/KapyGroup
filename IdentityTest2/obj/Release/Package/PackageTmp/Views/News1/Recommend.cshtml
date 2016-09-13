@@ -1,0 +1,52 @@
+﻿@model IEnumerable < IdentityTest2.Models.Category>
+@{
+    ViewBag.Title = "Recommend";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if (ViewBag.Message != null)
+    {
+        <h3>
+            @ViewBag.Message;
+        </h3>
+        <table class="table">
+            @foreach (var m in Model)
+            {
+                IEnumerable<IdentityTest2.Models.News1> newsList = m.News1.ToList().OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
+                foreach (var news in newsList)
+                {
+                    <tr>
+                        <td>
+                            @if (news.picUrl == "")
+                            {
+                                <img src="~/Content/Images/kapy_logo.png" style="width:200px;height:128px;">
+                            }
+                            else {
+                                <img src="@Html.DisplayFor(modelItem => news.picUrl) " style="width:200px;height:128px;">
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink(news.newsTitle, "Details", new { id = news.newsId })
+
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => news.newsDate)*@
+                            @Html.DisplayFor(modelItem => news.newsTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => news.Source.sourceName)
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("Details", "Details", new { id = item.newsId }) |
+        @Html.ActionLink("Edit", "Edit", new { id=item.newsId }) |
+    @Html.ActionLink("Delete", "Delete", new { id = news.newsId })*@
+                        </td>
+                    </tr>
+                }
+
+            }
+        </table>
+    }
+}
+
+
+

@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "InsertResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    if (ViewBag.Message != null)
+    {
+        if (ViewBag.Message == "You haven't selected any category")
+        {
+           <h2> @ViewBag.Message;</h2>
+           <div>
+               <input type="button" value="OK" class="btn btn-default" onclick="@("window.location.href='"+Url.Action("Insert","AspNetUser_Category")+"'")">
+               @*<input type="button" value="OK" class="btn btn-default" onclick="@Html.ActionLink("Insert", "AspNetUser_Category")">*@
+           </div>
+
+        }
+        else if (ViewBag.Message == "Sorry, please login or register First")
+        {
+            <h2> @ViewBag.Message;</h2>
+            <div>
+                <input type="button" value="OK" class="btn btn-default" onclick="@("window.location.href='"+Url.Action("Login","Account")+"'")">
+                @*<input type="button" value="OK" class="btn btn-default" onclick="@Html.ActionLink("Login", "Account")">*@
+            </div>
+        }
+        else {
+            <h2> @ViewBag.Message;</h2>
+            <div>
+                <input type="button" value="OK" class="btn btn-default" onclick="@("window.location.href='"+Url.Action("Recommend","News1")+"'")">
+                @*<input type="button" value="OK" class="btn btn-default" onclick="@Html.ActionLink("Recommend","News1")">*@
+            </div>
+
+        }
+
+
+    }
+}
+
+
+
