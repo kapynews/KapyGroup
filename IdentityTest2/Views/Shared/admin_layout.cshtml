@@ -29,14 +29,15 @@
                         </a>
                     </li>
                     <li>@Html.ActionLink("Manage Users", "Index", "Admin")</li>
-                    <li>@Html.ActionLink("Manage News", "News", "News1")</li>
                     <li>@Html.ActionLink("Manage Roles", "Index", "Role")</li>
+                    <li>@Html.ActionLink("Manage News", "Index", "News1")</li>
+                    
 
                     <li>
                         @using (Html.BeginForm("SearchForUsers", "Admin", FormMethod.Get))
                         {
 
-                            @Html.TextBox("SearchString")<span>    </span><input class="btn btn-primary btn-xs" type="submit" value="Search" />
+                            @Html.TextBox("SearchString")<span>    </span><input class="btn btn-primary btn-xs" type="submit" value="Search Users" />
 
                         }
                     </li>
