@@ -38,7 +38,7 @@ namespace IdentityTest2
             smtp.EnableSsl = true;
 
             var to = new MailAddress(message.Destination);
-            var from = new MailAddress("kapynews@gmail.com", "Your Contractor Connection");
+            var from = new MailAddress("kapynews@gmail.com", "Kapy's News");
 
             var msg = new MailMessage();
 

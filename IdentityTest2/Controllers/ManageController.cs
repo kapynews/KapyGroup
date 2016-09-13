@@ -9,6 +9,7 @@ using Microsoft.Owin.Security;
 using IdentityTest2.Models;
 using System.Text;
 using System.Collections.Generic;
+using System.IO;
 
 //new
 namespace IdentityTest2.Controllers
@@ -246,6 +247,21 @@ namespace IdentityTest2.Controllers
             return View(model);
         }
 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()
@@ -382,6 +398,7 @@ namespace IdentityTest2.Controllers
         }
 
 
+
         public ActionResult ShowCurrentCategories()
         {
 
@@ -405,6 +422,73 @@ namespace IdentityTest2.Controllers
 
             return View(currentCategories);
         }
+
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public ActionResult UpdatePicture()
+        //{
+        //    return View();
+        //}
+
+  
+
+        ////
+        //// POST: /Manage/UpdatePicture
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+
+        ////public async Task<ActionResult> UpdatePicture()
+        //public async Task<ActionResult> UpdatePicture(UpdatePictureViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        byte[] imageData = null;
+        //        if (Request.Files.Count > 0)
+        //        {
+        //            HttpPostedFileBase poImgFile = Request.Files["UserPhoto"];
+
+        //            using (var binary = new BinaryReader(poImgFile.InputStream))
+        //            {
+        //                imageData = binary.ReadBytes(poImgFile.ContentLength);
+        //            }
+        //        } //close count if
+
+
+        //        //Pass the byte array to the user context to store in database
+        //        var user = await UserManager.FindByIdAsync(User.Identity.GetUserId<int>());
+        //        user.UserPhoto = imageData;
+
+        //        if (user != null)
+        //        {
+        //            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+        //        }
+        //        return RedirectToAction("Index", "Manage");
+        //    }
+            
+        //    return RedirectToAction("Index", "Manage");
+        //}
+
+
+
+
+
+
+
+
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> UpdatePicture()
+        //{
+        //    return View();
+        //}
+
+
+
+        //
+
+
+
 
 
         #region Helpers
@@ -458,6 +542,72 @@ namespace IdentityTest2.Controllers
             Error
         }
 
-#endregion
+
+
+        // GET: /Account/Register
+        [AllowAnonymous]
+        public ActionResult UpdatePicture()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+
+        public async Task<ActionResult> UpdatePicture([Bind(Exclude = "UserPhoto")]RegisterViewModel model)
+        //public async Task<ActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                byte[] imageData = null;
+                if (Request.Files.Count > 0)
+                {
+                    HttpPostedFileBase poImgFile = Request.Files["UserPhoto"];
+
+                    using (var binary = new BinaryReader(poImgFile.InputStream))
+                    {
+                        imageData = binary.ReadBytes(poImgFile.ContentLength);
+                    }
+                } //close count if
+
+
+                //////
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                //Pass the byte array to the user context to store in database
+
+                user.UserPhoto = imageData;
+
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    
+                    return View("Info");
+
+                    //   return RedirectToAction("Insert", "AspNetUser_Category");
+                    //return RedirectToAction("AddCategories", "Manage");
+                }
+
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+
+
+
+
+
+
+
+        #endregion
     }
 }

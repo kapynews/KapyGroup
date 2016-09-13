@@ -489,7 +489,6 @@ C:\Users\pattira\Documents\GitHub\KapyGroup\IdentityTest2\bin\ko\System.Spatial.
 C:\Users\pattira\Documents\GitHub\KapyGroup\IdentityTest2\bin\ru\System.Spatial.resources.dll
 C:\Users\pattira\Documents\GitHub\KapyGroup\IdentityTest2\bin\zh-Hans\System.Spatial.resources.dll
 C:\Users\pattira\Documents\GitHub\KapyGroup\IdentityTest2\bin\zh-Hant\System.Spatial.resources.dll
-C:\Users\pattira\Documents\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.csprojResolveAssemblyReference.cache
 C:\Users\pattira\Documents\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.dll
 C:\Users\pattira\Documents\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.pdb
 C:\Users\atiat\Documents\GitHub\KapyGroup\KapyGroup\IdentityTest2\bin\ApplicationInsights.config
@@ -657,3 +656,4 @@ C:\Users\atiat\Documents\GitHub\KapyGroup\KapyGroup\IdentityTest2\bin\zh-Hant\Sy
 C:\Users\atiat\Documents\GitHub\KapyGroup\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.csprojResolveAssemblyReference.cache
 C:\Users\atiat\Documents\GitHub\KapyGroup\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.dll
 C:\Users\atiat\Documents\GitHub\KapyGroup\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.pdb
+C:\Users\pattira\Documents\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.csprojResolveAssemblyReference.cache
