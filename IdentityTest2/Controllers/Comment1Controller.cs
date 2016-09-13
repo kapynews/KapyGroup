@@ -12,11 +12,13 @@ using System.Text;
 
 namespace IdentityTest2.Controllers
 {
+    [Authorize]
     public class Comment1Controller : Controller
     {
         private kapymvc1Entities db = new kapymvc1Entities();
 
         // GET: Comment1
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var comment1 = db.Comment1.Include(c => c.AspNetUser).Include(c => c.News1);
@@ -24,6 +26,7 @@ namespace IdentityTest2.Controllers
         }
 
         // GET: Comment1/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,6 +42,7 @@ namespace IdentityTest2.Controllers
         }
 
         // GET: Comment1/Create
+        
         public ActionResult Create()
         {
             ViewBag.userId = new SelectList(db.AspNetUsers, "Id", "Email");

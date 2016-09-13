@@ -283,6 +283,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\News1Controller.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -522,8 +523,14 @@
     <Content Include="Views\AspNetUser_Category\ListSelectedCategories.cshtml" />
     <Content Include="Views\Shared\_adminView.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\errorNotAdmin.cshtml" />
     <Content Include="Views\Manage\UpdatePicture.cshtml" />
+    <Content Include="Views\Shared\admin_layout.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\Role\Details.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Admin\SearchForUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

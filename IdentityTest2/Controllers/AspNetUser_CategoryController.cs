@@ -12,11 +12,13 @@ using System.Text;
 
 namespace IdentityTest2.Controllers
 {
+    [Authorize]
     public class AspNetUser_CategoryController : Controller
     {
         private kapymvc1Entities db = new kapymvc1Entities();
 
         // GET: AspNetUser_Category
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var aspNetUser_Category = db.AspNetUser_Category.Include(a => a.AspNetUser).Include(a => a.Category);
