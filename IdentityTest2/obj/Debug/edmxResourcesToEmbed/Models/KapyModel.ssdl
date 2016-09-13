@@ -21,7 +21,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
   </EntityType>
   <EntityType Name="AspNetUser_Category">
@@ -85,6 +85,7 @@
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
     <Property Name="ReceiveNewsLetters" Type="int" />
+    <Property Name="UserPhoto" Type="varbinary" MaxLength="50" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -93,6 +94,14 @@
     <Property Name="categoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="categoryName" Type="varchar" MaxLength="50" />
     <Property Name="isSelected" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category1">
+    <Key>
+      <PropertyRef Name="categoryName" />
+    </Key>
+    <Property Name="categoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categoryName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="isSelected" Type="bit" />
   </EntityType>
   <EntityType Name="Comment">
     <Key>
@@ -140,6 +149,14 @@
     <Property Name="crawlTime" Type="datetime2" Precision="7" />
     <Property Name="numComments" Type="int" />
   </EntityType>
+  <EntityType Name="ResetPasswordRequests">
+    <Key>
+      <PropertyRef Name="ResetId" />
+    </Key>
+    <Property Name="ResetId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Id" Type="int" />
+    <Property Name="ResetRequestDateTime" Type="datetime" />
+  </EntityType>
   <EntityType Name="Role">
     <Key>
       <PropertyRef Name="roleId" />
@@ -154,6 +171,24 @@
     <Property Name="sourceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="sourceName" Type="varchar" MaxLength="50" />
     <Property Name="sourceUrl" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Source1">
+    <Key>
+      <PropertyRef Name="sourceName" />
+    </Key>
+    <Property Name="sourceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sourceName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sourceUrl" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -178,6 +213,14 @@
     <Property Name="categoryId" Type="int" Nullable="false" />
     <Property Name="categoryName" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="User_Category1">
+    <Key>
+      <PropertyRef Name="userId" />
+      <PropertyRef Name="categoryName" />
+    </Key>
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="categoryName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="User_Source">
     <Key>
       <PropertyRef Name="userId" />
@@ -188,6 +231,28 @@
     <Property Name="subscribeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="subscribeTime" Type="timestamp" StoreGeneratedPattern="Computed" />
   </EntityType>
+  <EntityType Name="User_Source1">
+    <Key>
+      <PropertyRef Name="userId" />
+      <PropertyRef Name="sourceName" />
+    </Key>
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="sourceName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="subscribeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subscribeTime" Type="timestamp" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <Association Name="FK__ResetPasswor__Id__47A6A41B">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="ResetPasswordRequests" Type="Self.ResetPasswordRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ResetPasswordRequests">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ActionRecord_Action">
     <End Role="Action" Type="Self.Action" Multiplicity="1" />
     <End Role="ActionRecord" Type="Self.ActionRecord" Multiplicity="*" />
@@ -249,7 +314,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_AspNetUser_Category_AspNetUsers">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="AspNetUser_Category" Type="Self.AspNetUser_Category" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUsers">
@@ -335,7 +402,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Comment1_AspNetUsers">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Comment1" Type="Self.Comment1" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUsers">
@@ -490,6 +559,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_User_Category1_Category1">
+    <End Role="Category1" Type="Self.Category1" Multiplicity="1" />
+    <End Role="User_Category1" Type="Self.User_Category1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category1">
+        <PropertyRef Name="categoryName" />
+      </Principal>
+      <Dependent Role="User_Category1">
+        <PropertyRef Name="categoryName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Category1_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User_Category1" Type="Self.User_Category1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="User_Category1">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_User_Role">
     <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
     <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -526,6 +619,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_User_Source1_Source1">
+    <End Role="Source1" Type="Self.Source1" Multiplicity="1" />
+    <End Role="User_Source1" Type="Self.User_Source1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Source1">
+        <PropertyRef Name="sourceName" />
+      </Principal>
+      <Dependent Role="User_Source1">
+        <PropertyRef Name="sourceName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Source1_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User_Source1" Type="Self.User_Source1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="User_Source1">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="kapymvc1ModelStoreContainer">
     <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ActionRecord" EntityType="Self.ActionRecord" Schema="dbo" store:Type="Tables" />
@@ -537,14 +654,24 @@
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category1" EntityType="Self.Category1" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comment1" EntityType="Self.Comment1" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="News1" EntityType="Self.News1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResetPasswordRequests" EntityType="Self.ResetPasswordRequests" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Source" EntityType="Self.Source" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Source1" EntityType="Self.Source1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User_Category" EntityType="Self.User_Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Category1" EntityType="Self.User_Category1" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User_Source" EntityType="Self.User_Source" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Source1" EntityType="Self.User_Source1" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__ResetPasswor__Id__47A6A41B" Association="Self.FK__ResetPasswor__Id__47A6A41B">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="ResetPasswordRequests" EntitySet="ResetPasswordRequests" />
+    </AssociationSet>
     <AssociationSet Name="FK_ActionRecord_Action" Association="Self.FK_ActionRecord_Action">
       <End Role="Action" EntitySet="Action" />
       <End Role="ActionRecord" EntitySet="ActionRecord" />
@@ -641,6 +768,14 @@
       <End Role="User" EntitySet="User" />
       <End Role="User_Category" EntitySet="User_Category" />
     </AssociationSet>
+    <AssociationSet Name="FK_User_Category1_Category1" Association="Self.FK_User_Category1_Category1">
+      <End Role="Category1" EntitySet="Category1" />
+      <End Role="User_Category1" EntitySet="User_Category1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Category1_User" Association="Self.FK_User_Category1_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="User_Category1" EntitySet="User_Category1" />
+    </AssociationSet>
     <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
       <End Role="Role" EntitySet="Role" />
       <End Role="User" EntitySet="User" />
@@ -652,6 +787,14 @@
     <AssociationSet Name="FK_User_Source_Source" Association="Self.FK_User_Source_Source">
       <End Role="Source" EntitySet="Source" />
       <End Role="User_Source" EntitySet="User_Source" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Source1_Source1" Association="Self.FK_User_Source1_Source1">
+      <End Role="Source1" EntitySet="Source1" />
+      <End Role="User_Source1" EntitySet="User_Source1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Source1_User" Association="Self.FK_User_Source1_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="User_Source1" EntitySet="User_Source1" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

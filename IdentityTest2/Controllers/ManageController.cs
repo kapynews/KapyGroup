@@ -37,9 +37,9 @@ namespace IdentityTest2.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -247,7 +247,7 @@ namespace IdentityTest2.Controllers
             return View(model);
         }
 
-    
+
 
 
 
@@ -360,7 +360,7 @@ namespace IdentityTest2.Controllers
         [HttpPost, ActionName("Insert")]
         public ActionResult AddCategories(IEnumerable<Category> categories)
         {
-            if (categories.Count(x => x.isSelected==true) == 0)
+            if (categories.Count(x => x.isSelected == true) == 0)
             {
                 ViewBag.message = "You didnt select any categories";
             }
@@ -369,7 +369,7 @@ namespace IdentityTest2.Controllers
                 sb.Append("You selected -");
                 foreach (Category c in categories)
                 {
-                    if (c.isSelected==true)
+                    if (c.isSelected == true)
                     {
                         sb.Append(c.categoryName + " ,");
                         if (ModelState.IsValid)
@@ -430,7 +430,7 @@ namespace IdentityTest2.Controllers
         //    return View();
         //}
 
-  
+
 
         ////
         //// POST: /Manage/UpdatePicture
@@ -464,7 +464,7 @@ namespace IdentityTest2.Controllers
         //        }
         //        return RedirectToAction("Index", "Manage");
         //    }
-            
+
         //    return RedirectToAction("Index", "Manage");
         //}
 
@@ -486,10 +486,6 @@ namespace IdentityTest2.Controllers
 
 
         //
-
-
-
-
 
         #region Helpers
         // Used for XSRF protection when adding external logins
@@ -587,7 +583,7 @@ namespace IdentityTest2.Controllers
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    
+
                     return View("Info");
 
                     //   return RedirectToAction("Insert", "AspNetUser_Category");

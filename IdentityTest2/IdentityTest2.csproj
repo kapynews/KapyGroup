@@ -282,6 +282,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\News1Controller.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -313,6 +314,9 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Category1.cs">
+      <DependentUpon>KapyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CheckBoxListItem.cs" />
     <Compile Include="Models\Comment.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
@@ -340,10 +344,19 @@
     <Compile Include="Models\News1.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ResetPasswordRequest.cs">
+      <DependentUpon>KapyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Role.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Source.cs">
+      <DependentUpon>KapyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Source1.cs">
+      <DependentUpon>KapyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
@@ -353,6 +366,9 @@
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User_Source.cs">
+      <DependentUpon>KapyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User_Source1.cs">
       <DependentUpon>KapyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -366,7 +382,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap_lumen.css" />
     <Content Include="Content\Images\kapy_logo.png" />
-    <Content Include="Content\Images\noimage.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -503,13 +518,11 @@
     <Content Include="Views\News1\SearchForNews.cshtml" />
     <Content Include="Views\News1\Like.cshtml" />
     <Content Include="Views\Manage\UserProfile.cshtml" />
-    <Content Include="Views\AspNetUser_Source\Create.cshtml" />
-    <Content Include="Views\AspNetUser_Source\Delete.cshtml" />
-    <Content Include="Views\AspNetUser_Source\Details.cshtml" />
-    <Content Include="Views\AspNetUser_Source\Edit.cshtml" />
-    <Content Include="Views\AspNetUser_Source\Index.cshtml" />
     <Content Include="Views\News1\AddSubscription.cshtml" />
     <Content Include="Views\AspNetUser_Category\ListSelectedCategories.cshtml" />
+    <Content Include="Views\Shared\_adminView.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\errorNotAdmin.cshtml" />
     <Content Include="Views\Manage\UpdatePicture.cshtml" />
   </ItemGroup>
   <ItemGroup>

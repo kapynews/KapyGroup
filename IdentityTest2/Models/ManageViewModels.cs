@@ -12,8 +12,8 @@ namespace IdentityTest2.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
-     
-    
+
+
     }
 
     public class ManageLoginsViewModel
@@ -91,9 +91,6 @@ namespace IdentityTest2.Models
         [Display(Name = "UserPhoto")]
         public byte[] UserPhoto { get; set; }
     }
-
-
-
 
 
 

@@ -79,6 +79,8 @@
     <NavigationProperty Name="AspNetUser_Category" Relationship="kapymvc1Model.FK_AspNetUser_Category_AspNetUsers" FromRole="AspNetUser" ToRole="AspNetUser_Category" />
     <Property Name="ReceiveNewsLetters" Type="Int32" />
     <NavigationProperty Name="AspNetUser_Source" Relationship="kapymvc1Model.FK_dbo_AspNetUser_Source_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUser_Source" />
+    <Property Name="UserPhoto" Type="Binary" MaxLength="50" FixedLength="false" />
+    <NavigationProperty Name="ResetPasswordRequests" Relationship="kapymvc1Model.FK__ResetPasswor__Id__47A6A41B" FromRole="AspNetUser" ToRole="ResetPasswordRequest" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -167,6 +169,8 @@
     <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
     <NavigationProperty Name="User_Category" Relationship="Self.FK_User_Category_User" FromRole="User" ToRole="User_Category" />
     <NavigationProperty Name="User_Source" Relationship="Self.FK_User_Source_User" FromRole="User" ToRole="User_Source" />
+    <NavigationProperty Name="User_Source1" Relationship="kapymvc1Model.FK_User_Source1_User" FromRole="User" ToRole="User_Source1" />
+    <NavigationProperty Name="Category1" Relationship="kapymvc1Model.User_Category1" FromRole="User" ToRole="Category1" />
   </EntityType>
   <EntityType Name="User_Category">
     <Key>
@@ -535,6 +539,27 @@
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="AspNetUser_Source" EntitySet="AspNetUser_Source" />
     </AssociationSet>
+    <EntitySet Name="Category1" EntityType="kapymvc1Model.Category1" />
+    <EntitySet Name="ResetPasswordRequests" EntityType="kapymvc1Model.ResetPasswordRequest" />
+    <EntitySet Name="Source1" EntityType="kapymvc1Model.Source1" />
+    <EntitySet Name="sysdiagrams" EntityType="kapymvc1Model.sysdiagram" />
+    <EntitySet Name="User_Source1" EntityType="kapymvc1Model.User_Source1" />
+    <AssociationSet Name="FK__ResetPasswor__Id__47A6A41B" Association="kapymvc1Model.FK__ResetPasswor__Id__47A6A41B">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="ResetPasswordRequest" EntitySet="ResetPasswordRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Source1_Source1" Association="kapymvc1Model.FK_User_Source1_Source1">
+      <End Role="Source1" EntitySet="Source1" />
+      <End Role="User_Source1" EntitySet="User_Source1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Source1_User" Association="kapymvc1Model.FK_User_Source1_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="User_Source1" EntitySet="User_Source1" />
+    </AssociationSet>
+    <AssociationSet Name="User_Category1" Association="kapymvc1Model.User_Category1">
+      <End Role="Category1" EntitySet="Category1" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Comment1">
     <Key>
@@ -646,5 +671,94 @@
         <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Category1">
+    <Key>
+      <PropertyRef Name="categoryName" />
+    </Key>
+    <Property Name="categoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="categoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="isSelected" Type="Boolean" />
+    <NavigationProperty Name="Users" Relationship="kapymvc1Model.User_Category1" FromRole="Category1" ToRole="User" />
+  </EntityType>
+  <EntityType Name="ResetPasswordRequest">
+    <Key>
+      <PropertyRef Name="ResetId" />
+    </Key>
+    <Property Name="ResetId" Type="Guid" Nullable="false" />
+    <Property Name="Id" Type="Int32" />
+    <Property Name="ResetRequestDateTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="kapymvc1Model.FK__ResetPasswor__Id__47A6A41B" FromRole="ResetPasswordRequest" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="Source1">
+    <Key>
+      <PropertyRef Name="sourceName" />
+    </Key>
+    <Property Name="sourceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sourceName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sourceUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User_Source1" Relationship="kapymvc1Model.FK_User_Source1_Source1" FromRole="Source1" ToRole="User_Source1" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User_Source1">
+    <Key>
+      <PropertyRef Name="userId" />
+      <PropertyRef Name="sourceName" />
+    </Key>
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="sourceName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="subscribeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subscribeTime" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Source1" Relationship="kapymvc1Model.FK_User_Source1_Source1" FromRole="User_Source1" ToRole="Source1" />
+    <NavigationProperty Name="User" Relationship="kapymvc1Model.FK_User_Source1_User" FromRole="User_Source1" ToRole="User" />
+  </EntityType>
+  <Association Name="FK__ResetPasswor__Id__47A6A41B">
+    <End Type="kapymvc1Model.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="kapymvc1Model.ResetPasswordRequest" Role="ResetPasswordRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ResetPasswordRequest">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Source1_Source1">
+    <End Type="kapymvc1Model.Source1" Role="Source1" Multiplicity="1" />
+    <End Type="kapymvc1Model.User_Source1" Role="User_Source1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Source1">
+        <PropertyRef Name="sourceName" />
+      </Principal>
+      <Dependent Role="User_Source1">
+        <PropertyRef Name="sourceName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Source1_User">
+    <End Type="kapymvc1Model.User" Role="User" Multiplicity="1" />
+    <End Type="kapymvc1Model.User_Source1" Role="User_Source1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="User_Source1">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="User_Category1">
+    <End Type="kapymvc1Model.Category1" Role="Category1" Multiplicity="*" />
+    <End Type="kapymvc1Model.User" Role="User" Multiplicity="*" />
   </Association>
 </Schema>

@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using IdentityTest2.Models;
 using System;
 using System.IO;
+using static IdentityTest2.Models.RegisterViewModel;
 
 namespace IdentityTest2.Controllers
 {
@@ -20,8 +21,10 @@ namespace IdentityTest2.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        //The default constructor for the accountController will now initialize the usermanager
         public AccountController()
         {
+
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)

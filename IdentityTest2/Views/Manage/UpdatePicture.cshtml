@@ -1,33 +1,31 @@
-﻿
-@model IdentityTest2.Models.RegisterViewModel
+﻿@model IdentityTest2.Models.RegisterViewModel
 
 @using (Html.BeginForm("Index", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
 
-    <br/>
-    <br/>
+    <br />
+    <br />
 
     <div class="userProfile_outerContainer" style="padding-left : 5% ; padding-top : 5%">
-      
+
 
         @*<div class="userProfile_rowContainer">*@
-            <div class="userProfile_labelContainer">
-                <span class="userProfile_labelTitle">Update your picture</span>
-                <div class="form-group">
-                    @*@Html.LabelFor(m => m.UserPhoto, new { @class = "col-md-2 control-label" })*@
-                    <div class="col-md-10">
+        <div class="userProfile_labelContainer">
+            <span class="userProfile_labelTitle">Update your picture</span>
+            <div class="form-group">
+                @*@Html.LabelFor(m => m.UserPhoto, new { @class = "col-md-2 control-label" })*@
+                <div class="col-md-10">
 
-                        <input type="file" name="UserPhoto" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />
+                    <input type="file" name="UserPhoto" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />
 
-                        @*<div class="col-md-offset-2 col-md-10">*@
-                        <input type="submit" class="btn btn-default" value="Update Picture" />
-                        @*</div>*@
-                    </div>
-
-
+                    @*<div class="col-md-offset-2 col-md-10">*@
+                    <input type="submit" class="btn btn-default" value="Update Picture" />
+                    @*</div>*@
                 </div>
+
             </div>
+        </div>
 
         <div style="float:right">
             <img id="usercirclepicmedium" src="@Url.Action("UserPhotos", "Home" )" />
@@ -36,6 +34,6 @@
 
         <div style="clear:both;"></div>
 
-</div>
+    </div>
 
 }
