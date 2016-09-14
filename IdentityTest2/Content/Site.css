@@ -83,3 +83,33 @@ textarea {
     margin-bottom:15%;
     box-shadow: 0px 0px 20px #888;
 }
+
+#usercirclepicmedium{
+    width:40%;
+    background: #FFFFFF;
+    margin: auto;
+    -moz-border-radius: 60px;
+    border-radius: 100px;
+    padding: 6px;
+    margin-top : 10%;
+    margin-bottom:10%;
+    box-shadow: 0px 0px 20px #888;
+}
+
+.post-container {
+    margin: 5px 5px 0 0;  
+    overflow: auto
+}
+.post-thumb {
+    float: left
+}
+.post-thumb img {
+    display: block
+}
+.post-content {
+    margin-left: 100px
+}
+.post-title {
+    font-weight: bold;
+    font-size: 200%
+}

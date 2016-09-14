@@ -384,6 +384,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap_lumen.css" />
     <Content Include="Content\Images\kapy_logo.png" />
+    <Content Include="Content\Images\noimage.png" />
+    <Content Include="Content\noimage.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
