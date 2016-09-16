@@ -160,7 +160,7 @@ namespace IdentityTest2.Controllers
         //        {
         //            sb.Append(c.categoryName + " ");
         //        }
-                
+
         //        ViewBag.message = sb.ToString();
         //        return ViewBag;
         //    }
@@ -170,17 +170,37 @@ namespace IdentityTest2.Controllers
         //    }
         //}
         [HttpGet]
-        public ActionResult Insert() {
-           
+        public ActionResult ListCategories()
+        {
+            int user_id = User.Identity.GetUserId<int>();
+            if (user_id != 0)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("You have selected categories: ");
+                IEnumerable<AspNetUser_Category> selectCategories = db.AspNetUser_Category.Where(n => n.userId == user_id);
+                foreach (var row in selectCategories)
+                {
+                    sb.Append(row.Category.categoryName + "   ");
+                }
+                ViewBag.message = sb.ToString();
+            }
+
+            return View();
+
+        }
+        [HttpGet]
+        public ActionResult Insert()
+        {
+
             return View(db.Categories.ToList());
 
         }
-        //private List<Category> categoryList = new kapymvc1Entities().Categories.ToList();
-        [HttpPost,ActionName("Insert")]
+
+        [HttpPost, ActionName("Insert")]
         public ActionResult Insert(IEnumerable<Category> categories)
         {
             bool isAdded = false;
-            int userId=User.Identity.GetUserId<int>();
+            int userId = User.Identity.GetUserId<int>();
             if (userId == 0)
             {
                 ViewBag.message = "Sorry, please login or register First";
@@ -188,7 +208,7 @@ namespace IdentityTest2.Controllers
             }
             else {
 
-                if (categories == null || categories.Count(x => x.isSelected==true) == 0 )
+                if (categories == null || categories.Count(x => x.isSelected == true) == 0)
                 {
                     ViewBag.message = "You haven't selected any category";
                     return View("InsertResult");
@@ -200,12 +220,14 @@ namespace IdentityTest2.Controllers
                     foreach (Category c in categories)
                     {
                         IEnumerable<AspNetUser_Category> aspNetUser_Categories = db.AspNetUser_Category.Where(n => n.userId == userId);
-                        foreach (var row in aspNetUser_Categories) {
-                            if (c.categoryId == row.categoryId){
+                        foreach (var row in aspNetUser_Categories)
+                        {
+                            if (c.categoryId == row.categoryId)
+                            {
                                 isAdded = true;
                             }
                         }
-                        if (c.isSelected==true && !isAdded)
+                        if (c.isSelected == true && !isAdded)
                         {
                             sb.Append(c.categoryName + " ");
                             if (ModelState.IsValid)
@@ -224,11 +246,9 @@ namespace IdentityTest2.Controllers
                     }
                     sb.Remove(sb.ToString().LastIndexOf(" "), 1);
                     ViewBag.message = sb.ToString();
-                    //return View();
                     return View("InsertResult");
                 }
             }
-            
 
         }
 

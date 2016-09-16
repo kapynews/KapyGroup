@@ -4,7 +4,7 @@
 <ul class="nav nav-sidebar">
 
     @*<li><a class="navbar-brand" href="#">Top</a></li>*@
-    <li>@Html.ActionLink("Recommended for you", "Recommend", "News1")</li>
+    <li>@Html.ActionLink("Recommend to you", "RecommendToYou", "News1")</li>
     <li>@Html.ActionLink("Most Recent", "Index", new { sortOrder = ViewBag.DateSortParm })</li>
     <li>@Html.ActionLink("Hot News", "HotNews", new { sortOrder = ViewBag.DateSortParm })</li>
     @foreach (var item in Model)
