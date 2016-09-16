@@ -160,7 +160,7 @@ namespace IdentityTest2.Controllers
         //        {
         //            sb.Append(c.categoryName + " ");
         //        }
-
+                
         //        ViewBag.message = sb.ToString();
         //        return ViewBag;
         //    }
@@ -170,31 +170,12 @@ namespace IdentityTest2.Controllers
         //    }
         //}
         [HttpGet]
-        public ActionResult ListCategories()
-        {
-            int user_id = User.Identity.GetUserId<int>();
-            if (user_id != 0)
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.Append("You have selected categories: ");
-                IEnumerable<AspNetUser_Category> selectCategories = db.AspNetUser_Category.Where(n => n.userId == user_id);
-                foreach (var row in selectCategories)
-                {
-                    sb.Append(row.Category.categoryName + "   ");
-                }
-                ViewBag.message = sb.ToString();
-            }
-
-            return View();
-
-        }
-        [HttpGet]
         public ActionResult Insert() {
            
             return View(db.Categories.ToList());
 
         }
-
+        //private List<Category> categoryList = new kapymvc1Entities().Categories.ToList();
         [HttpPost,ActionName("Insert")]
         public ActionResult Insert(IEnumerable<Category> categories)
         {
@@ -243,9 +224,11 @@ namespace IdentityTest2.Controllers
                     }
                     sb.Remove(sb.ToString().LastIndexOf(" "), 1);
                     ViewBag.message = sb.ToString();
+                    //return View();
                     return View("InsertResult");
                 }
-            }          
+            }
+            
 
         }
 

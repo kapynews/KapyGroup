@@ -1,7 +1,4 @@
-﻿@using PagedList;
-@using PagedList.Mvc;
-@model IPagedList<IdentityTest2.Models.News1>
-@*@model IEnumerable<IdentityTest2.Models.News1>*@
+﻿@model IEnumerable<IdentityTest2.Models.News1>
 
 @{
     ViewBag.Title = "RecommendToYou";
@@ -9,12 +6,9 @@
 
 }
 
-@*<h2>RecommendToYou</h2>*@
+<h2>RecommendToYou</h2>
 @if (ViewBag.Message != null)
 {
-    <h3>
-        @ViewBag.Message;
-    </h3>
     <table class="table">
 
         @foreach (var news in Model)
@@ -34,25 +28,25 @@
 
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => news.crawlTime)
+                    @*@Html.DisplayFor(modelItem => news.newsDate)*@
+                    @Html.DisplayFor(modelItem => news.newsTime)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => news.Source.sourceName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => news.Category.categoryName)
+                    @*@Html.ActionLink("Details", "Details", new { id = item.newsId }) |
+                        @Html.ActionLink("Edit", "Edit", new { id=item.newsId }) |*@
+                    @*@Html.ActionLink("Delete", "Delete", new { id = news.newsId })*@
                 </td>
-                <td>
-                    @if (ViewBag.user_id != 0)
-                    {
-                        @Html.Action("Like", "News1", new { id = news.newsId })
-                    }
-                </td>
-
             </tr>
         }
 
     </table>
-    @Html.PagedListPager(Model, page => Url.Action("RecommendToYou", new { page }))
+
+
+
+
+
 }
 

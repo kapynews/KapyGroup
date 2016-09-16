@@ -1,24 +1,18 @@
 ﻿@model IdentityTest2.Models.News1
 @{
     Layout = "";
-
 }
-
 
 @using (Html.BeginForm("AddSubscription", "News1", new { id = Model.newsId }, FormMethod.Post, null))
 {
 
     @Html.AntiForgeryToken()
-    <div class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Subscribe" class="btn btn-primary active" />
 
+
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Subscribe" class="btn btn-default" />
     </div>
 
+
 }
-
-
-
-
-
-
 

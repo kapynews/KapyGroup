@@ -97,14 +97,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
-            @*<td>
+            <td>
                 @Html.DisplayFor(modelItem => item.ReceiveNewsLetters)
-            </td>*@
+            </td>
             @*<td>
                 @Html.DisplayFor(modelItem => item.UserPhoto)
             </td>*@
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id=item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id=item.Id })
             </td>
