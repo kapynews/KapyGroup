@@ -1,0 +1,42 @@
+﻿@model IdentityTest2.Models.AspNetUser
+
+@{
+    ViewBag.Title = "NotificationSetting";
+}
+<br>
+<h3>NotificationSetting</h3>
+<br>
+<br>
+<h5>KAPY's news will send you an Email notification EVERY DAY</h5>
+<h5>based on your favorite categories and subscribed sources</h5>
+<br>
+<br>
+@if (Model.isNotified == 1)
+{
+    <h4>You have agreed in receiving notification!</h4><br>
+    <br>
+    using (Html.BeginForm("NoNotification", "Manage", FormMethod.Post, null))
+    {
+
+        @Html.AntiForgeryToken()
+        <div>
+            <p>Don't want receive notification any more?</p>
+            <input type="submit" value="Reject Notification" class="btn btn-default" />
+        </div>
+    }
+}
+else {
+
+    <br>
+    <br>
+    using (Html.BeginForm("ReceiveNotification", "Manage", FormMethod.Post, null))
+    {
+
+        @Html.AntiForgeryToken()
+        <div>
+            <h5>Try our notification function to receive recommended news every day!</h5>
+            <input type="submit" value="Receive Notification" class="btn btn-primary active" />
+        </div>
+    }
+}
+

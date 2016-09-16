@@ -397,31 +397,29 @@ namespace IdentityTest2.Controllers
 
         }
 
+        //public ActionResult ShowCurrentCategories()
+        //{
 
+        //    int userId = User.Identity.GetUserId<int>();
+        //    if (userId == 0)
+        //    {
+        //        return RedirectToAction("Login", "Account");
+        //    }
 
-        public ActionResult ShowCurrentCategories()
-        {
+        //    var currentSelectedCategories = db.Categories.Where(u => u.AspNetUser_Category.Any(a => a.userId == userId));
+        //    IEnumerable<Category> currentCategories = currentSelectedCategories.ToList();
 
-            int userId = User.Identity.GetUserId<int>();
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+        //    StringBuilder sb = new StringBuilder();
+        //    sb.Append("Your current favorite categories : ");
+        //    List<int> ids = new List<int>();
+        //    foreach (var c in currentCategories)
+        //    {
+        //        sb.Append(c.categoryName + "\n");
+        //        ids.Add(c.categoryId);
+        //    }
 
-            var currentCategories = db.Categories.Where(u => u.AspNetUser_Category.Any(a => a.userId == userId));
-            IEnumerable<Category> currentCatgories = currentCategories.ToList();
-
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Your current favorite categories : ");
-            List<int> ids = null;
-            foreach (var c in currentCategories)
-            {
-                sb.Append(c.categoryName + "\n");
-                ids.Add(c.categoryId);
-            }
-
-            return View(currentCategories);
-        }
+        //    return View(currentCategories);
+        //}
 
         //[HttpGet]
         //[AllowAnonymous]
@@ -429,6 +427,42 @@ namespace IdentityTest2.Controllers
         //{
         //    return View();
         //}
+        public ActionResult NotificationSetting()
+        {
+            int userId = User.Identity.GetUserId<int>();
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            AspNetUser aspNetUser = db.AspNetUsers.Find(userId);
+            return View(aspNetUser);
+
+        }
+        [Authorize]
+        [HttpPost, ActionName("ReceiveNotification")]
+        public ActionResult ReceiveNotification()
+        {
+            int userId = User.Identity.GetUserId<int>();
+            AspNetUser aspNetUser = db.AspNetUsers.Find(userId);
+            aspNetUser.isNotified = 1;
+            db.SaveChanges();
+
+            return RedirectToAction("NotificationSetting", "Manage");
+            
+        }
+        [Authorize]
+        [HttpPost, ActionName("NoNotification")]
+        public ActionResult NoNotification()
+        {
+            int userId = User.Identity.GetUserId<int>();
+            AspNetUser aspNetUser = db.AspNetUsers.Find(userId);
+            aspNetUser.isNotified = 0;
+            db.SaveChanges();
+
+            return RedirectToAction("NotificationSetting", "Manage");
+
+        }
+
 
 
 

@@ -180,9 +180,10 @@ namespace IdentityTest2.Controllers
                 IEnumerable<AspNetUser_Category> selectCategories = db.AspNetUser_Category.Where(n => n.userId == user_id);
                 foreach (var row in selectCategories)
                 {
-                    sb.Append(row.Category.categoryName + "   ");
+                    sb.Append(row.Category.categoryName + ", ");
                 }
-                ViewBag.message = sb.ToString();
+                sb.Remove(sb.ToString().LastIndexOf(", "), 1);
+                ViewBag.Message = sb.ToString();
             }
 
             return View();
@@ -210,10 +211,18 @@ namespace IdentityTest2.Controllers
 
                 if (categories == null || categories.Count(x => x.isSelected == true) == 0)
                 {
-                    ViewBag.message = "You haven't selected any category";
+                    ViewBag.Message = "You haven't selected any category";
                     return View("InsertResult");
                 }
                 else {
+                    StringBuilder sb2 = new StringBuilder();
+                    sb2.Append("You have selected categories: ");
+                    IEnumerable<AspNetUser_Category> selectCategories = db.AspNetUser_Category.Where(n => n.userId == userId);
+                    foreach (var row in selectCategories)
+                    {
+                        sb2.Append(row.Category.categoryName + "   ");
+                    }
+                    ViewBag.selectedCategories = sb2.ToString();
 
                     StringBuilder sb = new StringBuilder();
                     sb.Append("You have successfully selected:  ");
@@ -245,7 +254,7 @@ namespace IdentityTest2.Controllers
                         isAdded = false;
                     }
                     sb.Remove(sb.ToString().LastIndexOf(" "), 1);
-                    ViewBag.message = sb.ToString();
+                    ViewBag.Message = sb.ToString();
                     return View("InsertResult");
                 }
             }

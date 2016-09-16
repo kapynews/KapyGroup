@@ -3,9 +3,12 @@
     ViewBag.Title = "Select Categories";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br>
+
+    @*@Html.Partial("ListCategories")*@
+    @*@ViewBag.Message*@
 
 <p>
-    @Html.Partial("ListSelectedCategories")
     <div style="font-family:Arial">
         @using (Html.BeginForm("Insert", "AspNetUser_Category", FormMethod.Post))
         {
@@ -17,4 +20,4 @@
             <input type="submit" value="Submit" class="btn btn-default">
         }
     </div>
-</p>
+<p>
