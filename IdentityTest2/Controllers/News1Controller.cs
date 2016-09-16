@@ -310,7 +310,7 @@ namespace IdentityTest2.Controllers
         }
 
         // GET: News1/Like/5
-        [Authorize]
+    //    [Authorize]
         public ActionResult Like(int? id)
         {
             if (id == null)

@@ -25,7 +25,7 @@ namespace IdentityTest2.Controllers
 
             return View();
         }
-        [Authorize]
+       // [Authorize]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
