@@ -85,7 +85,8 @@
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
     <Property Name="ReceiveNewsLetters" Type="int" />
-    <Property Name="UserPhoto" Type="varbinary" MaxLength="50" />
+    <Property Name="UserPhoto" Type="varbinary(max)" />
+    <Property Name="isNotified" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Category">
     <Key>

@@ -79,8 +79,9 @@
     <NavigationProperty Name="AspNetUser_Category" Relationship="kapymvc1Model.FK_AspNetUser_Category_AspNetUsers" FromRole="AspNetUser" ToRole="AspNetUser_Category" />
     <Property Name="ReceiveNewsLetters" Type="Int32" />
     <NavigationProperty Name="AspNetUser_Source" Relationship="kapymvc1Model.FK_dbo_AspNetUser_Source_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUser_Source" />
-    <Property Name="UserPhoto" Type="Binary" MaxLength="50" FixedLength="false" />
+    <Property Name="UserPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
     <NavigationProperty Name="ResetPasswordRequests" Relationship="kapymvc1Model.FK__ResetPasswor__Id__47A6A41B" FromRole="AspNetUser" ToRole="ResetPasswordRequest" />
+    <Property Name="isNotified" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Category">
     <Key>

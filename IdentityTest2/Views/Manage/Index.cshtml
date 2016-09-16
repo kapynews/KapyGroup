@@ -142,12 +142,6 @@
 
 
 
-
-
-
-
-
-
     <div class="userProfile_rowContainer">
         <div class="userProfile_labelContainer">
             <span class="userProfile_labelTitle">Password Security</span>
@@ -175,15 +169,17 @@
 
 
 
-
-
-
-
     <div class="userProfile_rowContainer">
         <div class="userProfile_labelContainer">
             <span class="userProfile_labelTitle">Preferable Categories</span>
             <br />
             Categories:
+            [
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("View your current selected categories", "ListCategories", "AspNetUser_Category")
+            }
+            ]
             [
             @if (Model.HasPassword)
             {
@@ -194,19 +190,21 @@
                 @Html.ActionLink("Create", "SetPassword")
             }
             ]
+            
+
         </div>
         <div style="clear:both;"></div>
     </div>
 
     <div class="userProfile_rowContainer">
         <div class="userProfile_labelContainer">
-            <span class="userProfile_labelTitle">Newsletter Notification Frequency</span>
+            <span class="userProfile_labelTitle">Notification Setting</span>
             <br />
             Receive newsletter:
             [
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("Update your newsletter frequency", "ShowCurrentCategories")
+                @Html.ActionLink("Update your notification setting", "NotificationSetting")
             }
             else
             {
