@@ -2,13 +2,13 @@
 
 
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Personalize";
 }
 
 
 <link href="Site.css" rel="stylesheet" type="text/css" />
 
-<h2>Manage your account</h2>
+<h2>Personalize your account</h2>
 
 @*<h2>@ViewBag.Title.</h2>*@
 
@@ -97,7 +97,56 @@
 @*</dl>*@
 
 
+<h2>
+
+    <img src="@Url.Action("UserPhotos", "Home" )" style="width:160px;height:160px; background: #FFFFFF;
+    margin: auto;
+    -moz-border-radius: 60px;
+    border-radius: 100px;
+    padding: 6px;
+    box-shadow: 0px 0px 20px #888;" />
+</h2>
+
+
+
 <div class="userProfile_outerContainer">
+
+
+
+
+
+    <div class="userProfile_rowContainer">
+        <div class="userProfile_labelContainer">
+            <span class="userProfile_labelTitle">Update Profile Picture</span>
+            <br />
+            Profile Picture:
+            [
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Change your profile picture", "UpdatePicture")
+            }
+            else
+            {
+                @Html.ActionLink("Create", "SetPassword")
+            }
+            ]
+        </div>
+
+        @*<div class="userProfile_editContainer">
+                <a href="../Account/Login">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>*@
+        <div style="clear:both;"></div>
+    </div>
+
+
+
+
+
+
+
+
 
     <div class="userProfile_rowContainer">
         <div class="userProfile_labelContainer">
@@ -124,6 +173,12 @@
         <div style="clear:both;"></div>
     </div>
 
+
+
+
+
+
+
     <div class="userProfile_rowContainer">
         <div class="userProfile_labelContainer">
             <span class="userProfile_labelTitle">Preferable Categories</span>
@@ -132,7 +187,7 @@
             [
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("Update your favorite categories", "AddCategories")
+                @Html.ActionLink("Update your favorite categories", "Insert", "AspNetUser_Category")
             }
             else
             {
@@ -163,4 +218,3 @@
     </div>
 
 </div>
-

@@ -1,0 +1,50 @@
+﻿
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<IdentityTest2.Models.UsersAndRoles>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/admin_layout.cshtml";
+}
+
+
+
+
+<table class="table">
+
+    @foreach (var user in Model)
+    {
+
+        <tr>
+            <td>
+                @if (user.photo == null)
+                {
+                    <img src="~/Content/Images/kapy_logo.png" style="width:200px;height:128px;">
+                }
+                else
+                {
+                    <img src="@Html.DisplayFor(modelItem => user.photo) " style="width:200px;height:128px;">
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.username)
+            </td>
+            <td>
+                @foreach (String name in user.rolenames)
+                {
+
+                    @name
+
+                }
+            </td>
+
+
+
+        </tr>
+    }
+
+
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
