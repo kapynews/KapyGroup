@@ -1,17 +1,22 @@
-﻿@model IdentityTest2.Models.Category
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@*@model IdentityTest2.Models.Category*@
+@model IPagedList<IdentityTest2.Models.News1>
 
 @{
-    ViewBag.Title = "Category";
+    ViewBag.Title = ViewBag.Message;
     Layout = "~/Views/Shared/_Layout.cshtml";
-    IEnumerable<IdentityTest2.Models.News1> newsList = Model.News1.ToList().OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
+    //IEnumerable<IdentityTest2.Models.News1> newsList = Model.News1.ToList().OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
 }
 
-<h2>@Model.categoryName</h2>
+<h2>@ViewBag.Message</h2>
 <div class= "userProfile_outerContainer"></div>
 <table class="table">
     
-    @foreach (var news in newsList)
+    @foreach (var news in Model)
     {
+        int id = news.Category.categoryId;
         <tr>
             <td>
                 @if (news.picUrl == "")
@@ -28,10 +33,17 @@
             </td>
             <td>
                 @*@Html.DisplayFor(modelItem => news.newsDate)*@
-                @Html.DisplayFor(modelItem => news.newsTime)
+                @Html.DisplayFor(modelItem => news.crawlTime)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => news.Source.sourceName)
+            </td>
+            <td>
+                @if (ViewBag.user_id != 0)
+                {
+                    @Html.Action("Like", "News1", new { id = news.newsId })
+                }
+                @*@Html.DisplayFor(modelItem => item.numOfLikes)*@
             </td>
             <td>
                 @*@Html.ActionLink("Details", "Details", new { id = item.newsId }) |
@@ -42,4 +54,4 @@
     }
 
 </table>
-
+@Html.PagedListPager(Model, page => Url.Action("Category",  new { categoryId = ViewContext.ViewBag.categoryId,page }))

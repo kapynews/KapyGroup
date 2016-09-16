@@ -5,7 +5,7 @@
 }
 
 
-@using (Html.BeginForm("AddSubscription", "News1", new { id = Model.newsId }, FormMethod.Post, null))
+@using (Html.BeginForm("UnSubscription", "News1", new { id = Model.newsId }, FormMethod.Post, null))
 {
 
     @Html.AntiForgeryToken()
@@ -15,10 +15,4 @@
     </div>
 
 }
-
-
-
-
-
-
 

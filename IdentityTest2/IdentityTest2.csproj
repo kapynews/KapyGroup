@@ -501,7 +501,6 @@
     <Content Include="Views\AspNetUser_Category\EditorTemplates\Category.cshtml" />
     <Content Include="Views\Manage\AddCategories.cshtml" />
     <Content Include="Views\AspNetUser_Category\InsertResult.cshtml" />
-    <Content Include="Views\News1\Recommend.cshtml" />
     <Content Include="Views\News1\RecommendToYou.cshtml" />
     <Content Include="Views\Comment1\Create.cshtml" />
     <Content Include="Views\Comment1\Delete.cshtml" />
@@ -538,6 +537,7 @@
     <Content Include="Views\AspNetUsers\Details.cshtml" />
     <Content Include="Views\AspNetUsers\Edit.cshtml" />
     <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\News1\UnSubscription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

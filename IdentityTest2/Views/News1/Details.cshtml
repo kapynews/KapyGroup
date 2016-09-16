@@ -30,20 +30,15 @@
         @if (Model.author != "")
         {
             <dt>
-                @*@Html.DisplayNameFor(model => model.author)*@
                 Author:
             </dt>
-
             <dd>
-
                 @Html.DisplayFor(model => model.author)
             </dd>
         }
-
         @if (Model.picUrl != "")
         {
             <dt>
-                @*@Html.DisplayNameFor(model => model.picUrl)*@
             </dt>
             <dd>
                 <img src="@Html.DisplayFor(model => model.picUrl) " style="width:300px;height:228px;">
@@ -51,7 +46,6 @@
         }
         else {
             <dt>
-                @*@Html.DisplayNameFor(model => model.picUrl)*@
             </dt>
             <dd>
                 <img src="~/Content/Images/kapy_logo.png" style="width:200px;height:128px;">
@@ -66,7 +60,32 @@
         <dt>
         </dt>
         <dd>
-            @Html.Partial("AddSubscription")
+            @if (ViewBag.Message == null)
+            {
+                @*@Html.Partial("AddSubscription")*@
+                using (Html.BeginForm("AddSubscription", "News1", new { id = Model.newsId }, FormMethod.Post, null))
+                {
+
+                    @Html.AntiForgeryToken()
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Subscribe" class="btn btn-primary active" />
+                    </div>
+                }
+            }
+            else {
+                @*<button type="button" disabled="disabled">Subscribed</button>*@
+                using (Html.BeginForm("UnSubscription", "News1", new { id = Model.newsId }, FormMethod.Post, null))
+                {
+
+                    @Html.AntiForgeryToken()
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="UnSubscribe" class="btn btn-default" />
+
+                    </div>
+
+                }
+            }
+
         </dd>
         <dt>
             Content:
@@ -89,7 +108,7 @@
                 @Html.DisplayFor(model => model.crawlTime)
             </dd>
         }
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.numOfClicks)
         </dt>
 
@@ -103,7 +122,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.numOfLikes)
-        </dd>
+        </dd>*@
 
     </dl>
 </div>
