@@ -121,14 +121,15 @@
             <br />
             Profile Picture:
             [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Change your profile picture", "UpdatePicture")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
+            @*@if (Model.HasPassword)
+                {
+                    @Html.ActionLink("Change your profile picture", "UpdatePicture")
+                }
+                else
+                {
+                    @Html.ActionLink("Create", "SetPassword")
+                }*@
+            @Html.ActionLink("Change your profile picture", "UpdatePicture")
             ]
         </div>
 
@@ -139,12 +140,6 @@
             </div>*@
         <div style="clear:both;"></div>
     </div>
-
-
-
-
-
-
 
 
 
@@ -155,13 +150,13 @@
             Password:
             [
             @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
+                {
+                    @Html.ActionLink("Change your password", "ChangePassword")
+                }
+                else
+                {
+                    @Html.ActionLink("Set a password", "SetPassword")
+                }
             ]
         </div>
 
@@ -175,43 +170,50 @@
 
 
 
-
-
-
-
     <div class="userProfile_rowContainer">
         <div class="userProfile_labelContainer">
             <span class="userProfile_labelTitle">Preferable Categories</span>
             <br />
             Categories:
             [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Update your favorite categories", "Insert", "AspNetUser_Category")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
+            @*@if (Model.HasPassword)
+                {
+                    @Html.ActionLink("View your current selected categories", "ListCategories", "AspNetUser_Category")
+                }*@
+            @Html.ActionLink("View your current selected categories", "ListCategories", "AspNetUser_Category")
             ]
+            [
+            @*@if (Model.HasPassword)
+                {
+                    @Html.ActionLink("Update your favorite categories", "Insert", "AspNetUser_Category")
+                }
+                else
+                {
+                    @Html.ActionLink("Create", "SetPassword")
+                }*@
+            @Html.ActionLink("Update your favorite categories", "Insert", "AspNetUser_Category")
+            ]
+
+
         </div>
         <div style="clear:both;"></div>
     </div>
 
     <div class="userProfile_rowContainer">
         <div class="userProfile_labelContainer">
-            <span class="userProfile_labelTitle">Newsletter Notification Frequency</span>
+            <span class="userProfile_labelTitle">Notification Setting</span>
             <br />
-            Receive newsletter:
+            Notification:
             [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Update your newsletter frequency", "ShowCurrentCategories")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
+            @*@if (Model.HasPassword)
+                {
+                    @Html.ActionLink("Update your notification setting", "NotificationSetting")
+                }
+                else
+                {
+                    @Html.ActionLink("Create", "SetPassword")
+                }*@
+            @Html.ActionLink("Update your notification setting", "NotificationSetting")
             ]
         </div>
         <div style="clear:both;"></div>
