@@ -1156,3 +1156,4 @@ C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\bin\zh-Hant\System.Spati
 C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.csprojResolveAssemblyReference.cache
 C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.dll
 C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\obj\Debug\IdentityTest2.pdb
+C:\Users\atiat\Documents\GitHub\KapyGroup\IdentityTest2\bin\IdentityTest2.exe.config
