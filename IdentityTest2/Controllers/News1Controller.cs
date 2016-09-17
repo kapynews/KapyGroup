@@ -24,7 +24,7 @@ namespace IdentityTest2.Controllers
         [AllowAnonymous]
         public ActionResult Index(string sortOrder, int? page)
         {
-            ViewBag.DateSortParm = sortOrder == "ID" ? "Time" : "ID";
+            //ViewBag.DateSortParm = sortOrder == "ID" ? "Time" : "ID";
             var news = from s in db.News1
                        select s;
             switch (sortOrder)
@@ -34,10 +34,11 @@ namespace IdentityTest2.Controllers
                     news = news.OrderBy(s => s.newsId);
                     break;
                 case "Time":
-                    news = news.OrderByDescending(s => s.newsTime);
+                    news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
                     break;
                 default:
-                    news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
+                    //news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
+                    news = news.OrderByDescending(s => s.crawlTime);
                     break;
             }
             //var news1 = db.News1.Include(n => n.Category).Include(n => n.Source);
@@ -86,10 +87,11 @@ namespace IdentityTest2.Controllers
                     news = news.OrderBy(s => s.newsId);
                     break;
                 case "Time":
-                    news = news.OrderByDescending(s => s.newsTime);
+                    news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
                     break;
                 default:
-                    news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
+                    //news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
+                    news = news.OrderByDescending(s => s.crawlTime);
                     break;
             }
             //var news1 = db.News1.Include(n => n.Category).Include(n => n.Source);
@@ -228,31 +230,9 @@ namespace IdentityTest2.Controllers
             return View(newsList.ToPagedList(page ?? 1, 5));
 
         }
-        //// GET: News1/Recommend
-        //[Authorize]
-        //public ActionResult Recommend()
-        //{
-        //    int userId = User.Identity.GetUserId<int>();
-        //    if (userId == 0)
-        //    {
-        //        return RedirectToAction("Login", "Account");
-        //    }
-        //    //Get students enrolled in a particular course
-        //    //dc.Students.Where(s => s.StudentCourseEnrollments.Any(e => e.CourseID == courseID)
-        //    var selectedCategoriesModel = db.Categories.Include("News1").Where(c => c.AspNetUser_Category.Any(u => u.userId == userId));
-        //    IEnumerable<Category> selectCategories = selectedCategoriesModel.ToList();
-        //    StringBuilder sb = new StringBuilder();
-        //    sb.Append("Recommended News for you in categories: " + "\n");
-        //    foreach (var c in selectCategories)
-        //    {
-        //        sb.Append(c.categoryName + " ");
-        //    }
-        //    //sb.Remove(sb.ToString().LastIndexOf(","), 1);
-        //    ViewBag.message = sb.ToString();
-        //    return View(selectedCategoriesModel);
-        //}
 
-        // GET: News1/RecommendToYou()
+
+        //GET: News1/RecommendToYou()
         //Needs modification
         [Authorize]
         public ActionResult RecommendToYou(int? page)
@@ -347,40 +327,14 @@ namespace IdentityTest2.Controllers
             }
         }
         // GET: News1/HotNews/5
-        [Authorize]
-        public ActionResult HotNews(string sortOrder, int? page)
+        [AllowAnonymous]
+        public ActionResult HotNews(int? page)
         {
 
-            int userId = User.Identity.GetUserId<int>();
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
-
-            var selectedCategoriesModel = db.Categories.Include("News1").Where(c => c.AspNetUser_Category.Any(u => u.userId == userId));
-            var selectedSourcesModel = db.Sources.Include("News1").Where(s => s.User_Source.Any(u => u.userId == userId));
-            IEnumerable<Category> selectedCategories = selectedCategoriesModel.ToList();
-            IEnumerable<Source> selectedSources = selectedSourcesModel.ToList();
-            int nbcat = selectedCategories.Count();
-            int nbsources = selectedSources.Count();
-            ViewBag.nbcat = nbcat;
-            ViewBag.nbsources = nbsources;
-            ViewBag.DateSortParm = sortOrder == "ID" ? "Time" : "ID";
             var news = from s in db.News1
                        select s;
-            switch (sortOrder)
-            {
+            news = news.OrderBy(s => s.numOfLikes).OrderBy(s=>s.crawlTime);
 
-                case "ID":
-                    news = news.OrderBy(s => s.newsId);
-                    break;
-                case "Time":
-                    news = news.OrderByDescending(s => s.newsTime);
-                    break;
-                default:
-                    news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
-                    break;
-            }
             //var news1 = db.News1.Include(n => n.Category).Include(n => n.Source);
             return View(news.ToList().ToPagedList(page ?? 1, 5));
         }

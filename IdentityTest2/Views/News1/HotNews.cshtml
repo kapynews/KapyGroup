@@ -1,67 +1,66 @@
-﻿@model IEnumerable<IdentityTest2.Models.News1>
+﻿
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<IdentityTest2.Models.News1>
+
 
 @{
     ViewBag.Title = "Hot News";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
 
-<h2>The most commented news</h2>
-@if (ViewBag.nbcat == 0 | ViewBag.nbsources == 0)
-{
-<h3>Personalize your profile with your prefered categories and news sources.</h3>
+<h2 style="background-color:#158cba"><img src="~/Content/Images/kapy_logo.png" style="width:80px;height:50px;">Everything</h2>
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table">
 
-    using (Html.BeginForm("Insert", "AspNetUser_Category", FormMethod.Get, null))
+    @foreach (var item in Model)
     {
-        @Html.AntiForgeryToken()
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Personalyze your profile" class="btn btn-default" />
-        </div>
+        <tr>
+            <td>
+                @if (item.picUrl == "")
+                {
+                    <img src="~/Content/Images/kapy_logo.png" style="width:200px;height:128px;">
+                }
+                else {
+                    <img src="@Html.DisplayFor(modelItem => item.picUrl) " style="width:200px;height:128px;">
+                }
+
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.uniqueTitle)
+                </td>*@
+            <td>
+                @Html.ActionLink(item.newsTitle, "Details", new { id = item.newsId })
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.newsDate)*@
+                @Html.DisplayFor(modelItem => item.crawlTime)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.categoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Source.sourceName)
+            </td>
+            <td>
+                @if (ViewBag.user_id != 0)
+                {
+                    @Html.Action("Like", "News1", new { id = item.newsId })
+                }
+                @*@Html.DisplayFor(modelItem => item.numOfLikes)*@
+            </td>
+            <td>
+
+                @*@Html.ActionLink("Details", "Details", new { id = item.newsId }) |
+                        @Html.ActionLink("Edit", "Edit", new { id=item.newsId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.newsId })*@
+            </td>
+        </tr>
     }
-}
-else
-{
-    <table class="table">
 
-        @foreach (var news in Model)
-        {
-            <tr>
-                <td>
-                    @if (news.picUrl == "")
-                    {
-                        <img src="~/Content/Images/kapy_logo.png" style="width:200px;height:128px;">
-                    }
-                    else
-                    {
-                        <img src="@Html.DisplayFor(modelItem => news.picUrl) " style="width:200px;height:128px;">
-                    }
-                </td>
-                <td>
-                    @Html.ActionLink(news.newsTitle, "Details", new { id = news.newsId })
+</table>
+@Html.PagedListPager(Model, page => Url.Action("HotNews", new { page }))
 
-                </td>
-                <td>
-                    @*@Html.DisplayFor(modelItem => news.newsDate)*@
-                    @Html.DisplayFor(modelItem => news.newsTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => news.Source.sourceName)
-                </td>
-                <td>
-                    @if (ViewBag.user_id != 0)
-                    {
-                        @Html.Action("Like", "News1", new { id = news.newsId })
-                    }
-                    @Html.DisplayFor(modelItem => news.numOfLikes)
-                </td>
-            </tr>
-        }
-
-    </table>
-
-
-
-
-
-}
 
