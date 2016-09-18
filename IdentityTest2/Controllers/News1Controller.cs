@@ -22,26 +22,28 @@ namespace IdentityTest2.Controllers
         // GET: News1
         // GET: News1
         [AllowAnonymous]
-        public ActionResult Index(string sortOrder, int? page)
+        //public ActionResult Index(string sortOrder, int? page)
+        public ActionResult Index(int? page)
         {
             //ViewBag.DateSortParm = sortOrder == "ID" ? "Time" : "ID";
             var news = from s in db.News1
                        select s;
-            switch (sortOrder)
-            {
+            //switch (sortOrder)
+            //{
 
-                case "ID":
-                    news = news.OrderBy(s => s.newsId);
-                    break;
-                case "Time":
-                    news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
-                    break;
-                default:
-                    //news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
-                    news = news.OrderByDescending(s => s.crawlTime);
-                    break;
-            }
+            //    case "ID":
+            //        news = news.OrderBy(s => s.newsId);
+            //        break;
+            //    case "Time":
+            //        news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
+            //        break;
+            //    default:
+            //        //news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
+            //        news = news.OrderByDescending(s => s.crawlTime);
+            //        break;
+            //}
             //var news1 = db.News1.Include(n => n.Category).Include(n => n.Source);
+            news = news.OrderByDescending(s => s.crawlTime);
             return View(news.ToList().ToPagedList(page ?? 1, 5));
         }
 
@@ -75,26 +77,28 @@ namespace IdentityTest2.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        public ActionResult NewsManagement(string sortOrder, int? page)
+        //public ActionResult NewsManagement(string sortOrder, int? page)
+        public ActionResult NewsManagement(int? page)
         {
-            ViewBag.DateSortParm = sortOrder == "ID" ? "Time" : "ID";
+            //ViewBag.DateSortParm = sortOrder == "ID" ? "Time" : "ID";
             var news = from s in db.News1
                        select s;
-            switch (sortOrder)
-            {
+            //switch (sortOrder)
+            //{
 
-                case "ID":
-                    news = news.OrderBy(s => s.newsId);
-                    break;
-                case "Time":
-                    news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
-                    break;
-                default:
-                    //news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
-                    news = news.OrderByDescending(s => s.crawlTime);
-                    break;
-            }
+            //    case "ID":
+            //        news = news.OrderBy(s => s.newsId);
+            //        break;
+            //    case "Time":
+            //        news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
+            //        break;
+            //    default:
+            //        //news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
+            //        news = news.OrderByDescending(s => s.crawlTime);
+            //        break;
+            //}
             //var news1 = db.News1.Include(n => n.Category).Include(n => n.Source);
+            news = news.OrderByDescending(s => s.crawlTime);
             return View(news.ToList().ToPagedList(page ?? 1, 5));
         }
 
@@ -333,7 +337,7 @@ namespace IdentityTest2.Controllers
 
             var news = from s in db.News1
                        select s;
-            news = news.OrderBy(s => s.numOfLikes).OrderBy(s=>s.crawlTime);
+            news = news.OrderByDescending(s => s.crawlTime).OrderByDescending(s => s.numOfLikes);
 
             //var news1 = db.News1.Include(n => n.Category).Include(n => n.Source);
             return View(news.ToList().ToPagedList(page ?? 1, 5));

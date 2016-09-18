@@ -432,6 +432,7 @@
     <None Include="Properties\PublishProfiles\kapynewstest1 %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\kapynewstest1 %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\kapynewstest1 %284%29.pubxml" />
+    <None Include="Properties\PublishProfiles\kapynewstest1 %285%29.pubxml" />
     <None Include="Properties\PublishProfiles\kapynewstest1.pubxml" />
     <None Include="Properties\PublishProfiles\kapysnews %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\kapysnews %283%29.pubxml" />
@@ -440,6 +441,7 @@
     <None Include="Properties\PublishProfiles\kapysnews %286%29.pubxml" />
     <None Include="Properties\PublishProfiles\kapysnews %287%29.pubxml" />
     <None Include="Properties\PublishProfiles\kapysnews %288%29.pubxml" />
+    <None Include="Properties\PublishProfiles\kapysnews %289%29.pubxml" />
     <None Include="Properties\PublishProfiles\kapysnews.pubxml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />

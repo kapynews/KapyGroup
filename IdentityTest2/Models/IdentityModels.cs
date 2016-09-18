@@ -20,6 +20,7 @@ namespace IdentityTest2.Models
         }
 
         public byte[] UserPhoto { get; set; }
+        public int isNotified { get; set; }
     }
 
     public class UsersAndRoles{

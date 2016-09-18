@@ -249,19 +249,6 @@ namespace IdentityTest2.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()
@@ -427,6 +414,8 @@ namespace IdentityTest2.Controllers
         //{
         //    return View();
         //}
+        [Authorize]
+
         public ActionResult NotificationSetting()
         {
             int userId = User.Identity.GetUserId<int>();
@@ -434,36 +423,129 @@ namespace IdentityTest2.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            AspNetUser aspNetUser = db.AspNetUsers.Find(userId);
-            return View(aspNetUser);
+            else {
+                ApplicationUser databaseUser = this.UserManager.FindById(userId);
+                ViewBag.Message = databaseUser.isNotified.ToString();
+            }
+            //AspNetUser aspNetUser = db.AspNetUsers.Find(userId);
+            return View();
 
         }
+
         [Authorize]
         [HttpPost, ActionName("ReceiveNotification")]
+        [ValidateAntiForgeryToken]
+        //public ActionResult ReceiveNotification([Bind(Include = "Id,Email,isNotified")] AspNetUser aspNetUser)
         public ActionResult ReceiveNotification()
         {
-            int userId = User.Identity.GetUserId<int>();
-            AspNetUser aspNetUser = db.AspNetUsers.Find(userId);
-            aspNetUser.isNotified = 1;
-            db.SaveChanges();
-
+            int id=User.Identity.GetUserId<int>();
+            //AspNetUser aspNetUser = db.AspNetUsers.Find(userId);
+            if (ModelState.IsValid && id!=0)
+            {
+                ApplicationUser databaseUser = this.UserManager.FindById(id);
+                databaseUser.isNotified = 1;
+                IdentityResult result = this.UserManager.Update(databaseUser);
+                //db.SaveChanges();
+                if (result.Succeeded)
+                {
+                    ViewBag.Title = "success";
+                }
+                else
+                {
+                    this.AddErrors(result);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            ModelState.Clear();
             return RedirectToAction("NotificationSetting", "Manage");
-            
+
         }
+
         [Authorize]
         [HttpPost, ActionName("NoNotification")]
+        [ValidateAntiForgeryToken]
         public ActionResult NoNotification()
         {
-            int userId = User.Identity.GetUserId<int>();
-            AspNetUser aspNetUser = db.AspNetUsers.Find(userId);
-            aspNetUser.isNotified = 0;
-            db.SaveChanges();
-
+            int id = User.Identity.GetUserId<int>();
+            //AspNetUser aspNetUser = db.AspNetUsers.Find(userId);
+            if (ModelState.IsValid && id != 0)
+            {
+                ApplicationUser databaseUser = this.UserManager.FindById(id);
+                databaseUser.isNotified = 0;
+                IdentityResult result = this.UserManager.Update(databaseUser);
+                //db.SaveChanges();
+                if (result.Succeeded)
+                {
+                    ViewBag.Title = "success";
+                }
+                else
+                {
+                    this.AddErrors(result);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            ModelState.Clear();
             return RedirectToAction("NotificationSetting", "Manage");
 
         }
+        //[HttpGet]
+        //public ActionResult UpdatePicture() {
+        //    return View();
+        //}
+        //public ActionResult PicModify()
+        //{
+        //    int userId = User.Identity.GetUserId<int>();
+        //    if (userId == 0)
+        //    {
+        //        return RedirectToAction("Login", "Account");
+        //    }
+        //    else {
+
+        //        ViewBag.Message = "updating pictures";
+        //    }
+        //    //AspNetUser aspNetUser = db.AspNetUsers.Find(userId);
+        //    return View();
+
+        //}
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult UpdatePicture()
+        //{
+        //    int id = User.Identity.GetUserId<int>();
+        //    if (ModelState.IsValid && id!=0)
+        //    {
+        //        byte[] imageData = null;
+        //        if (Request.Files.Count > 0)
+        //        {
+        //            HttpPostedFileBase poImgFile = Request.Files["UserPhoto"];
+
+        //            using (var binary = new BinaryReader(poImgFile.InputStream))
+        //            {
+        //                imageData = binary.ReadBytes(poImgFile.ContentLength);
+        //                ViewBag.Message = imageData;
+        //            }
+        //            ApplicationUser databaseUser = this.UserManager.FindById(id);
+        //            databaseUser.UserPhoto = imageData;
+        //            IdentityResult result = this.UserManager.Update(databaseUser);
+
+        //            if (result.Succeeded)
+        //            {
+        //                return RedirectToAction("Index", "Manage");
+        //            }
+        //            else
+        //            {
+        //                this.AddErrors(result);
+        //                return RedirectToAction("Index", "Home");
+        //            }
+        //        } //close count if
 
 
+
+        //    }
+        //    ModelState.Clear();
+        //    return RedirectToAction("Index", "Manage");
+        //}
 
 
         ////
@@ -581,11 +663,10 @@ namespace IdentityTest2.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+
+       [HttpPost]
+       [AllowAnonymous]
+       [ValidateAntiForgeryToken]
 
         public async Task<ActionResult> UpdatePicture([Bind(Exclude = "UserPhoto")]RegisterViewModel model)
         //public async Task<ActionResult> Register(RegisterViewModel model)

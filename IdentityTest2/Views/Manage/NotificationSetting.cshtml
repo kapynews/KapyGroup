@@ -11,11 +11,11 @@
 <h5>based on your favorite categories and subscribed sources</h5>
 <br>
 <br>
-@if (Model.isNotified == 1)
+@if (ViewBag.Message == "1")
 {
     <h4>You have agreed in receiving notification!</h4><br>
     <br>
-    using (Html.BeginForm("NoNotification", "Manage", FormMethod.Post, null))
+    using (Html.BeginForm("NoNotification",  "Manage", FormMethod.Post, null))
     {
 
         @Html.AntiForgeryToken()
