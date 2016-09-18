@@ -255,9 +255,10 @@ namespace IdentityTest2.Controllers
             foreach (var c in selectCategories)
             {
                 message1.Append(c.Category.categoryName + "  ");
-                sb.Append(c.Category.categoryName + "   ");
+                sb.Append(c.Category.categoryName + ", ");
                 categoryIds.Add(c.Category.categoryId);
             }
+            sb.Remove(sb.ToString().LastIndexOf(", "), 1);
             if (message1.ToString() == "1")
             {
                 return RedirectToAction("Insert", "AspNetUser_Category");
@@ -269,13 +270,14 @@ namespace IdentityTest2.Controllers
                 IEnumerable<AspNetUser_Source> selectSources = db.AspNetUser_Source.Where(n => n.UserId == userId);
                 List<int> sourceIds = new List<int>();
                 sb2.Append(sb);
-                sb2.Append("\n\nand in sources: " + "\n");
+                sb2.Append("\n  And in sources: " + "\n");
                 foreach (var c in selectSources)
                 {
                     message2.Append(c.Source.sourceName + "  ");
-                    sb2.Append(c.Source.sourceName + "   ");
+                    sb2.Append(c.Source.sourceName + ", ");
                     sourceIds.Add(c.Source.sourceId);
                 }
+                //sb2.Remove(sb2.ToString().LastIndexOf(", "), 1);
                 if (message2.ToString() == "1")
                 {
                     var newsModel = db.News1.Where(n => categoryIds.Contains(n.categoryId));
@@ -284,7 +286,7 @@ namespace IdentityTest2.Controllers
                     return View(newsList.ToPagedList(page ?? 1, 5));
                 }
                 else {
-
+                    sb2.Remove(sb2.ToString().LastIndexOf(", "), 1);
                     ViewBag.message = sb2.ToString();
                     var newsModel = db.News1.Where(n => categoryIds.Contains(n.categoryId)).Where(n => sourceIds.Contains(n.sourceId));
                     IEnumerable<IdentityTest2.Models.News1> newsList = newsModel.ToList().OrderByDescending(s => s.crawlTime);

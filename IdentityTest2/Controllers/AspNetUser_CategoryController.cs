@@ -176,13 +176,25 @@ namespace IdentityTest2.Controllers
             if (user_id != 0)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append("You have selected categories: ");
+                int num = 0;
                 IEnumerable<AspNetUser_Category> selectCategories = db.AspNetUser_Category.Where(n => n.userId == user_id);
                 foreach (var row in selectCategories)
                 {
-                    sb.Append(row.Category.categoryName + ", ");
+                    num++;
                 }
-                sb.Remove(sb.ToString().LastIndexOf(", "), 1);
+                if (num==0)
+                {
+                    sb.Append("You haven't selected any categories! ");
+                }
+                else {
+                    sb.Append("You have selected categories: ");
+                    foreach (var row in selectCategories)
+                    {
+                        sb.Append(row.Category.categoryName + ", ");
+                    }
+                    sb.Remove(sb.ToString().LastIndexOf(", "), 1);
+                    
+                }
                 ViewBag.Message = sb.ToString();
             }
 
