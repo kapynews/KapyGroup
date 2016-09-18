@@ -11,25 +11,25 @@
 
 
         @*<div class="userProfile_rowContainer">*@
-        <div class="userProfile_labelContainer">
-            <span class="userProfile_labelTitle">Update your picture</span>
-            <div class="form-group">
-                @*@Html.LabelFor(m => m.UserPhoto, new { @class = "col-md-2 control-label" })*@
-                <div class="col-md-10">
+        <div class="userProfile_outerContainer" style="padding-left : 5% ; padding-top : 5%">
+            <div class="post-container">
+                <div class="post-thumb">
 
-                    <input type="file" name="UserPhoto" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />
-
-                    @*<div class="col-md-offset-2 col-md-10">*@
-                    <input type="submit" class="btn btn-default" value="Update Picture" />
-                    @*</div>*@
+                    <img id="usercirclepicmedium" src="@Url.Action("UserPhotos", "Home" )" />
                 </div>
 
-            </div>
-        </div>
+                <div class="post-content">
+                    <h3 class="post-title">Profile Picture</h3>
 
-        <div style="float:right">
-            <img id="usercirclepicmedium" src="@Url.Action("UserPhotos", "Home" )" />
-        </div>
+                    <input type="file" name="UserPhoto" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" onchange="this.form.submit()" />
+
+                    <input type="submit" value="Update Profile Picture" />
+                    <br />
+
+                </div>
+            </div>
+
+        
         @*</div>*@
 
         <div style="clear:both;"></div>
