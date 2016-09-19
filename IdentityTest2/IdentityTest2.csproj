@@ -433,6 +433,8 @@
     <None Include="Properties\PublishProfiles\kapyNews %286%29.pubxml" />
     <None Include="Properties\PublishProfiles\kapyNews %287%29.pubxml" />
     <None Include="Properties\PublishProfiles\kapyNews.pubxml" />
+    <None Include="Properties\PublishProfiles\kapyNewsTest %286%29.pubxml" />
+    <None Include="Properties\PublishProfiles\kapyNewsTest.pubxml" />
     <None Include="Properties\PublishProfiles\kapynewstest1 %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\kapynewstest1 %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\kapynewstest1 %284%29.pubxml" />

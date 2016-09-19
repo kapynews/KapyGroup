@@ -43,7 +43,7 @@ namespace IdentityTest2.Controllers
 
                 if (userId == null)
                 {
-                    string fileName = HttpContext.Server.MapPath(@"~/Content/Images/kapy_logo.png");
+                    string fileName = HttpContext.Server.MapPath(@"~/Content/Images/noimage.png");
                     byte[] imageData = null;
                     FileInfo fileInfo = new FileInfo(fileName);
                     long imageFileLength = fileInfo.Length;
@@ -53,48 +53,30 @@ namespace IdentityTest2.Controllers
 
                     return File(imageData, "image/png");
                 }
-
-
 
                 var bdUsers = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
 
                 var userImage = bdUsers.Users.Where(x => x.Id.ToString() == userId).FirstOrDefault();
-
                 if (userImage.UserPhoto == null)
                 {
-                    string fileName = HttpContext.Server.MapPath(@"~/Content/Images/kapy_logo.png");
+                    string fileName = HttpContext.Server.MapPath(@"~/Content/Images/noimage.png");
+
                     byte[] imageData = null;
                     FileInfo fileInfo = new FileInfo(fileName);
                     long imageFileLength = fileInfo.Length;
                     FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
                     BinaryReader br = new BinaryReader(fs);
                     imageData = br.ReadBytes((int)imageFileLength);
-
                     return File(imageData, "image/png");
-                } else
-                {
-                    //TODO - replace fileName with path of user uploaded image
-
-                    //string picName = System.IO.Path.GetFileName(File.FileName);
-
-                    string fileName = HttpContext.Server.MapPath(@"~/Content/Images/Group.PNG");
-                    byte[] imageData = null;
-                    FileInfo fileInfo = new FileInfo(fileName);
-                    long imageFileLength = fileInfo.Length;
-                    FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-                    BinaryReader br = new BinaryReader(fs);
-                    imageData = br.ReadBytes((int)imageFileLength);
-
-                    return File(imageData, "image/png");
-
                 }
 
-                //return new FileContentResult(userImage.UserPhoto, "image/jpeg");
-
+                return new FileContentResult(userImage.UserPhoto, "image/jpeg");
             }
+
             else
             {
-                string fileName = HttpContext.Server.MapPath(@"~/Content/Images/kapy_logo.png");
+
+                string fileName = HttpContext.Server.MapPath(@"~/Content/Images/noimage.png");
 
                 byte[] imageData = null;
                 FileInfo fileInfo = new FileInfo(fileName);

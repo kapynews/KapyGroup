@@ -7,12 +7,12 @@
 
         <ul class="nav navbar-nav navbar-right">
 
-            <!--
+            
             <li>
                 <img id="usercirclepicsmall" src="@Url.Action("UserPhotos", "Home" )" />
 
             </li>
-            -->
+            
 
             <li>
                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "PERSONALIZE YOUR ACCOUNT" })

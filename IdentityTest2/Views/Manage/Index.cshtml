@@ -115,12 +115,12 @@
 
 
 
-    <div class="userProfile_rowContainer">
-        <div class="userProfile_labelContainer">
-            <span class="userProfile_labelTitle">Update Profile Picture</span>
-            <br />
-            Profile Picture:
-            [
+    <!--<div class="userProfile_rowContainer">-->
+        <!--div class="userProfile_labelContainer">-->
+            <!--<span class="userProfile_labelTitle">Update Profile Picture</span>-->
+            @*<br />*@
+            @*Profile Picture:
+            [*@
             @*@if (Model.HasPassword)
                 {
                     @Html.ActionLink("Change your profile picture", "UpdatePicture")
@@ -129,9 +129,9 @@
                 {
                     @Html.ActionLink("Create", "SetPassword")
                 }*@
-            @Html.ActionLink("Change your profile picture", "UpdatePicture")
-            ]
-        </div>
+            @*@Html.ActionLink("Change your profile picture", "UpdatePicture")*@ 
+            @*]*@
+        @*</!--div>*@
 
         @*<div class="userProfile_editContainer">
                 <a href="../Account/Login">
@@ -139,7 +139,7 @@
                 </a>
             </div>*@
         <div style="clear:both;"></div>
-    </div>
+    @*</div>*@
 
 
 
