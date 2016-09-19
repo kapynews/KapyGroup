@@ -71,9 +71,9 @@
                     
                         @if (item.userId == ViewBag.user_id && ViewBag.user_id != 0)
                         {
-                            <td>
+                            @*<td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.commentId }) 
-                            </td>
+                            </td>*@
                             <td>
                                 @Html.ActionLink("Delete", "Delete", new { id = item.commentId })
                             </td>

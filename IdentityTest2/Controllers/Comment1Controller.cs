@@ -12,7 +12,7 @@ using System.Text;
 
 namespace IdentityTest2.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class Comment1Controller : Controller
     {
         private kapymvc1Entities db = new kapymvc1Entities();

@@ -89,7 +89,7 @@ namespace IdentityTest2.Controllers
 
                 }
 
-                return new FileContentResult(userImage.UserPhoto, "image/jpeg");
+                //return new FileContentResult(userImage.UserPhoto, "image/jpeg");
 
             }
             else
