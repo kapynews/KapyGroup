@@ -5,25 +5,26 @@
     {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right">
 
+            <!--
+            <li>
+                <img id="usercirclepicsmall" src="@Url.Action("UserPhotos", "Home" )" />
 
-        <li>
-            <img id="usercirclepicsmall" src="@Url.Action("UserPhotos", "Home" )" />
-                    
-        </li>
+            </li>
+            -->
 
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "PERSONALIZE YOUR ACCOUNT" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-        <li>
-        @if (ViewContext.HttpContext.User.IsInRole("admin"))
-        {
-            @Html.Partial("_adminView")
-        }
-        </li>
-    </ul>
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "PERSONALIZE YOUR ACCOUNT" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            <li>
+                @if (ViewContext.HttpContext.User.IsInRole("admin"))
+                {
+                    @Html.Partial("_adminView")
+                }
+            </li>
+        </ul>
     }
 }
 else

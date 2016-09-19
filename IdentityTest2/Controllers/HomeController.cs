@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static System.Net.WebRequestMethods;
 
 namespace IdentityTest2.Controllers
 {
@@ -33,6 +34,7 @@ namespace IdentityTest2.Controllers
             return View();
         }
 
+        //public ActionResult FileUpload(HttpPostedFileBase file)
         public FileContentResult UserPhotos()
         {
             if (User.Identity.IsAuthenticated)
@@ -69,6 +71,22 @@ namespace IdentityTest2.Controllers
                     imageData = br.ReadBytes((int)imageFileLength);
 
                     return File(imageData, "image/png");
+                } else
+                {
+                    //TODO - replace fileName with path of user uploaded image
+
+                    //string picName = System.IO.Path.GetFileName(File.FileName);
+
+                    string fileName = HttpContext.Server.MapPath(@"~/Content/Images/Group.PNG");
+                    byte[] imageData = null;
+                    FileInfo fileInfo = new FileInfo(fileName);
+                    long imageFileLength = fileInfo.Length;
+                    FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fs);
+                    imageData = br.ReadBytes((int)imageFileLength);
+
+                    return File(imageData, "image/png");
+
                 }
 
                 return new FileContentResult(userImage.UserPhoto, "image/jpeg");

@@ -383,8 +383,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap_lumen.css" />
+    <Content Include="Content\Images\bbcnews_logo.png" />
+    <Content Include="Content\Images\foxnews_logo.jpeg" />
+    <Content Include="Content\Images\fuzzydicepixpink.jpg" />
     <Content Include="Content\Images\Group.PNG" />
     <Content Include="Content\Images\kapy_logo.png" />
+    <Content Include="Content\Images\kapy_logo_resized.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
