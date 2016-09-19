@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="MyConnection-Web.config Connection String" description="MyConnection Connection String used in web.config by the application to access the database." defaultValue="Server=tcp:kapydatabase.database.windows.net,1433;Initial Catalog=kapymvc1;Persist Security Info=False;User ID=kapygroup;Password=Kapykapy1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="D:\\My\ Documents2010_T60_061110\\GitHub\\KapyGroup\\IdentityTest2\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MyConnection']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\pattira\\Documents\\GitHub\\KapyGroup\\IdentityTest2\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MyConnection']/@connectionString" />
   </parameter>
   <parameter name="kapymvc1Entities-Web.config Connection String" description="kapymvc1Entities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.KapyModel.csdl|res://*/Models.KapyModel.ssdl|res://*/Models.KapyModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=kapydatabase.database.windows.net;initial catalog=kapymvc1;user id=kapygroup;password=Kapykapy1234;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="D:\\My\ Documents2010_T60_061110\\GitHub\\KapyGroup\\IdentityTest2\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='kapymvc1Entities']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\pattira\\Documents\\GitHub\\KapyGroup\\IdentityTest2\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='kapymvc1Entities']/@connectionString" />
   </parameter>
 </parameters>
