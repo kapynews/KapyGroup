@@ -247,18 +247,31 @@ namespace IdentityTest2.Controllers
                 return RedirectToAction("Login", "Account");
             }
             StringBuilder sb = new StringBuilder();
+            int num = 0;
             StringBuilder message1 = new StringBuilder();
             message1.Append("1");
             IEnumerable<AspNetUser_Category> selectCategories = db.AspNetUser_Category.Where(n => n.userId == userId);
             List<int> categoryIds = new List<int>();
-            sb.Append("Recommended news for you in categories: ");
-            foreach (var c in selectCategories)
+            foreach (var row in selectCategories)
             {
-                message1.Append(c.Category.categoryName + "  ");
-                sb.Append(c.Category.categoryName + ", ");
-                categoryIds.Add(c.Category.categoryId);
+                num++;
             }
-            sb.Remove(sb.ToString().LastIndexOf(", "), 1);
+            if (num == 0 )
+            {
+                sb.Append("You haven't selected any categories! ");
+            }
+            else
+            {
+                sb.Append("Recommended news for you in categories: ");
+                foreach (var c in selectCategories)
+                {
+                    message1.Append(c.Category.categoryName + "  ");
+                    sb.Append(c.Category.categoryName + ", ");
+                    categoryIds.Add(c.Category.categoryId);
+                }
+
+                sb.Remove(sb.ToString().LastIndexOf(", "), 1);
+            }
             if (message1.ToString() == "1")
             {
                 return RedirectToAction("Insert", "AspNetUser_Category");
