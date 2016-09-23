@@ -43,7 +43,7 @@ namespace IdentityTest2.Controllers
 
                 if (userId == null)
                 {
-                    string fileName = HttpContext.Server.MapPath(@"~/Content/Images/noimage.png");
+                    string fileName = HttpContext.Server.MapPath(@"~/Content/Images/kapy_logo.png");
                     byte[] imageData = null;
                     FileInfo fileInfo = new FileInfo(fileName);
                     long imageFileLength = fileInfo.Length;
@@ -59,7 +59,7 @@ namespace IdentityTest2.Controllers
                 var userImage = bdUsers.Users.Where(x => x.Id.ToString() == userId).FirstOrDefault();
                 if (userImage.UserPhoto == null)
                 {
-                    string fileName = HttpContext.Server.MapPath(@"~/Content/Images/noimage.png");
+                    string fileName = HttpContext.Server.MapPath(@"~/Content/Images/kapy_logo.png");
 
                     byte[] imageData = null;
                     FileInfo fileInfo = new FileInfo(fileName);
@@ -76,7 +76,7 @@ namespace IdentityTest2.Controllers
             else
             {
 
-                string fileName = HttpContext.Server.MapPath(@"~/Content/Images/noimage.png");
+                string fileName = HttpContext.Server.MapPath(@"~/Content/Images/kapy_logo.png");
 
                 byte[] imageData = null;
                 FileInfo fileInfo = new FileInfo(fileName);
